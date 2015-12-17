@@ -2,16 +2,8 @@ My new Jekyll-based personal site, modeled off Steve's No-Good-Very-Bad Jekyll T
 
 ### Notes about this site
 
-Source code for the site is in the source branch.  Because I use a Jekyll plugin for publication management, I build the site locally and upload only the static html to the master branch as follows
+Source code for the site is in the source branch.  Because I use a Jekyll plugin for publication management, I build the site locally and upload only the static html to the master branch using the rakefile.
 
-```
-git checkout source
-git branch -D master 
-git checkout -b master
-git filter-branch --subdirectory-filter _site/ -f
-git checkout source
-git push --all origin
-```
 
 ### Steve's No-Good-Very-Bad Jekyll Theme
 
