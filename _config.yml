@@ -1,0 +1,43 @@
+# Site settings
+title: Kelly A. Kearney
+email: kakearney@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+  University of Washington<br>
+  Joint Institute for the Study of the Atmosphere and Ocean<br>
+  Alaska Fisheries Science Center, NOAA<br>
+  7600 Sand Point Way N.E., Building 4<br>
+  Seattle, Washington 98115
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://kellyakearney.net" # the base hostname & protocol for your site
+github_username:  kakearney
+
+# Build settings
+# markdown: kramdown
+# kramdown:
+#   input: GFM # Enable GitHub Flavored Markdown (fenced code blocks)
+#   # syntax_highlighter: rouge
+
+markdown: redcarpet
+redcarpet:
+  extensions: ["smart", "no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data"]
+
+scholar:
+  style: assets/fish-and-fisheries.csl
+  locale: en
+
+  sort_by: year
+  order: descending
+
+  source: ./_bibliography
+  bibliography: kakPubsDetails.bib
+  bibliography_template: bib
+
+  replace_strings: true
+
+  details_dir:    pubs
+  details_layout: pub_details.html
+  details_link:   Details
+
+  query: "@*"
+
+  repository: ./pdf

@@ -1,0 +1,34 @@
+---
+layout: default
+title: Publication Details
+---
+
+<html>
+
+<style>
+div.pdfimg{
+	float: right;
+	border: 1px solid #BFBFBF;
+	box-shadow: 2px 2px 3px #aaaaaa;
+	margin: 10px;
+}
+</style>
+
+
+<h3>{{ page.entry.title }}</h3>
+<h4>{{ page.entry.author }}</h4>
+<hr>
+
+{% if page.entry.abstract %}
+
+<div class="pdfimg">
+	<a href="/assets/pubs/{{ page.entry.key }}.pdf">
+	<img src="/assets/pubs/{{ page.entry.key }}.png" width="300">
+	</a>
+</div>
+
+{{ page.entry.abstract }}
+
+{% endif %}
+
+</html>
