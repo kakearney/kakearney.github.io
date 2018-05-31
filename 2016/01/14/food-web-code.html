@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Food webs as network graphs-- Part 3: The Code</title>
+  <meta name="description" content="Food web graph codeWhen I began writing the D3-based node-positioning code I discussed in my previous post, I thought perhaps it would be the first step in a...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://kellyakearney.net/2016/01/14/food-web-code.html">
+  <link rel="alternate" type="application/rss+xml" title="Kelly A. Kearney" href="http://kellyakearney.net/feed.xml" />
+<link rel='stylesheet' id='open-sans-css'  href='//fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&#038;subset=latin%2Clatin-ext&#038;ver=4.2.4' type='text/css' media='all' />
+<link href='http://fonts.googleapis.com/css?family=Titillium+Web:600italic,600,400,400italic' rel='stylesheet' type='text/css'>
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Kelly A. Kearney</a>
+
+
+    <nav class="site-nav">
+
+      <a href="#" class="menu-icon menu.open">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>  
+
+    <div class="trigger"><h1>Main Navigation</h1>
+
+ <ul class="menu">
+
+    
+    
+     <li><a href="/research/" class="page-link">Research</a>
+    
+    </li>
+    
+    
+     <li><a href="/blog/" class="page-link">Technical Blog</a>
+    
+    </li>
+    
+    
+     <li><a href="/publications/" class="page-link">Publications</a>
+    
+    </li>
+    
+    </ul>
+
+
+<!-- <ul class="menu">
+        <li> <a class="page-link" href="/about">About</a></li>
+        <li> <a class="page-link"  href="/blog">Blog</a>
+        <li> <a class="page-link" href="/blog">CV</a>
+        <li> <a class="page-link" href="/blog">For Students</a></li>
+        <li> <a class="page-link"  href="/blog">Research</a></a>
+        <li> <a class="page-link" href="/blog">Teaching</a>
+<ul class="sub-menu">
+	<li><a href="http://svmiller.com/teaching/posc-1020-introduction-to-international-relations/">POSC 1020 – Introduction to International Relations</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3410-quantitative-methods-in-political-science/">POSC 3410 – Quantitative Methods in Political Science</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3610-international-politics-in-crisis/">POSC 3610 – International Politics in Crisis</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3630-united-states-foreign-policy/">POSC 3630 – United States Foreign Policy</a></li>
+</ul></li>
+        <li> <a class="page-link" href="/blog">Miscellany</a>
+<ul class="sub-menu">
+	<li><a href="http://svmiller.com/teaching/posc-1020-introduction-to-international-relations/">Clean USAID Greenbook Data</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3410-quantitative-methods-in-political-science/">Journal of Peace Research *.bst File</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3610-international-politics-in-crisis/">My Custom Beamer Style</a></li>
+</ul> 
+
+</li>
+</ul> -->
+
+     </div>  
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Food webs as network graphs-- Part 3: The Code</h1>
+    <p class="post-meta">Posted on January 14, 2016   
+
+  in
+  
+
+
+</p>
+  </header>
+
+  <article class="post-content">
+    <h2 id="food-web-graph-code">Food web graph code</h2>
+
+<p>When I began writing the D3-based node-positioning code I discussed in my previous post, I thought perhaps it would be the first step in a web-based tool to create food web diagrams in their entirety, including running the node positioning algorithm and the edge bundling calculations and then rendering the final thing as a potentially-interactive SVG.</p>
+
+<p>Unfortunately, the edge-bundling calculations have proven too computationally-intensive for this, at least with my rather rudimentary javascript programming skills (I’ve played around with some other implementations of force-directed edge bundling in D3, such as <a href="http://bl.ocks.org/sjengle/5450007">this one</a>, and they too slowed to a painful crawl when I tested them on even small food webs).  And the resulting SVGs, with thousands of components (or hundreds of thousands, when attempting to add edge color gradients), were terrible to try to work with (crashed a couple browsers and Adobe Illustrator, though Inkscape was generally up to the task).</p>
+
+<p>So, in the end, the majority of the code I developed for this process is written in Matlab, simply because that’s where I do most of my work.  Apologies to all the R and python people out there.</p>
+
+<h2 id="the-process">The process</h2>
+
+<h3 id="step-1-start-with-an-ecopath-model">Step 1: Start with an Ecopath model</h3>
+
+<p>Although this graphing process can be applied to any network food web, many of the calculations (network fluxes, trophic levels, etc.) in this particular code suite are based on my Matlab implementation of the Ecopath model.  <a href="http://ecopath.org/">Ecopath with Ecosim</a> is a software suite, used primarily in fisheries modeling, which calculates a mass-balance snapshot of the biomass pools and fluxes in a food web.</p>
+
+<p>You can import an Ecopath model into Matlab using one of two processes:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">mdb2ewein.m</code>: This function reads information directly from an EwE 6 database file (.EwEmdb file).  This function relies on the <a href="https://github.com/brianb/mdbtools">mdbtools</a> utility to extract info the the Microsoft Access file format, so that needs to be installed prior to running this.</li>
+  <li><code class="highlighter-rouge">rpath2ewein.m</code>: This function reads food web data from a set of Rpath .csv files.  <a href="https://github.com/slucey/RpathDev">Rpath</a> is the R implementation of Ecopath with Ecosim.  It is currently still in beta testing, so this format is loosely documented for now; it will be updated once Rpath is officially released.</li>
+</ul>
+
+<p>Alternatively, you can manually contruct the necessary input structure by following the description of the input in <code class="highlighter-rouge">ecopathlite.m</code>.</p>
+
+<p>For our example, we’re using the direct import method:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">Ewein</span> <span class="o">=</span> <span class="n">mdb2ewein</span><span class="p">(</span><span class="s1">'Generic_37.EwEmdb'</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="step-2-convert-to-a-graph-object">Step 2: Convert to a graph object</h3>
+
+<p>The conversion is performed via the <code class="highlighter-rouge">ecopath2graph.m</code> function:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">G</span> <span class="o">=</span> <span class="n">ecopath2graph</span><span class="p">(</span><span class="n">Ewein</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="step-3-prepare-graph-object-for-trophic-grouping">Step 3: Prepare graph object for trophic grouping</h3>
+
+<p>As discussed in the previous blog post, this involves removing out-of-system nodes and non-predatory flux edges:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><pre><span class="n">G2</span> <span class="o">=</span> <span class="n">G</span><span class="p">;</span>
+
+<span class="n">detid</span> <span class="o">=</span> <span class="n">G2</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="n">G2</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="nb">type</span> <span class="o">==</span> <span class="mi">2</span><span class="p">);</span>
+<span class="n">oosid</span> <span class="o">=</span> <span class="n">G2</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="n">G2</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="nb">type</span> <span class="o">==</span> <span class="mi">4</span><span class="p">);</span>
+
+<span class="n">G2</span> <span class="o">=</span> <span class="n">rmnode</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span> <span class="n">oosid</span><span class="p">);</span>
+<span class="n">isdet</span> <span class="o">=</span> <span class="nb">ismember</span><span class="p">(</span><span class="n">G2</span><span class="o">.</span><span class="n">Edges</span><span class="o">.</span><span class="n">EndNodes</span><span class="p">(:,</span><span class="mi">2</span><span class="p">),</span> <span class="n">detid</span><span class="p">);</span>
+<span class="n">G2</span> <span class="o">=</span> <span class="n">rmedge</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span> <span class="nb">find</span><span class="p">(</span><span class="n">isdet</span><span class="p">));</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="step-4-calculate-trophic-groups">Step 4: Calculate trophic groups</h3>
+
+<p>Trophic groups can be calculated with the <code class="highlighter-rouge">gauzensgroupep.m</code> function:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">grp</span> <span class="o">=</span> <span class="n">gauzensgroupep</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'type'</span><span class="p">,</span> <span class="s1">'trophicgroup'</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="step-5-create-a-new-graph-holding-the-trophic-grouping-hierarchy">Step 5: Create a new graph holding the trophic grouping hierarchy</h3>
+
+<p>The <code class="highlighter-rouge">trophicgroupgraph.m</code> function returns two graph structures.  The first is a copy of the input graph, with trophic group nodes added, and edges now showing trophic-group links rather than predator-prey links.  The second one keeps the old predator-prey links, but adds two new fields to the Nodes table: ‘parent’ (listing the parent trohpic-grouping node for each group) and ‘TG’ (listing the trophic group index for each group).  The latter is the one we’ll need to create the appropriate input for the node-positioning.</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="p">[</span><span class="n">H3</span><span class="p">,</span> <span class="n">G3</span><span class="p">]</span> <span class="o">=</span> <span class="n">trophicgroupgraph</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span> <span class="n">grp</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="step-6-export-graph-to-json-format">Step 6: Export graph to JSON format</h3>
+
+<p>The node layout javascript function reads data from a JSON file.  The previous step already formatted the Nodes table with all the necessary data, so we simply need to export it to a file.</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6</pre></td><td class="code"><pre><span class="n">Jopt</span> <span class="o">=</span> <span class="nb">struct</span><span class="p">(</span><span class="s1">'Compact'</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">...</span>
+              <span class="s1">'FileName'</span><span class="p">,</span> <span class="s1">'gen37.json'</span><span class="p">,</span> <span class="k">...</span>
+              <span class="s1">'NoRowBracket'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+          
+<span class="n">Json</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="nb">table2struct</span><span class="p">(</span><span class="n">G3</span><span class="o">.</span><span class="n">Nodes</span><span class="p">)</span><span class="o">'</span><span class="p">;</span>
+<span class="n">savejson</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="n">Json</span><span class="p">,</span> <span class="n">Jopt</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="step-7-position-nodes">Step 7: Position nodes</h3>
+
+<p>The <code class="highlighter-rouge">renderfoodwebforce.m</code> function is a wrapper that creates an empty webpage and then runs the <code class="highlighter-rouge">foodweblayout.js</code> script with your chosen parameters.  There are a lot of user-controllable parameters; you can use the ‘test’ mode to see how changing those affect your food web.  Particularly for large food webs, small changes in things like padding (space around nodes), charge (repelling force between nodes), trophic nudging (speed at which nodes move toward their trophic level), scaling factor for initial node size (smaller space leads to smaller nodes with more room to move, while larger ones can get tangled up), and even the random seed (there’s a bit of randomness in the collison-avoidance code) can change the way the final layout looks.</p>
+
+<p>Once you’ve settled on a good set of parameters, you’ll need to pull the coordinate information out of the svg object and into Matlab.  At the moment, this step requires the use of <a href="http://phantomjs.org/">phantomJS</a>.  I’m looking for a solution that doesn’t require you to install that, but for now, it’s necessary.</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</pre></td><td class="code"><pre><span class="p">[</span><span class="n">C</span><span class="p">,</span> <span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">renderfoodwebforce</span><span class="p">(</span><span class="s1">'gen37.json'</span><span class="p">,</span> <span class="k">...</span>
+    <span class="s1">'drawmode'</span><span class="p">,</span> <span class="s1">'force'</span><span class="p">,</span> <span class="k">...</span>
+    <span class="s1">'init'</span><span class="p">,</span> <span class="s1">'cpack'</span><span class="p">,</span> <span class="k">...</span>
+    <span class="s1">'cpfac'</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="k">...</span>
+    <span class="s1">'totheight'</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="k">...</span>
+    <span class="s1">'totwidth'</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="k">...</span>
+    <span class="s1">'fontsz'</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="k">...</span>
+    <span class="s1">'charge'</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="k">...</span>
+    <span class="s1">'padding'</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="k">...</span>
+    <span class="s1">'tlnudge'</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="k">...</span>
+    <span class="s1">'mode'</span><span class="p">,</span> <span class="s1">'test'</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>This function returns data about all the circle and text objects in the figure.  To get that data into slightly more user-friendly format, run <code class="highlighter-rouge">foodweblayoutdetails</code>.  This adds a few new fields to the Nodes table of the graph object: x/y-cooridnates of the node center, radius of the node, x/y-coordinates of the text label, and horizontal and vertical alignment of the text label.</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="p">[</span><span class="n">G2</span><span class="p">,</span> <span class="n">Ax</span><span class="p">]</span> <span class="o">=</span> <span class="n">foodweblayoutdetails</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span> <span class="mi">5</span><span class="p">]);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+<!--     <h2 class="footer-heading">Kelly A. Kearney</h2> -->
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li><strong>Kelly A. Kearney</strong></li>
+
+          <li><a href="mailto:kakearney@gmail.com">kakearney@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/kakearney">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">kakearney</span>
+            </a>
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+         <p class="text">
+University of Washington<br> Joint Institute for the Study of the Atmosphere and Ocean<br> Alaska Fisheries Science Center, NOAA<br> 7600 Sand Point Way N.E., Building 4<br> Seattle, Washington 98115
+ 
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+
+</html>

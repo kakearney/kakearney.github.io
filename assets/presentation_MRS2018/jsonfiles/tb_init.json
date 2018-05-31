@@ -1,0 +1,3252 @@
+{
+	"nodes": [
+		[
+			{
+				"B": 0.000219581343,
+				"type": 0,
+				"TL": 2.959442584,
+				"id": "Snook0_12",
+				"TG": 16
+			},
+			{
+				"B": 0.0187197663,
+				"type": 0,
+				"TL": 2.974915839,
+				"id": "Snook3_12",
+				"TG": 16
+			},
+			{
+				"B": 0.229919672,
+				"type": 0,
+				"TL": 3.502109352,
+				"id": "Snook12_48",
+				"TG": 13
+			},
+			{
+				"B": 0.0996193215,
+				"type": 0,
+				"TL": 3.733791633,
+				"id": "Snook48_90",
+				"TG": 13
+			},
+			{
+				"B": 0.0202408545,
+				"type": 0,
+				"TL": 3.836046975,
+				"id": "Snook90",
+				"TG": 15
+			},
+			{
+				"B": 0.000273913174,
+				"type": 0,
+				"TL": 3.01406205,
+				"id": "RedDrum0_3",
+				"TG": 19
+			},
+			{
+				"B": 0.00415810756,
+				"type": 0,
+				"TL": 3.11842337,
+				"id": "RedDrum3_8",
+				"TG": 16
+			},
+			{
+				"B": 0.0272602104,
+				"type": 0,
+				"TL": 3.627668175,
+				"id": "RedDrum8_18",
+				"TG": 11
+			},
+			{
+				"B": 0.108259343,
+				"type": 0,
+				"TL": 3.622170321,
+				"id": "RedDrum18_36",
+				"TG": 11
+			},
+			{
+				"B": 0.300400048,
+				"type": 0,
+				"TL": 3.584577582,
+				"id": "RedDrum36",
+				"TG": 11
+			},
+			{
+				"B": 9.0966947e-05,
+				"type": 0,
+				"TL": 3.086136854,
+				"id": "SeaTrout0_3",
+				"TG": 16
+			},
+			{
+				"B": 0.0259713996,
+				"type": 0,
+				"TL": 3.458703725,
+				"id": "SeaTrout3_18",
+				"TG": 13
+			},
+			{
+				"B": 0.220055297,
+				"type": 0,
+				"TL": 3.734370778,
+				"id": "SeaTrout18",
+				"TG": 11
+			},
+			{
+				"B": 1.96947403e-05,
+				"type": 0,
+				"TL": 3.053571261,
+				"id": "SandTrout0_3",
+				"TG": 16
+			},
+			{
+				"B": 0.00252330722,
+				"type": 0,
+				"TL": 3.39046744,
+				"id": "SandTrout3_12",
+				"TG": 13
+			},
+			{
+				"B": 0.100014657,
+				"type": 0,
+				"TL": 3.717776805,
+				"id": "SandTrout12",
+				"TG": 13
+			},
+			{
+				"B": 0.0648558587,
+				"type": 0,
+				"TL": 2.945967281,
+				"id": "Mullet0_6",
+				"TG": 19
+			},
+			{
+				"B": 0.522470474,
+				"type": 0,
+				"TL": 2.913896827,
+				"id": "Mullet6_18",
+				"TG": 14
+			},
+			{
+				"B": 2.80055499,
+				"type": 0,
+				"TL": 2.026331945,
+				"id": "Mullet18",
+				"TG": 14
+			},
+			{
+				"B": 1.24408075e-06,
+				"type": 0,
+				"TL": 3.222436701,
+				"id": "Mackrel0_3",
+				"TG": 13
+			},
+			{
+				"B": 0.0183387771,
+				"type": 0,
+				"TL": 3.884142915,
+				"id": "Mackrel3",
+				"TG": 15
+			},
+			{
+				"B": 0.00978701282,
+				"type": 0,
+				"TL": 3.20419487,
+				"id": "Ladyfish0_10",
+				"TG": 16
+			},
+			{
+				"B": 0.0889999121,
+				"type": 0,
+				"TL": 3.310434552,
+				"id": "Ladyfish10",
+				"TG": 13
+			},
+			{
+				"B": 0.02393293744,
+				"type": 0,
+				"TL": 3.85415766,
+				"id": "Jacks",
+				"TG": 13
+			},
+			{
+				"B": 0.3850912054,
+				"type": 0,
+				"TL": 2.752972305,
+				"id": "BayAnchovy",
+				"TG": 10
+			},
+			{
+				"B": 0.319999993,
+				"type": 0,
+				"TL": 2.623319082,
+				"id": "PinFish",
+				"TG": 10
+			},
+			{
+				"B": 0.689999998,
+				"type": 0,
+				"TL": 2.686220007,
+				"id": "Spot",
+				"TG": 10
+			},
+			{
+				"B": 0.0900000036,
+				"type": 0,
+				"TL": 3.170890445,
+				"id": "SilverPerch",
+				"TG": 10
+			},
+			{
+				"B": 0.0799999982,
+				"type": 0,
+				"TL": 3.062410716,
+				"id": "ScaledSardine",
+				"TG": 10
+			},
+			{
+				"B": 0.181500003,
+				"type": 0,
+				"TL": 3.059525799,
+				"id": "Mojarra",
+				"TG": 10
+			},
+			{
+				"B": 0.0388999991,
+				"type": 0,
+				"TL": 3.077117114,
+				"id": "ThreadfinHerring",
+				"TG": 19
+			},
+			{
+				"B": 0.1208904046,
+				"type": 0,
+				"TL": 2.736736738,
+				"id": "Manhaden",
+				"TG": 19
+			},
+			{
+				"B": 0.136439994,
+				"type": 0,
+				"TL": 2.928011912,
+				"id": "Menidia_silverside",
+				"TG": 19
+			},
+			{
+				"B": 0.056499999,
+				"type": 0,
+				"TL": 3.48473069,
+				"id": "Catfish",
+				"TG": 15
+			},
+			{
+				"B": 0.0370000005,
+				"type": 0,
+				"TL": 2.980974567,
+				"id": "Bumper",
+				"TG": 14
+			},
+			{
+				"B": 1.258789732,
+				"type": 0,
+				"TL": 2.183243018,
+				"id": "CaridanShrimp",
+				"TG": 10
+			},
+			{
+				"B": 0.0799999982,
+				"type": 0,
+				"TL": 2.476425346,
+				"id": "Shrimp",
+				"TG": 10
+			},
+			{
+				"B": 0.08248251754,
+				"type": 0,
+				"TL": 2.47522117,
+				"id": "StoneCrab",
+				"TG": 2
+			},
+			{
+				"B": 0.122000001,
+				"type": 0,
+				"TL": 2.65317892,
+				"id": "BlueCrab",
+				"TG": 2
+			},
+			{
+				"B": 0.899999976,
+				"type": 0,
+				"TL": 2.528632553,
+				"id": "Cyprinodontids",
+				"TG": 3
+			},
+			{
+				"B": 0.0500000007,
+				"type": 0,
+				"TL": 2.63435907,
+				"id": "Poecilids",
+				"TG": 3
+			},
+			{
+				"B": 0.100000001,
+				"type": 0,
+				"TL": 3.585961504,
+				"id": "Pigfish",
+				"TG": 7
+			},
+			{
+				"B": 0.025639147,
+				"type": 0,
+				"TL": 3.082460689,
+				"id": "Gobies",
+				"TG": 7
+			},
+			{
+				"B": 4,
+				"type": 0,
+				"TL": 3,
+				"id": "Rays",
+				"TG": 21
+			},
+			{
+				"B": 6.480879713,
+				"type": 0,
+				"TL": 2.057265106,
+				"id": "BenthicInvertebrates",
+				"TG": 18
+			},
+			{
+				"B": 1.207243102,
+				"type": 0,
+				"TL": 2.091091089,
+				"id": "MacroZooplankton",
+				"TG": 18
+			},
+			{
+				"B": 0.7862258789,
+				"type": 0,
+				"TL": 2.001001001,
+				"id": "MicroZoolplankton",
+				"TG": 18
+			},
+			{
+				"B": 20,
+				"type": 0,
+				"TL": 2,
+				"id": "Infauna",
+				"TG": 20
+			},
+			{
+				"B": 29.7779999,
+				"type": 1,
+				"TL": 1,
+				"id": "AttachedMicroalgae",
+				"TG": 12
+			},
+			{
+				"B": 175.617004,
+				"type": 1,
+				"TL": 1,
+				"id": "SeaGrass",
+				"TG": 12
+			},
+			{
+				"B": 25,
+				"type": 1,
+				"TL": 1,
+				"id": "Phytoplankton",
+				"TG": 12
+			},
+			{
+				"B": 10,
+				"type": 2,
+				"TL": 1,
+				"id": "Detritus",
+				"TG": 1
+			},
+			{
+				"B": 0.75,
+				"type": 3,
+				"TL": 3.322186906,
+				"id": "Gillnet_Trawl",
+				"TG": 4
+			},
+			{
+				"B": 0.01999999956,
+				"type": 3,
+				"TL": 3.744854522,
+				"id": "PurseSeine",
+				"TG": 17
+			},
+			{
+				"B": 0.01099999983,
+				"type": 3,
+				"TL": 3.781103071,
+				"id": "HaulSeine",
+				"TG": 17
+			},
+			{
+				"B": 0.1220000003,
+				"type": 3,
+				"TL": 4.658304329,
+				"id": "Rec_HookLine",
+				"TG": 9
+			},
+			{
+				"B": 0.0989999995,
+				"type": 3,
+				"TL": 3.65317892,
+				"id": "CrabTraps",
+				"TG": 5
+			},
+			{
+				"B": 0.0020000001,
+				"type": 3,
+				"TL": 3.897104763,
+				"id": "CastNet",
+				"TG": 8
+			},
+			{
+				"B": 0.00100000005,
+				"type": 3,
+				"TL": 3.476425346,
+				"id": "BaitTrawl",
+				"TG": 6
+			}
+		]
+	],
+	"links1": [
+		[
+			{
+				"source": "Snook0_12",
+				"target": "Snook3_12",
+				"Weight": 0.0001163745894
+			},
+			{
+				"source": "Snook0_12",
+				"target": "Detritus",
+				"Weight": 0.002092765065
+			},
+			{
+				"source": "Snook3_12",
+				"target": "Snook48_90",
+				"Weight": 0.0002960886608
+			},
+			{
+				"source": "Snook3_12",
+				"target": "Detritus",
+				"Weight": 0.060418361
+			},
+			{
+				"source": "Snook12_48",
+				"target": "Detritus",
+				"Weight": 0.2946874069
+			},
+			{
+				"source": "Snook12_48",
+				"target": "Rec_HookLine",
+				"Weight": 0.0199999996
+			},
+			{
+				"source": "Snook48_90",
+				"target": "Detritus",
+				"Weight": 0.05636988418
+			},
+			{
+				"source": "Snook48_90",
+				"target": "Rec_HookLine",
+				"Weight": 0.0350000001
+			},
+			{
+				"source": "Snook90",
+				"target": "Detritus",
+				"Weight": 0.01736405391
+			},
+			{
+				"source": "RedDrum0_3",
+				"target": "Snook12_48",
+				"Weight": 5.387392202e-06
+			},
+			{
+				"source": "RedDrum0_3",
+				"target": "Snook48_90",
+				"Weight": 1.480443156e-05
+			},
+			{
+				"source": "RedDrum0_3",
+				"target": "RedDrum18_36",
+				"Weight": 0.0001638241385
+			},
+			{
+				"source": "RedDrum0_3",
+				"target": "SeaTrout18",
+				"Weight": 3.520537545e-05
+			},
+			{
+				"source": "RedDrum0_3",
+				"target": "SandTrout12",
+				"Weight": 2.699809363e-05
+			},
+			{
+				"source": "RedDrum0_3",
+				"target": "Detritus",
+				"Weight": 0.002903919906
+			},
+			{
+				"source": "RedDrum3_8",
+				"target": "Jacks",
+				"Weight": 4.787066913e-05
+			},
+			{
+				"source": "RedDrum3_8",
+				"target": "Detritus",
+				"Weight": 0.01941621957
+			},
+			{
+				"source": "RedDrum8_18",
+				"target": "Detritus",
+				"Weight": 0.04434875459
+			},
+			{
+				"source": "RedDrum18_36",
+				"target": "Detritus",
+				"Weight": 0.09271715531
+			},
+			{
+				"source": "RedDrum18_36",
+				"target": "Rec_HookLine",
+				"Weight": 0.00499999989
+			},
+			{
+				"source": "RedDrum36",
+				"target": "Detritus",
+				"Weight": 0.2235406827
+			},
+			{
+				"source": "RedDrum36",
+				"target": "Rec_HookLine",
+				"Weight": 0.000500000024
+			},
+			{
+				"source": "SeaTrout0_3",
+				"target": "Pigfish",
+				"Weight": 0.0002000200116
+			},
+			{
+				"source": "SeaTrout0_3",
+				"target": "Detritus",
+				"Weight": 0.0007672627548
+			},
+			{
+				"source": "SeaTrout3_18",
+				"target": "Snook48_90",
+				"Weight": 0.003671499196
+			},
+			{
+				"source": "SeaTrout3_18",
+				"target": "Snook90",
+				"Weight": 4.814138401e-05
+			},
+			{
+				"source": "SeaTrout3_18",
+				"target": "SeaTrout18",
+				"Weight": 0.001056161285
+			},
+			{
+				"source": "SeaTrout3_18",
+				"target": "Mackrel3",
+				"Weight": 0.0001562135858
+			},
+			{
+				"source": "SeaTrout3_18",
+				"target": "Detritus",
+				"Weight": 0.05226186697
+			},
+			{
+				"source": "SeaTrout18",
+				"target": "Mackrel3",
+				"Weight": 0.0008703328429
+			},
+			{
+				"source": "SeaTrout18",
+				"target": "Detritus",
+				"Weight": 0.1735720868
+			},
+			{
+				"source": "SeaTrout18",
+				"target": "Rec_HookLine",
+				"Weight": 0.0500000007
+			},
+			{
+				"source": "SandTrout0_3",
+				"target": "SandTrout3_12",
+				"Weight": 2.215586897e-05
+			},
+			{
+				"source": "SandTrout0_3",
+				"target": "Detritus",
+				"Weight": 0.0002254689497
+			},
+			{
+				"source": "SandTrout3_12",
+				"target": "Snook90",
+				"Weight": 0.0002179031045
+			},
+			{
+				"source": "SandTrout3_12",
+				"target": "SandTrout12",
+				"Weight": 0.001079923793
+			},
+			{
+				"source": "SandTrout3_12",
+				"target": "Detritus",
+				"Weight": 0.006160872458
+			},
+			{
+				"source": "SandTrout12",
+				"target": "Snook90",
+				"Weight": 9.628276776e-05
+			},
+			{
+				"source": "SandTrout12",
+				"target": "Detritus",
+				"Weight": 0.1074155641
+			},
+			{
+				"source": "SandTrout12",
+				"target": "Rec_HookLine",
+				"Weight": 0.0164999999
+			},
+			{
+				"source": "Mullet0_6",
+				"target": "Snook3_12",
+				"Weight": 0.0005818729049
+			},
+			{
+				"source": "Mullet0_6",
+				"target": "Snook12_48",
+				"Weight": 0.0005387446734
+			},
+			{
+				"source": "Mullet0_6",
+				"target": "Snook48_90",
+				"Weight": 0.0002960886608
+			},
+			{
+				"source": "Mullet0_6",
+				"target": "Snook90",
+				"Weight": 0.001206068353
+			},
+			{
+				"source": "Mullet0_6",
+				"target": "RedDrum8_18",
+				"Weight": 0.0004308757091
+			},
+			{
+				"source": "Mullet0_6",
+				"target": "RedDrum18_36",
+				"Weight": 0.0009829447984
+			},
+			{
+				"source": "Mullet0_6",
+				"target": "RedDrum36",
+				"Weight": 0.0009704437191
+			},
+			{
+				"source": "Mullet0_6",
+				"target": "SeaTrout18",
+				"Weight": 0.04224645019
+			},
+			{
+				"source": "Mullet0_6",
+				"target": "Mackrel0_3",
+				"Weight": 9.895665159e-08
+			},
+			{
+				"source": "Mullet0_6",
+				"target": "Ladyfish10",
+				"Weight": 0.0005446201421
+			},
+			{
+				"source": "Mullet0_6",
+				"target": "Detritus",
+				"Weight": 1.121653142
+			},
+			{
+				"source": "Mullet6_18",
+				"target": "Snook90",
+				"Weight": 0.0002179031045
+			},
+			{
+				"source": "Mullet6_18",
+				"target": "RedDrum8_18",
+				"Weight": 0.0009335640417
+			},
+			{
+				"source": "Mullet6_18",
+				"target": "RedDrum18_36",
+				"Weight": 0.001802065366
+			},
+			{
+				"source": "Mullet6_18",
+				"target": "RedDrum36",
+				"Weight": 0.01346858178
+			},
+			{
+				"source": "Mullet6_18",
+				"target": "SeaTrout18",
+				"Weight": 0.0003520537897
+			},
+			{
+				"source": "Mullet6_18",
+				"target": "Mackrel3",
+				"Weight": 1.115811336e-05
+			},
+			{
+				"source": "Mullet6_18",
+				"target": "Catfish",
+				"Weight": 4.29357048e-05
+			},
+			{
+				"source": "Mullet6_18",
+				"target": "Detritus",
+				"Weight": 2.577761223
+			},
+			{
+				"source": "Mullet6_18",
+				"target": "Gillnet_Trawl",
+				"Weight": 0.25
+			},
+			{
+				"source": "Mullet18",
+				"target": "Snook90",
+				"Weight": 0.0009906989624
+			},
+			{
+				"source": "Mullet18",
+				"target": "Mackrel3",
+				"Weight": 1.115811336e-05
+			},
+			{
+				"source": "Mullet18",
+				"target": "Catfish",
+				"Weight": 4.29352721e-06
+			},
+			{
+				"source": "Mullet18",
+				"target": "Detritus",
+				"Weight": 6.219626706
+			},
+			{
+				"source": "Mullet18",
+				"target": "Gillnet_Trawl",
+				"Weight": 0.5
+			},
+			{
+				"source": "Mackrel0_3",
+				"target": "Jacks",
+				"Weight": 4.787018329e-07
+			},
+			{
+				"source": "Mackrel0_3",
+				"target": "Detritus",
+				"Weight": 2.50058378e-05
+			},
+			{
+				"source": "Mackrel3",
+				"target": "Detritus",
+				"Weight": 0.02613971534
+			},
+			{
+				"source": "Mackrel3",
+				"target": "Rec_HookLine",
+				"Weight": 0.00499999989
+			},
+			{
+				"source": "Ladyfish0_10",
+				"target": "Snook12_48",
+				"Weight": 0.0005387446734
+			},
+			{
+				"source": "Ladyfish0_10",
+				"target": "Snook90",
+				"Weight": 0.0007601270907
+			},
+			{
+				"source": "Ladyfish0_10",
+				"target": "Jacks",
+				"Weight": 0.001819085246
+			},
+			{
+				"source": "Ladyfish0_10",
+				"target": "Detritus",
+				"Weight": 0.05920754421
+			},
+			{
+				"source": "Ladyfish10",
+				"target": "Snook90",
+				"Weight": 9.628276776e-05
+			},
+			{
+				"source": "Ladyfish10",
+				"target": "Jacks",
+				"Weight": 0.001819085246
+			},
+			{
+				"source": "Ladyfish10",
+				"target": "Detritus",
+				"Weight": 0.2372844998
+			},
+			{
+				"source": "Ladyfish10",
+				"target": "Rec_HookLine",
+				"Weight": 0.00999999978
+			},
+			{
+				"source": "Jacks",
+				"target": "Mackrel3",
+				"Weight": 0.008424375491
+			},
+			{
+				"source": "Jacks",
+				"target": "Jacks",
+				"Weight": 0.0001914826775
+			},
+			{
+				"source": "Jacks",
+				"target": "Detritus",
+				"Weight": 0.01531707999
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "Snook12_48",
+				"Weight": 0.0005387446734
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "Snook48_90",
+				"Weight": 0.01467119247
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "Snook90",
+				"Weight": 0.005024440453
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "RedDrum8_18",
+				"Weight": 0.001364439721
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "RedDrum18_36",
+				"Weight": 0.009321592695
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "RedDrum36",
+				"Weight": 0.01185117602
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "SeaTrout3_18",
+				"Weight": 0.005187647758
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "SeaTrout18",
+				"Weight": 0.05499080026
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "SandTrout3_12",
+				"Weight": 0.009447262343
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "SandTrout12",
+				"Weight": 0.1161997998
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "Mackrel0_3",
+				"Weight": 1.710850583e-05
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "Mackrel3",
+				"Weight": 0.04805799687
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "Ladyfish0_10",
+				"Weight": 0.01746093282
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "Ladyfish10",
+				"Weight": 0.1329417673
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "Jacks",
+				"Weight": 0.01797543453
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "SilverPerch",
+				"Weight": 0.04300670265
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "Catfish",
+				"Weight": 0.07651142788
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "Detritus",
+				"Weight": 1.467967663
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "PurseSeine",
+				"Weight": 0.00999999978
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "HaulSeine",
+				"Weight": 0.00999999978
+			},
+			{
+				"source": "PinFish",
+				"target": "Snook3_12",
+				"Weight": 0.0005818729049
+			},
+			{
+				"source": "PinFish",
+				"target": "Snook12_48",
+				"Weight": 0.0269911059
+			},
+			{
+				"source": "PinFish",
+				"target": "Snook48_90",
+				"Weight": 0.0337541055
+			},
+			{
+				"source": "PinFish",
+				"target": "Snook90",
+				"Weight": 0.0005067514268
+			},
+			{
+				"source": "PinFish",
+				"target": "RedDrum8_18",
+				"Weight": 0.0004308757091
+			},
+			{
+				"source": "PinFish",
+				"target": "RedDrum18_36",
+				"Weight": 0.004587075816
+			},
+			{
+				"source": "PinFish",
+				"target": "RedDrum36",
+				"Weight": 0.006822512942
+			},
+			{
+				"source": "PinFish",
+				"target": "SeaTrout18",
+				"Weight": 0.03559263319
+			},
+			{
+				"source": "PinFish",
+				"target": "SandTrout12",
+				"Weight": 0.0005399618952
+			},
+			{
+				"source": "PinFish",
+				"target": "Mackrel0_3",
+				"Weight": 9.895665159e-08
+			},
+			{
+				"source": "PinFish",
+				"target": "Mackrel3",
+				"Weight": 0.0002901109564
+			},
+			{
+				"source": "PinFish",
+				"target": "Jacks",
+				"Weight": 0.009105001008
+			},
+			{
+				"source": "PinFish",
+				"target": "SilverPerch",
+				"Weight": 0.0145785425
+			},
+			{
+				"source": "PinFish",
+				"target": "Catfish",
+				"Weight": 0.0004293570669
+			},
+			{
+				"source": "PinFish",
+				"target": "Pigfish",
+				"Weight": 0.04908490809
+			},
+			{
+				"source": "PinFish",
+				"target": "Detritus",
+				"Weight": 0.6537850914
+			},
+			{
+				"source": "PinFish",
+				"target": "CastNet",
+				"Weight": 0.00100000005
+			},
+			{
+				"source": "Spot",
+				"target": "Snook12_48",
+				"Weight": 0.01077489248
+			},
+			{
+				"source": "Spot",
+				"target": "Snook48_90",
+				"Weight": 0.004544960657
+			},
+			{
+				"source": "Spot",
+				"target": "Snook90",
+				"Weight": 9.628276776e-05
+			},
+			{
+				"source": "Spot",
+				"target": "RedDrum8_18",
+				"Weight": 0.002298003956
+			},
+			{
+				"source": "Spot",
+				"target": "RedDrum18_36",
+				"Weight": 0.004587075816
+			},
+			{
+				"source": "Spot",
+				"target": "RedDrum36",
+				"Weight": 0.004705181789
+			},
+			{
+				"source": "Spot",
+				"target": "SeaTrout18",
+				"Weight": 0.002816430314
+			},
+			{
+				"source": "Spot",
+				"target": "SandTrout3_12",
+				"Weight": 0.0002215586786
+			},
+			{
+				"source": "Spot",
+				"target": "SandTrout12",
+				"Weight": 0.01349904715
+			},
+			{
+				"source": "Spot",
+				"target": "Mackrel0_3",
+				"Weight": 2.089085001e-07
+			},
+			{
+				"source": "Spot",
+				"target": "Mackrel3",
+				"Weight": 0.02441395217
+			},
+			{
+				"source": "Spot",
+				"target": "Ladyfish10",
+				"Weight": 0.001089240284
+			},
+			{
+				"source": "Spot",
+				"target": "Jacks",
+				"Weight": 0.003642957515
+			},
+			{
+				"source": "Spot",
+				"target": "SilverPerch",
+				"Weight": 0.001619838138
+			},
+			{
+				"source": "Spot",
+				"target": "Catfish",
+				"Weight": 0.0008587141321
+			},
+			{
+				"source": "Spot",
+				"target": "Pigfish",
+				"Weight": 0.04908490809
+			},
+			{
+				"source": "Spot",
+				"target": "Detritus",
+				"Weight": 2.290746779
+			},
+			{
+				"source": "SilverPerch",
+				"target": "Snook12_48",
+				"Weight": 0.002693723116
+			},
+			{
+				"source": "SilverPerch",
+				"target": "Snook48_90",
+				"Weight": 0.004544960657
+			},
+			{
+				"source": "SilverPerch",
+				"target": "Snook90",
+				"Weight": 0.001157926977
+			},
+			{
+				"source": "SilverPerch",
+				"target": "RedDrum8_18",
+				"Weight": 0.00925664719
+			},
+			{
+				"source": "SilverPerch",
+				"target": "RedDrum18_36",
+				"Weight": 0.0009829447984
+			},
+			{
+				"source": "SilverPerch",
+				"target": "RedDrum36",
+				"Weight": 0.001617406175
+			},
+			{
+				"source": "SilverPerch",
+				"target": "SeaTrout3_18",
+				"Weight": 0.005187647758
+			},
+			{
+				"source": "SilverPerch",
+				"target": "SeaTrout18",
+				"Weight": 0.01056161253
+			},
+			{
+				"source": "SilverPerch",
+				"target": "SandTrout3_12",
+				"Weight": 0.0001107793395
+			},
+			{
+				"source": "SilverPerch",
+				"target": "SandTrout12",
+				"Weight": 0.03480054447
+			},
+			{
+				"source": "SilverPerch",
+				"target": "Mackrel0_3",
+				"Weight": 2.089085001e-07
+			},
+			{
+				"source": "SilverPerch",
+				"target": "Mackrel3",
+				"Weight": 0.01263098504
+			},
+			{
+				"source": "SilverPerch",
+				"target": "Ladyfish10",
+				"Weight": 0.0005446201421
+			},
+			{
+				"source": "SilverPerch",
+				"target": "Jacks",
+				"Weight": 0.001819085246
+			},
+			{
+				"source": "SilverPerch",
+				"target": "SilverPerch",
+				"Weight": 0.001619838138
+			},
+			{
+				"source": "SilverPerch",
+				"target": "Catfish",
+				"Weight": 0.0008587141321
+			},
+			{
+				"source": "SilverPerch",
+				"target": "Pigfish",
+				"Weight": 0.02884288461
+			},
+			{
+				"source": "SilverPerch",
+				"target": "Detritus",
+				"Weight": 0.1697694829
+			},
+			{
+				"source": "SilverPerch",
+				"target": "CastNet",
+				"Weight": 0.00100000005
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "Snook12_48",
+				"Weight": 0.0005387446734
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "Snook48_90",
+				"Weight": 0.01467119247
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "Snook90",
+				"Weight": 9.628276776e-05
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "SeaTrout3_18",
+				"Weight": 0.005187647758
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "SandTrout3_12",
+				"Weight": 0.0001107793395
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "SandTrout12",
+				"Weight": 0.02346134489
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "Mackrel0_3",
+				"Weight": 2.089085001e-07
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "Mackrel3",
+				"Weight": 0.004931886489
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "Ladyfish10",
+				"Weight": 0.001579398223
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "Jacks",
+				"Weight": 0.001819085246
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "SilverPerch",
+				"Weight": 0.0145785425
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "Catfish",
+				"Weight": 0.006440355401
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "Detritus",
+				"Weight": 0.247280527
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "HaulSeine",
+				"Weight": 0.00100000005
+			},
+			{
+				"source": "Mojarra",
+				"target": "Snook3_12",
+				"Weight": 0.00116374581
+			},
+			{
+				"source": "Mojarra",
+				"target": "Snook12_48",
+				"Weight": 0.05554457321
+			},
+			{
+				"source": "Mojarra",
+				"target": "Snook48_90",
+				"Weight": 0.004544960657
+			},
+			{
+				"source": "Mojarra",
+				"target": "Snook90",
+				"Weight": 9.628276776e-05
+			},
+			{
+				"source": "Mojarra",
+				"target": "RedDrum3_8",
+				"Weight": 0.000319196398
+			},
+			{
+				"source": "Mojarra",
+				"target": "RedDrum8_18",
+				"Weight": 0.004660639292
+			},
+			{
+				"source": "Mojarra",
+				"target": "RedDrum18_36",
+				"Weight": 0.004587075816
+			},
+			{
+				"source": "Mojarra",
+				"target": "RedDrum36",
+				"Weight": 0.0004999255608
+			},
+			{
+				"source": "Mojarra",
+				"target": "SeaTrout18",
+				"Weight": 0.0003520537897
+			},
+			{
+				"source": "Mojarra",
+				"target": "SandTrout3_12",
+				"Weight": 0.0001107793395
+			},
+			{
+				"source": "Mojarra",
+				"target": "SandTrout12",
+				"Weight": 0.006479542262
+			},
+			{
+				"source": "Mojarra",
+				"target": "Mackrel0_3",
+				"Weight": 2.089085001e-07
+			},
+			{
+				"source": "Mojarra",
+				"target": "Mackrel3",
+				"Weight": 0.0001562135858
+			},
+			{
+				"source": "Mojarra",
+				"target": "Ladyfish0_10",
+				"Weight": 0.0001794546078
+			},
+			{
+				"source": "Mojarra",
+				"target": "Ladyfish10",
+				"Weight": 0.007461295156
+			},
+			{
+				"source": "Mojarra",
+				"target": "Jacks",
+				"Weight": 0.001819085246
+			},
+			{
+				"source": "Mojarra",
+				"target": "SilverPerch",
+				"Weight": 0.0145785425
+			},
+			{
+				"source": "Mojarra",
+				"target": "Catfish",
+				"Weight": 0.0004293570669
+			},
+			{
+				"source": "Mojarra",
+				"target": "Pigfish",
+				"Weight": 0.04908490809
+			},
+			{
+				"source": "Mojarra",
+				"target": "Detritus",
+				"Weight": 0.7372821792
+			},
+			{
+				"source": "ThreadfinHerring",
+				"target": "Snook12_48",
+				"Weight": 0.0005387446734
+			},
+			{
+				"source": "ThreadfinHerring",
+				"target": "Snook48_90",
+				"Weight": 0.0002960886608
+			},
+			{
+				"source": "ThreadfinHerring",
+				"target": "Snook90",
+				"Weight": 0.005024440453
+			},
+			{
+				"source": "ThreadfinHerring",
+				"target": "Mackrel0_3",
+				"Weight": 9.895665159e-08
+			},
+			{
+				"source": "ThreadfinHerring",
+				"target": "Mackrel3",
+				"Weight": 0.001316657458
+			},
+			{
+				"source": "ThreadfinHerring",
+				"target": "Jacks",
+				"Weight": 0.001436119935
+			},
+			{
+				"source": "ThreadfinHerring",
+				"target": "Catfish",
+				"Weight": 0.0008587141321
+			},
+			{
+				"source": "ThreadfinHerring",
+				"target": "Detritus",
+				"Weight": 0.1387381314
+			},
+			{
+				"source": "Manhaden",
+				"target": "Snook48_90",
+				"Weight": 0.003227366168
+			},
+			{
+				"source": "Manhaden",
+				"target": "Snook90",
+				"Weight": 0.01005141413
+			},
+			{
+				"source": "Manhaden",
+				"target": "RedDrum8_18",
+				"Weight": 0.004660639292
+			},
+			{
+				"source": "Manhaden",
+				"target": "RedDrum18_36",
+				"Weight": 0.02458999975
+			},
+			{
+				"source": "Manhaden",
+				"target": "RedDrum36",
+				"Weight": 0.03373026841
+			},
+			{
+				"source": "Manhaden",
+				"target": "SeaTrout18",
+				"Weight": 0.0003520537897
+			},
+			{
+				"source": "Manhaden",
+				"target": "Catfish",
+				"Weight": 0.0004293570669
+			},
+			{
+				"source": "Manhaden",
+				"target": "Detritus",
+				"Weight": 0.396520531
+			},
+			{
+				"source": "Manhaden",
+				"target": "PurseSeine",
+				"Weight": 0.00999999978
+			},
+			{
+				"source": "Menidia_silverside",
+				"target": "Snook3_12",
+				"Weight": 0.00116374581
+			},
+			{
+				"source": "Menidia_silverside",
+				"target": "Snook12_48",
+				"Weight": 0.0269911059
+			},
+			{
+				"source": "Menidia_silverside",
+				"target": "Snook90",
+				"Weight": 9.628276776e-05
+			},
+			{
+				"source": "Menidia_silverside",
+				"target": "RedDrum8_18",
+				"Weight": 0.004660639292
+			},
+			{
+				"source": "Menidia_silverside",
+				"target": "RedDrum18_36",
+				"Weight": 0.008338648512
+			},
+			{
+				"source": "Menidia_silverside",
+				"target": "RedDrum36",
+				"Weight": 0.0004999255608
+			},
+			{
+				"source": "Menidia_silverside",
+				"target": "SeaTrout3_18",
+				"Weight": 0.003114671849
+			},
+			{
+				"source": "Menidia_silverside",
+				"target": "SeaTrout18",
+				"Weight": 0.04481644167
+			},
+			{
+				"source": "Menidia_silverside",
+				"target": "Mackrel0_3",
+				"Weight": 2.089085001e-07
+			},
+			{
+				"source": "Menidia_silverside",
+				"target": "Jacks",
+				"Weight": 0.0007180599699
+			},
+			{
+				"source": "Menidia_silverside",
+				"target": "SilverPerch",
+				"Weight": 0.001619838138
+			},
+			{
+				"source": "Menidia_silverside",
+				"target": "Pigfish",
+				"Weight": 0.06136614141
+			},
+			{
+				"source": "Menidia_silverside",
+				"target": "Detritus",
+				"Weight": 0.5970342569
+			},
+			{
+				"source": "Catfish",
+				"target": "Snook90",
+				"Weight": 2.533757192e-05
+			},
+			{
+				"source": "Catfish",
+				"target": "RedDrum36",
+				"Weight": 0.0001764443141
+			},
+			{
+				"source": "Catfish",
+				"target": "SeaTrout0_3",
+				"Weight": 2.105300031e-06
+			},
+			{
+				"source": "Catfish",
+				"target": "Catfish",
+				"Weight": 0.0004293570669
+			},
+			{
+				"source": "Catfish",
+				"target": "Detritus",
+				"Weight": 0.1204467545
+			},
+			{
+				"source": "Catfish",
+				"target": "Rec_HookLine",
+				"Weight": 0.00999999978
+			},
+			{
+				"source": "Bumper",
+				"target": "Snook90",
+				"Weight": 9.628276776e-05
+			},
+			{
+				"source": "Bumper",
+				"target": "Mackrel3",
+				"Weight": 0.001751823931
+			},
+			{
+				"source": "Bumper",
+				"target": "Jacks",
+				"Weight": 0.003642957515
+			},
+			{
+				"source": "Bumper",
+				"target": "Catfish",
+				"Weight": 0.005581641651
+			},
+			{
+				"source": "Bumper",
+				"target": "Detritus",
+				"Weight": 0.1221272991
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "Snook3_12",
+				"Weight": 0.00116374581
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "Snook12_48",
+				"Weight": 0.1100116598
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "Snook48_90",
+				"Weight": 0.004544960657
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "RedDrum3_8",
+				"Weight": 0.001964285436
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "RedDrum8_18",
+				"Weight": 0.01391728542
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "RedDrum18_36",
+				"Weight": 0.02783371865
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "RedDrum36",
+				"Weight": 0.02870160704
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "SeaTrout0_3",
+				"Weight": 0.0004210600037
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "SeaTrout3_18",
+				"Weight": 0.04253246168
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "SeaTrout18",
+				"Weight": 0.03520537721
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "SandTrout0_3",
+				"Weight": 1.491362066e-06
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "SandTrout3_12",
+				"Weight": 0.0005538967386
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "SandTrout12",
+				"Weight": 0.03318065643
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "Mackrel0_3",
+				"Weight": 1.66906901e-05
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "Ladyfish0_10",
+				"Weight": 0.000699872928
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "Ladyfish10",
+				"Weight": 0.01443243244
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "Jacks",
+				"Weight": 0.0001914826775
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "BayAnchovy",
+				"Weight": 0.02695638378
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "PinFish",
+				"Weight": 0.7560435316
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "Spot",
+				"Weight": 0.3311999916
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "SilverPerch",
+				"Weight": 0.1435176582
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "Catfish",
+				"Weight": 0.05929420601
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "Pigfish",
+				"Weight": 0.1418141854
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "Gobies",
+				"Weight": 0.0384587205
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "Detritus",
+				"Weight": 10.27172433
+			},
+			{
+				"source": "Shrimp",
+				"target": "Snook12_48",
+				"Weight": 0.05554457321
+			},
+			{
+				"source": "Shrimp",
+				"target": "Snook48_90",
+				"Weight": 0.02953483978
+			},
+			{
+				"source": "Shrimp",
+				"target": "Snook90",
+				"Weight": 9.628276776e-05
+			},
+			{
+				"source": "Shrimp",
+				"target": "RedDrum3_8",
+				"Weight": 0.001325892734
+			},
+			{
+				"source": "Shrimp",
+				"target": "RedDrum8_18",
+				"Weight": 0.01979873949
+			},
+			{
+				"source": "Shrimp",
+				"target": "RedDrum18_36",
+				"Weight": 0.04048094176
+			},
+			{
+				"source": "Shrimp",
+				"target": "RedDrum36",
+				"Weight": 0.04802225688
+			},
+			{
+				"source": "Shrimp",
+				"target": "SeaTrout3_18",
+				"Weight": 0.03319885826
+			},
+			{
+				"source": "Shrimp",
+				"target": "SeaTrout18",
+				"Weight": 0.07012910858
+			},
+			{
+				"source": "Shrimp",
+				"target": "SandTrout3_12",
+				"Weight": 0.0005538967386
+			},
+			{
+				"source": "Shrimp",
+				"target": "SandTrout12",
+				"Weight": 0.03318065643
+			},
+			{
+				"source": "Shrimp",
+				"target": "Mackrel0_3",
+				"Weight": 2.089085001e-07
+			},
+			{
+				"source": "Shrimp",
+				"target": "Mackrel3",
+				"Weight": 0.006538655031
+			},
+			{
+				"source": "Shrimp",
+				"target": "Ladyfish10",
+				"Weight": 0.003757878669
+			},
+			{
+				"source": "Shrimp",
+				"target": "Jacks",
+				"Weight": 0.0001914826775
+			},
+			{
+				"source": "Shrimp",
+				"target": "PinFish",
+				"Weight": 0.002560255765
+			},
+			{
+				"source": "Shrimp",
+				"target": "SilverPerch",
+				"Weight": 0.001619838138
+			},
+			{
+				"source": "Shrimp",
+				"target": "Catfish",
+				"Weight": 0.02623371521
+			},
+			{
+				"source": "Shrimp",
+				"target": "BlueCrab",
+				"Weight": 0.00103700006
+			},
+			{
+				"source": "Shrimp",
+				"target": "Detritus",
+				"Weight": 0.6555949153
+			},
+			{
+				"source": "Shrimp",
+				"target": "BaitTrawl",
+				"Weight": 0.00100000005
+			},
+			{
+				"source": "StoneCrab",
+				"target": "SeaTrout18",
+				"Weight": 0.0003520537897
+			},
+			{
+				"source": "StoneCrab",
+				"target": "Catfish",
+				"Weight": 0.05929420601
+			},
+			{
+				"source": "StoneCrab",
+				"target": "StoneCrab",
+				"Weight": 0.001154755298
+			},
+			{
+				"source": "StoneCrab",
+				"target": "BlueCrab",
+				"Weight": 0.005184999928
+			},
+			{
+				"source": "StoneCrab",
+				"target": "Detritus",
+				"Weight": 0.3010611846
+			},
+			{
+				"source": "BlueCrab",
+				"target": "Snook90",
+				"Weight": 9.628276776e-05
+			},
+			{
+				"source": "BlueCrab",
+				"target": "RedDrum8_18",
+				"Weight": 0.004660639292
+			},
+			{
+				"source": "BlueCrab",
+				"target": "RedDrum18_36",
+				"Weight": 0.001802065366
+			},
+			{
+				"source": "BlueCrab",
+				"target": "RedDrum36",
+				"Weight": 0.00179385044
+			},
+			{
+				"source": "BlueCrab",
+				"target": "SeaTrout18",
+				"Weight": 0.0003520537897
+			},
+			{
+				"source": "BlueCrab",
+				"target": "SandTrout12",
+				"Weight": 0.0005399618952
+			},
+			{
+				"source": "BlueCrab",
+				"target": "Mackrel3",
+				"Weight": 0.0002901109564
+			},
+			{
+				"source": "BlueCrab",
+				"target": "Catfish",
+				"Weight": 0.119919427
+			},
+			{
+				"source": "BlueCrab",
+				"target": "StoneCrab",
+				"Weight": 0.001732132886
+			},
+			{
+				"source": "BlueCrab",
+				"target": "BlueCrab",
+				"Weight": 0.00103700006
+			},
+			{
+				"source": "BlueCrab",
+				"target": "Detritus",
+				"Weight": 0.4245264874
+			},
+			{
+				"source": "BlueCrab",
+				"target": "CrabTraps",
+				"Weight": 0.0989999995
+			},
+			{
+				"source": "Cyprinodontids",
+				"target": "Snook3_12",
+				"Weight": 0.01745618823
+			},
+			{
+				"source": "Cyprinodontids",
+				"target": "Snook12_48",
+				"Weight": 0.08081169721
+			},
+			{
+				"source": "Cyprinodontids",
+				"target": "Snook48_90",
+				"Weight": 0.01467119247
+			},
+			{
+				"source": "Cyprinodontids",
+				"target": "RedDrum8_18",
+				"Weight": 0.003590630921
+			},
+			{
+				"source": "Cyprinodontids",
+				"target": "RedDrum18_36",
+				"Weight": 0.01310593023
+			},
+			{
+				"source": "Cyprinodontids",
+				"target": "SeaTrout3_18",
+				"Weight": 0.005187647758
+			},
+			{
+				"source": "Cyprinodontids",
+				"target": "SeaTrout18",
+				"Weight": 0.01760268864
+			},
+			{
+				"source": "Cyprinodontids",
+				"target": "Ladyfish0_10",
+				"Weight": 0.02618242615
+			},
+			{
+				"source": "Cyprinodontids",
+				"target": "Detritus",
+				"Weight": 3.871391517
+			},
+			{
+				"source": "Poecilids",
+				"target": "Snook3_12",
+				"Weight": 0.005818729259
+			},
+			{
+				"source": "Poecilids",
+				"target": "Snook12_48",
+				"Weight": 0.02693723316
+			},
+			{
+				"source": "Poecilids",
+				"target": "Snook48_90",
+				"Weight": 0.007342998392
+			},
+			{
+				"source": "Poecilids",
+				"target": "RedDrum8_18",
+				"Weight": 0.0007181261699
+			},
+			{
+				"source": "Poecilids",
+				"target": "RedDrum18_36",
+				"Weight": 0.008191206238
+			},
+			{
+				"source": "Poecilids",
+				"target": "SeaTrout3_18",
+				"Weight": 0.001041696232
+			},
+			{
+				"source": "Poecilids",
+				"target": "Ladyfish0_10",
+				"Weight": 0.003319910333
+			},
+			{
+				"source": "Poecilids",
+				"target": "Detritus",
+				"Weight": 0.1716301049
+			},
+			{
+				"source": "Pigfish",
+				"target": "Snook12_48",
+				"Weight": 0.02693723316
+			},
+			{
+				"source": "Pigfish",
+				"target": "Snook48_90",
+				"Weight": 0.007402216165
+			},
+			{
+				"source": "Pigfish",
+				"target": "RedDrum18_36",
+				"Weight": 0.008191206238
+			},
+			{
+				"source": "Pigfish",
+				"target": "SeaTrout18",
+				"Weight": 0.01760268864
+			},
+			{
+				"source": "Pigfish",
+				"target": "Ladyfish10",
+				"Weight": 0.01601183128
+			},
+			{
+				"source": "Pigfish",
+				"target": "Jacks",
+				"Weight": 0.001436119935
+			},
+			{
+				"source": "Pigfish",
+				"target": "Detritus",
+				"Weight": 0.08241870859
+			},
+			{
+				"source": "Gobies",
+				"target": "RedDrum18_36",
+				"Weight": 0.003276482557
+			},
+			{
+				"source": "Gobies",
+				"target": "RedDrum36",
+				"Weight": 0.005881476714
+			},
+			{
+				"source": "Gobies",
+				"target": "SeaTrout3_18",
+				"Weight": 0.002083392464
+			},
+			{
+				"source": "Gobies",
+				"target": "SeaTrout18",
+				"Weight": 0.01760268864
+			},
+			{
+				"source": "Gobies",
+				"target": "Detritus",
+				"Weight": 0.04807340063
+			},
+			{
+				"source": "Rays",
+				"target": "Detritus",
+				"Weight": 2.00000006
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Snook0_12",
+				"Weight": 0.002222465878
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Snook3_12",
+				"Weight": 0.04643345755
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Snook12_48",
+				"Weight": 0.08533715171
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "RedDrum0_3",
+				"Weight": 0.0005758762152
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "RedDrum3_8",
+				"Weight": 0.008962052751
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "RedDrum8_18",
+				"Weight": 0.0004308757091
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "RedDrum18_36",
+				"Weight": 0.0009829447984
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "RedDrum36",
+				"Weight": 0.0009704437191
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "SeaTrout0_3",
+				"Weight": 0.0004210600037
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "SandTrout0_3",
+				"Weight": 0.0001313889876
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "SandTrout3_12",
+				"Weight": 0.01102254475
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "SandTrout12",
+				"Weight": 0.007019504403
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Mullet6_18",
+				"Weight": 4.141986073
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Mullet18",
+				"Weight": 0.4699989333
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Mackrel0_3",
+				"Weight": 1.66906901e-05
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Ladyfish0_10",
+				"Weight": 0.0248006266
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Ladyfish10",
+				"Weight": 0.2376177529
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Jacks",
+				"Weight": 0.0001914826775
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "BayAnchovy",
+				"Weight": 0.4420847162
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "PinFish",
+				"Weight": 0.6047324233
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Spot",
+				"Weight": 3.162959983
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "SilverPerch",
+				"Weight": 0.1435176582
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "ScaledSardine",
+				"Weight": 0.3521745166
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Mojarra",
+				"Weight": 2.178000069
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Menidia_silverside",
+				"Weight": 0.2510495933
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Catfish",
+				"Weight": 0.07178849822
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Bumper",
+				"Weight": 0.0543944212
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "CaridanShrimp",
+				"Weight": 2.809618637
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Shrimp",
+				"Weight": 0.4945920049
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "StoneCrab",
+				"Weight": 0.2552009104
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "BlueCrab",
+				"Weight": 0.6014599873
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Cyprinodontids",
+				"Weight": 4.49999988
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Poecilids",
+				"Weight": 0.3000000162
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Pigfish",
+				"Weight": 0.02052205225
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Gobies",
+				"Weight": 0.153834882
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "BenthicInvertebrates",
+				"Weight": 1.896115745
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "Detritus",
+				"Weight": 62.86453373
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "Snook0_12",
+				"Weight": 0.002222465544
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "Snook3_12",
+				"Weight": 0.01082283653
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "Snook12_48",
+				"Weight": 0.0275298513
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "RedDrum0_3",
+				"Weight": 0.002308303964
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "RedDrum3_8",
+				"Weight": 0.01195758759
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "SeaTrout0_3",
+				"Weight": 0.0008421200095
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "SeaTrout3_18",
+				"Weight": 0.001447957817
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "SandTrout0_3",
+				"Weight": 0.0003500972418
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "Mullet0_6",
+				"Weight": 1.837292746
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "Mullet6_18",
+				"Weight": 2.065765989
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "Mullet18",
+				"Weight": 0.04442776253
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "Mackrel0_3",
+				"Weight": 4.967623916e-05
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "Ladyfish0_10",
+				"Weight": 0.05238280003
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "Ladyfish10",
+				"Weight": 0.1180191783
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "BayAnchovy",
+				"Weight": 2.857376588
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "PinFish",
+				"Weight": 0.04608459854
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "Spot",
+				"Weight": 1.175760038
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "SilverPerch",
+				"Weight": 0.2862253747
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "ScaledSardine",
+				"Weight": 0.4402181523
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "Mojarra",
+				"Weight": 0.4083750231
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "ThreadfinHerring",
+				"Weight": 0.4162299933
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "Manhaden",
+				"Weight": 0.6769862757
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "Menidia_silverside",
+				"Weight": 1.130814686
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "Bumper",
+				"Weight": 0.2653386305
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "CaridanShrimp",
+				"Weight": 0.02265821631
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "Shrimp",
+				"Weight": 0.09983999823
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "BlueCrab",
+				"Weight": 0.02799900096
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "BenthicInvertebrates",
+				"Weight": 3.906283638
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "Detritus",
+				"Weight": 42.97785428
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "Snook0_12",
+				"Weight": 0.0005556163867
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "Snook3_12",
+				"Weight": 0.008029846067
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "RedDrum0_3",
+				"Weight": 0.001732427643
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "SeaTrout0_3",
+				"Weight": 0.0004210600037
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "SandTrout0_3",
+				"Weight": 0.0002627779759
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "Mullet0_6",
+				"Weight": 1.46991252
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "Mullet6_18",
+				"Weight": 2.065765989
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "Mullet18",
+				"Weight": 0.04442776253
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "Mackrel0_3",
+				"Weight": 8.24638745e-07
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "Ladyfish0_10",
+				"Weight": 0.04958331053
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "BayAnchovy",
+				"Weight": 0.4420847162
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "PinFish",
+				"Weight": 0.007680767013
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "Spot",
+				"Weight": 0.6623999832
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "SilverPerch",
+				"Weight": 0.1435176582
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "ScaledSardine",
+				"Weight": 0.1760872578
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "Mojarra",
+				"Weight": 0.1361250042
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "ThreadfinHerring",
+				"Weight": 0.06953375179
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "Manhaden",
+				"Weight": 0.5077397195
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "Menidia_silverside",
+				"Weight": 0.5261126103
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "Bumper",
+				"Weight": 0.08844621223
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "CaridanShrimp",
+				"Weight": 1.155568951
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "Shrimp",
+				"Weight": 0.09983999823
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "BenthicInvertebrates",
+				"Weight": 1.896115745
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "MacroZooplankton",
+				"Weight": 7.360561047
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "MicroZoolplankton",
+				"Weight": 0.06997410672
+			},
+			{
+				"source": "MicroZoolplankton",
+				"target": "Detritus",
+				"Weight": 39.31129369
+			},
+			{
+				"source": "Infauna",
+				"target": "Rays",
+				"Weight": 4
+			},
+			{
+				"source": "Infauna",
+				"target": "Detritus",
+				"Weight": 76.0000006
+			},
+			{
+				"source": "AttachedMicroalgae",
+				"target": "RedDrum0_3",
+				"Weight": 5.758762487e-05
+			},
+			{
+				"source": "AttachedMicroalgae",
+				"target": "Mullet6_18",
+				"Weight": 1.038110037
+			},
+			{
+				"source": "AttachedMicroalgae",
+				"target": "Mullet18",
+				"Weight": 12.32051937
+			},
+			{
+				"source": "AttachedMicroalgae",
+				"target": "PinFish",
+				"Weight": 0.3791738797
+			},
+			{
+				"source": "AttachedMicroalgae",
+				"target": "Spot",
+				"Weight": 0.9770400054
+			},
+			{
+				"source": "AttachedMicroalgae",
+				"target": "Bumper",
+				"Weight": 0.02255378252
+			},
+			{
+				"source": "AttachedMicroalgae",
+				"target": "CaridanShrimp",
+				"Weight": 4.667592326
+			},
+			{
+				"source": "AttachedMicroalgae",
+				"target": "Shrimp",
+				"Weight": 0.01689600017
+			},
+			{
+				"source": "AttachedMicroalgae",
+				"target": "Cyprinodontids",
+				"Weight": 4.49999988
+			},
+			{
+				"source": "AttachedMicroalgae",
+				"target": "Poecilids",
+				"Weight": 0.2000000058
+			},
+			{
+				"source": "AttachedMicroalgae",
+				"target": "BenthicInvertebrates",
+				"Weight": 18.87561854
+			},
+			{
+				"source": "AttachedMicroalgae",
+				"target": "MicroZoolplankton",
+				"Weight": 0.6997410168
+			},
+			{
+				"source": "AttachedMicroalgae",
+				"target": "Detritus",
+				"Weight": 700.7526951
+			},
+			{
+				"source": "SeaGrass",
+				"target": "Mullet18",
+				"Weight": 3.11462006
+			},
+			{
+				"source": "SeaGrass",
+				"target": "BenthicInvertebrates",
+				"Weight": 0.1425651025
+			},
+			{
+				"source": "SeaGrass",
+				"target": "Detritus",
+				"Weight": 1579.754478
+			},
+			{
+				"source": "Phytoplankton",
+				"target": "RedDrum0_3",
+				"Weight": 4.798968572e-06
+			},
+			{
+				"source": "Phytoplankton",
+				"target": "PinFish",
+				"Weight": 0.007680767013
+			},
+			{
+				"source": "Phytoplankton",
+				"target": "Spot",
+				"Weight": 0.02484000018
+			},
+			{
+				"source": "Phytoplankton",
+				"target": "ThreadfinHerring",
+				"Weight": 0.0004862500131
+			},
+			{
+				"source": "Phytoplankton",
+				"target": "Manhaden",
+				"Weight": 0.3384931378
+			},
+			{
+				"source": "Phytoplankton",
+				"target": "Menidia_silverside",
+				"Weight": 0.02401343873
+			},
+			{
+				"source": "Phytoplankton",
+				"target": "BenthicInvertebrates",
+				"Weight": 38.62088601
+			},
+			{
+				"source": "Phytoplankton",
+				"target": "MacroZooplankton",
+				"Weight": 44.08248325
+			},
+			{
+				"source": "Phytoplankton",
+				"target": "MicroZoolplankton",
+				"Weight": 69.20438963
+			},
+			{
+				"source": "Phytoplankton",
+				"target": "Infauna",
+				"Weight": 200
+			},
+			{
+				"source": "Phytoplankton",
+				"target": "Detritus",
+				"Weight": 4200.946848
+			},
+			{
+				"source": "Detritus",
+				"target": "Snook0_12",
+				"Weight": 0.0005556163867
+			},
+			{
+				"source": "Detritus",
+				"target": "Snook3_12",
+				"Weight": 0.02304216743
+			},
+			{
+				"source": "Detritus",
+				"target": "RedDrum0_3",
+				"Weight": 0.0001151752497
+			},
+			{
+				"source": "Detritus",
+				"target": "RedDrum3_8",
+				"Weight": 2.455356974e-05
+			},
+			{
+				"source": "Detritus",
+				"target": "Mullet0_6",
+				"Weight": 0.3673802268
+			},
+			{
+				"source": "Detritus",
+				"target": "Mullet6_18",
+				"Weight": 0.2090856029
+			},
+			{
+				"source": "Detritus",
+				"target": "Mullet18",
+				"Weight": 6.406950616
+			},
+			{
+				"source": "Detritus",
+				"target": "BayAnchovy",
+				"Weight": 1.622774334
+			},
+			{
+				"source": "Detritus",
+				"target": "PinFish",
+				"Weight": 0.7560435316
+			},
+			{
+				"source": "Detritus",
+				"target": "Spot",
+				"Weight": 1.945799986
+			},
+			{
+				"source": "Detritus",
+				"target": "Manhaden",
+				"Weight": 0.1692465681
+			},
+			{
+				"source": "Detritus",
+				"target": "Menidia_silverside",
+				"Weight": 0.2510495933
+			},
+			{
+				"source": "Detritus",
+				"target": "Bumper",
+				"Weight": 0.01326693121
+			},
+			{
+				"source": "Detritus",
+				"target": "CaridanShrimp",
+				"Weight": 14.00277632
+			},
+			{
+				"source": "Detritus",
+				"target": "Shrimp",
+				"Weight": 0.8248320158
+			},
+			{
+				"source": "Detritus",
+				"target": "StoneCrab",
+				"Weight": 0.3192898098
+			},
+			{
+				"source": "Detritus",
+				"target": "BlueCrab",
+				"Weight": 0.4002820105
+			},
+			{
+				"source": "Detritus",
+				"target": "BenthicInvertebrates",
+				"Weight": 77.24177202
+			},
+			{
+				"source": "Detritus",
+				"target": "MacroZooplankton",
+				"Weight": 29.44224421
+			},
+			{
+				"source": "Rec_HookLine",
+				"target": "Detritus",
+				"Weight": 0.02999999938
+			}
+		]
+	],
+	"links2": [
+		[
+			{
+				"source": "Snook0_12",
+				"target": "Snook3_12",
+				"TG": 16
+			},
+			{
+				"source": "Snook0_12",
+				"target": "RedDrum3_8",
+				"TG": 16
+			},
+			{
+				"source": "Snook0_12",
+				"target": "SeaTrout0_3",
+				"TG": 16
+			},
+			{
+				"source": "Snook0_12",
+				"target": "SandTrout0_3",
+				"TG": 16
+			},
+			{
+				"source": "Snook0_12",
+				"target": "Ladyfish0_10",
+				"TG": 16
+			},
+			{
+				"source": "Snook3_12",
+				"target": "RedDrum3_8",
+				"TG": 16
+			},
+			{
+				"source": "Snook3_12",
+				"target": "SeaTrout0_3",
+				"TG": 16
+			},
+			{
+				"source": "Snook3_12",
+				"target": "SandTrout0_3",
+				"TG": 16
+			},
+			{
+				"source": "Snook3_12",
+				"target": "Ladyfish0_10",
+				"TG": 16
+			},
+			{
+				"source": "Snook12_48",
+				"target": "Snook48_90",
+				"TG": 13
+			},
+			{
+				"source": "Snook12_48",
+				"target": "SeaTrout3_18",
+				"TG": 13
+			},
+			{
+				"source": "Snook12_48",
+				"target": "SandTrout3_12",
+				"TG": 13
+			},
+			{
+				"source": "Snook12_48",
+				"target": "SandTrout12",
+				"TG": 13
+			},
+			{
+				"source": "Snook12_48",
+				"target": "Mackrel0_3",
+				"TG": 13
+			},
+			{
+				"source": "Snook12_48",
+				"target": "Ladyfish10",
+				"TG": 13
+			},
+			{
+				"source": "Snook12_48",
+				"target": "Jacks",
+				"TG": 13
+			},
+			{
+				"source": "Snook48_90",
+				"target": "SeaTrout3_18",
+				"TG": 13
+			},
+			{
+				"source": "Snook48_90",
+				"target": "SandTrout3_12",
+				"TG": 13
+			},
+			{
+				"source": "Snook48_90",
+				"target": "SandTrout12",
+				"TG": 13
+			},
+			{
+				"source": "Snook48_90",
+				"target": "Mackrel0_3",
+				"TG": 13
+			},
+			{
+				"source": "Snook48_90",
+				"target": "Ladyfish10",
+				"TG": 13
+			},
+			{
+				"source": "Snook48_90",
+				"target": "Jacks",
+				"TG": 13
+			},
+			{
+				"source": "Snook90",
+				"target": "Mackrel3",
+				"TG": 15
+			},
+			{
+				"source": "Snook90",
+				"target": "Catfish",
+				"TG": 15
+			},
+			{
+				"source": "RedDrum0_3",
+				"target": "Mullet0_6",
+				"TG": 19
+			},
+			{
+				"source": "RedDrum0_3",
+				"target": "ThreadfinHerring",
+				"TG": 19
+			},
+			{
+				"source": "RedDrum0_3",
+				"target": "Manhaden",
+				"TG": 19
+			},
+			{
+				"source": "RedDrum0_3",
+				"target": "Menidia_silverside",
+				"TG": 19
+			},
+			{
+				"source": "RedDrum3_8",
+				"target": "SeaTrout0_3",
+				"TG": 16
+			},
+			{
+				"source": "RedDrum3_8",
+				"target": "SandTrout0_3",
+				"TG": 16
+			},
+			{
+				"source": "RedDrum3_8",
+				"target": "Ladyfish0_10",
+				"TG": 16
+			},
+			{
+				"source": "RedDrum8_18",
+				"target": "RedDrum18_36",
+				"TG": 11
+			},
+			{
+				"source": "RedDrum8_18",
+				"target": "RedDrum36",
+				"TG": 11
+			},
+			{
+				"source": "RedDrum8_18",
+				"target": "SeaTrout18",
+				"TG": 11
+			},
+			{
+				"source": "RedDrum18_36",
+				"target": "RedDrum36",
+				"TG": 11
+			},
+			{
+				"source": "RedDrum18_36",
+				"target": "SeaTrout18",
+				"TG": 11
+			},
+			{
+				"source": "RedDrum36",
+				"target": "SeaTrout18",
+				"TG": 11
+			},
+			{
+				"source": "SeaTrout0_3",
+				"target": "SandTrout0_3",
+				"TG": 16
+			},
+			{
+				"source": "SeaTrout0_3",
+				"target": "Ladyfish0_10",
+				"TG": 16
+			},
+			{
+				"source": "SeaTrout3_18",
+				"target": "SandTrout3_12",
+				"TG": 13
+			},
+			{
+				"source": "SeaTrout3_18",
+				"target": "SandTrout12",
+				"TG": 13
+			},
+			{
+				"source": "SeaTrout3_18",
+				"target": "Mackrel0_3",
+				"TG": 13
+			},
+			{
+				"source": "SeaTrout3_18",
+				"target": "Ladyfish10",
+				"TG": 13
+			},
+			{
+				"source": "SeaTrout3_18",
+				"target": "Jacks",
+				"TG": 13
+			},
+			{
+				"source": "SandTrout0_3",
+				"target": "Ladyfish0_10",
+				"TG": 16
+			},
+			{
+				"source": "SandTrout3_12",
+				"target": "SandTrout12",
+				"TG": 13
+			},
+			{
+				"source": "SandTrout3_12",
+				"target": "Mackrel0_3",
+				"TG": 13
+			},
+			{
+				"source": "SandTrout3_12",
+				"target": "Ladyfish10",
+				"TG": 13
+			},
+			{
+				"source": "SandTrout3_12",
+				"target": "Jacks",
+				"TG": 13
+			},
+			{
+				"source": "SandTrout12",
+				"target": "Mackrel0_3",
+				"TG": 13
+			},
+			{
+				"source": "SandTrout12",
+				"target": "Ladyfish10",
+				"TG": 13
+			},
+			{
+				"source": "SandTrout12",
+				"target": "Jacks",
+				"TG": 13
+			},
+			{
+				"source": "Mullet0_6",
+				"target": "ThreadfinHerring",
+				"TG": 19
+			},
+			{
+				"source": "Mullet0_6",
+				"target": "Manhaden",
+				"TG": 19
+			},
+			{
+				"source": "Mullet0_6",
+				"target": "Menidia_silverside",
+				"TG": 19
+			},
+			{
+				"source": "Mullet6_18",
+				"target": "Mullet18",
+				"TG": 14
+			},
+			{
+				"source": "Mullet6_18",
+				"target": "Bumper",
+				"TG": 14
+			},
+			{
+				"source": "Mullet18",
+				"target": "Bumper",
+				"TG": 14
+			},
+			{
+				"source": "Mackrel0_3",
+				"target": "Ladyfish10",
+				"TG": 13
+			},
+			{
+				"source": "Mackrel0_3",
+				"target": "Jacks",
+				"TG": 13
+			},
+			{
+				"source": "Mackrel3",
+				"target": "Catfish",
+				"TG": 15
+			},
+			{
+				"source": "Ladyfish10",
+				"target": "Jacks",
+				"TG": 13
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "PinFish",
+				"TG": 10
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "Spot",
+				"TG": 10
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "SilverPerch",
+				"TG": 10
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "ScaledSardine",
+				"TG": 10
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "Mojarra",
+				"TG": 10
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "CaridanShrimp",
+				"TG": 10
+			},
+			{
+				"source": "BayAnchovy",
+				"target": "Shrimp",
+				"TG": 10
+			},
+			{
+				"source": "PinFish",
+				"target": "Spot",
+				"TG": 10
+			},
+			{
+				"source": "PinFish",
+				"target": "SilverPerch",
+				"TG": 10
+			},
+			{
+				"source": "PinFish",
+				"target": "ScaledSardine",
+				"TG": 10
+			},
+			{
+				"source": "PinFish",
+				"target": "Mojarra",
+				"TG": 10
+			},
+			{
+				"source": "PinFish",
+				"target": "CaridanShrimp",
+				"TG": 10
+			},
+			{
+				"source": "PinFish",
+				"target": "Shrimp",
+				"TG": 10
+			},
+			{
+				"source": "Spot",
+				"target": "SilverPerch",
+				"TG": 10
+			},
+			{
+				"source": "Spot",
+				"target": "ScaledSardine",
+				"TG": 10
+			},
+			{
+				"source": "Spot",
+				"target": "Mojarra",
+				"TG": 10
+			},
+			{
+				"source": "Spot",
+				"target": "CaridanShrimp",
+				"TG": 10
+			},
+			{
+				"source": "Spot",
+				"target": "Shrimp",
+				"TG": 10
+			},
+			{
+				"source": "SilverPerch",
+				"target": "ScaledSardine",
+				"TG": 10
+			},
+			{
+				"source": "SilverPerch",
+				"target": "Mojarra",
+				"TG": 10
+			},
+			{
+				"source": "SilverPerch",
+				"target": "CaridanShrimp",
+				"TG": 10
+			},
+			{
+				"source": "SilverPerch",
+				"target": "Shrimp",
+				"TG": 10
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "Mojarra",
+				"TG": 10
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "CaridanShrimp",
+				"TG": 10
+			},
+			{
+				"source": "ScaledSardine",
+				"target": "Shrimp",
+				"TG": 10
+			},
+			{
+				"source": "Mojarra",
+				"target": "CaridanShrimp",
+				"TG": 10
+			},
+			{
+				"source": "Mojarra",
+				"target": "Shrimp",
+				"TG": 10
+			},
+			{
+				"source": "ThreadfinHerring",
+				"target": "Manhaden",
+				"TG": 19
+			},
+			{
+				"source": "ThreadfinHerring",
+				"target": "Menidia_silverside",
+				"TG": 19
+			},
+			{
+				"source": "Manhaden",
+				"target": "Menidia_silverside",
+				"TG": 19
+			},
+			{
+				"source": "CaridanShrimp",
+				"target": "Shrimp",
+				"TG": 10
+			},
+			{
+				"source": "StoneCrab",
+				"target": "BlueCrab",
+				"TG": 2
+			},
+			{
+				"source": "Cyprinodontids",
+				"target": "Poecilids",
+				"TG": 3
+			},
+			{
+				"source": "Pigfish",
+				"target": "Gobies",
+				"TG": 7
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "MacroZooplankton",
+				"TG": 18
+			},
+			{
+				"source": "BenthicInvertebrates",
+				"target": "MicroZoolplankton",
+				"TG": 18
+			},
+			{
+				"source": "MacroZooplankton",
+				"target": "MicroZoolplankton",
+				"TG": 18
+			},
+			{
+				"source": "AttachedMicroalgae",
+				"target": "SeaGrass",
+				"TG": 12
+			},
+			{
+				"source": "AttachedMicroalgae",
+				"target": "Phytoplankton",
+				"TG": 12
+			},
+			{
+				"source": "SeaGrass",
+				"target": "Phytoplankton",
+				"TG": 12
+			},
+			{
+				"source": "PurseSeine",
+				"target": "HaulSeine",
+				"TG": 17
+			}
+		]
+	]
+}

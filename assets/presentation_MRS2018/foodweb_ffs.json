@@ -1,0 +1,1250 @@
+{
+	"nodes": [
+		[
+			{
+				"B": 0.0001975766116,
+				"type": 0,
+				"TL": 4.229260432,
+				"id": "SearbirdsNearShore",
+				"TG": 14
+			},
+			{
+				"B": 0.00079999998,
+				"type": 0,
+				"TL": 4.26704086,
+				"id": "TigerSharks",
+				"TG": 15
+			},
+			{
+				"B": 0.00463999994,
+				"type": 0,
+				"TL": 4.368097741,
+				"id": "MonkSeals",
+				"TG": 17
+			},
+			{
+				"B": 0.00222399994,
+				"type": 0,
+				"TL": 4.344810027,
+				"id": "ReefSharks",
+				"TG": 14
+			},
+			{
+				"B": 0.00409149984,
+				"type": 0,
+				"TL": 4.352092207,
+				"id": "BankSharks",
+				"TG": 16
+			},
+			{
+				"B": 0.0199999996,
+				"type": 0,
+				"TL": 4.042976139,
+				"id": "ReefJacks",
+				"TG": 14
+			},
+			{
+				"B": 0.0245000012,
+				"type": 0,
+				"TL": 4.210563086,
+				"id": "BankJacks",
+				"TG": 16
+			},
+			{
+				"B": 0.1276216785,
+				"type": 0,
+				"TL": 2.100000003,
+				"id": "Turtles",
+				"TG": 6
+			},
+			{
+				"B": 0.0255999994,
+				"type": 0,
+				"TL": 3.516133747,
+				"id": "BenthicBottomfish",
+				"TG": 10
+			},
+			{
+				"B": 0.0207999982,
+				"type": 0,
+				"TL": 3.285972218,
+				"id": "DemersalBottomfish",
+				"TG": 10
+			},
+			{
+				"B": 0.1322533998,
+				"type": 0,
+				"TL": 3.150000001,
+				"id": "SmallPelagics",
+				"TG": 10
+			},
+			{
+				"B": 0.282399982,
+				"type": 0,
+				"TL": 3.974954091,
+				"id": "RFPisc",
+				"TG": 8
+			},
+			{
+				"B": 0.338400006,
+				"type": 0,
+				"TL": 3,
+				"id": "RFPlank",
+				"TG": 8
+			},
+			{
+				"B": 0.631199896,
+				"type": 0,
+				"TL": 2.138750001,
+				"id": "RFHerb",
+				"TG": 8
+			},
+			{
+				"B": 0.408800006,
+				"type": 0,
+				"TL": 3.421177848,
+				"id": "RFBC",
+				"TG": 8
+			},
+			{
+				"B": 0.0441000015,
+				"type": 0,
+				"TL": 4.04011767,
+				"id": "BankPisc",
+				"TG": 9
+			},
+			{
+				"B": 0.735000014,
+				"type": 0,
+				"TL": 3,
+				"id": "BankPlank",
+				"TG": 9
+			},
+			{
+				"B": 0.646800041,
+				"type": 0,
+				"TL": 2.138750001,
+				"id": "BankHerb",
+				"TG": 9
+			},
+			{
+				"B": 1.17110002,
+				"type": 0,
+				"TL": 3.421373535,
+				"id": "BankBC",
+				"TG": 9
+			},
+			{
+				"B": 0.00800000038,
+				"type": 0,
+				"TL": 4.13640351,
+				"id": "MesoPisc",
+				"TG": 13
+			},
+			{
+				"B": 0.107199997,
+				"type": 0,
+				"TL": 3,
+				"id": "MesoPlank",
+				"TG": 7
+			},
+			{
+				"B": 0.00287999981,
+				"type": 0,
+				"TL": 3.786111116,
+				"id": "MesoBC",
+				"TG": 13
+			},
+			{
+				"B": 0.0943999961,
+				"type": 0,
+				"TL": 3,
+				"id": "MesoForageFish",
+				"TG": 7
+			},
+			{
+				"B": 0.00378000038,
+				"type": 0,
+				"TL": 4.48245615,
+				"id": "SubPisc",
+				"TG": 11
+			},
+			{
+				"B": 0.0086400006,
+				"type": 0,
+				"TL": 3.555555561,
+				"id": "SubBC",
+				"TG": 11
+			},
+			{
+				"B": 0.0159300007,
+				"type": 0,
+				"TL": 3,
+				"id": "SubPlank",
+				"TG": 11
+			},
+			{
+				"B": 3.100223326,
+				"type": 0,
+				"TL": 2.805555551,
+				"id": "MacroHeterotrophs",
+				"TG": 6
+			},
+			{
+				"B": 0.5868807166,
+				"type": 0,
+				"TL": 3.805555551,
+				"id": "Cephalopods",
+				"TG": 6
+			},
+			{
+				"B": 0.5999609155,
+				"type": 0,
+				"TL": 2.25,
+				"id": "HeterotrophicBenthos",
+				"TG": 5
+			},
+			{
+				"B": 0.3980136424,
+				"type": 0,
+				"TL": 2,
+				"id": "Zooplankton",
+				"TG": 4
+			},
+			{
+				"B": 1.046,
+				"type": 1,
+				"TL": 1,
+				"id": "Phytoplankton",
+				"TG": 3
+			},
+			{
+				"B": 9.157454367,
+				"type": 1,
+				"TL": 1,
+				"id": "BenthicAlgae",
+				"TG": 1
+			},
+			{
+				"B": 1000,
+				"type": 2,
+				"TL": 1,
+				"id": "Detritus",
+				"TG": 2
+			},
+			{
+				"B": 2.00000002e-07,
+				"type": 3,
+				"TL": 5.348451117,
+				"id": "fleet_BankSharks",
+				"TG": 21
+			},
+			{
+				"B": 1.00000001e-07,
+				"type": 3,
+				"TL": 3.805555551,
+				"id": "fleet_MacroHet",
+				"TG": 12
+			},
+			{
+				"B": 2.00000002e-07,
+				"type": 3,
+				"TL": 4.401052983,
+				"id": "fleet_Bottomfish",
+				"TG": 18
+			},
+			{
+				"B": 1.00000001e-07,
+				"type": 3,
+				"TL": 5.042976139,
+				"id": "fleet_ReefJacks",
+				"TG": 19
+			},
+			{
+				"B": 1.00000001e-07,
+				"type": 3,
+				"TL": 5.210563086,
+				"id": "fleet_BankJacks",
+				"TG": 20
+			}
+		]
+	],
+	"links1": [
+		[
+			{
+				"source": "SearbirdsNearShore",
+				"target": "TigerSharks",
+				"Weight": 1.199999944e-05
+			},
+			{
+				"source": "SearbirdsNearShore",
+				"target": "ReefSharks",
+				"Weight": 4.892800224e-06
+			},
+			{
+				"source": "TigerSharks",
+				"target": "TigerSharks",
+				"Weight": 3.599999838e-05
+			},
+			{
+				"source": "MonkSeals",
+				"target": "TigerSharks",
+				"Weight": 7.199999652e-05
+			},
+			{
+				"source": "MonkSeals",
+				"target": "ReefSharks",
+				"Weight": 2.935680012e-05
+			},
+			{
+				"source": "ReefSharks",
+				"target": "TigerSharks",
+				"Weight": 3.840000096e-05
+			},
+			{
+				"source": "ReefSharks",
+				"target": "ReefSharks",
+				"Weight": 0.0001174272005
+			},
+			{
+				"source": "ReefSharks",
+				"target": "fleet_BankSharks",
+				"Weight": 1.00000001e-07
+			},
+			{
+				"source": "BankSharks",
+				"target": "TigerSharks",
+				"Weight": 0.000103200001
+			},
+			{
+				"source": "BankSharks",
+				"target": "BankSharks",
+				"Weight": 0.0003060442112
+			},
+			{
+				"source": "BankSharks",
+				"target": "fleet_BankSharks",
+				"Weight": 1.00000001e-07
+			},
+			{
+				"source": "ReefJacks",
+				"target": "TigerSharks",
+				"Weight": 2.399999887e-05
+			},
+			{
+				"source": "ReefJacks",
+				"target": "ReefSharks",
+				"Weight": 0.0001223200014
+			},
+			{
+				"source": "ReefJacks",
+				"target": "fleet_ReefJacks",
+				"Weight": 1.00000001e-07
+			},
+			{
+				"source": "BankJacks",
+				"target": "TigerSharks",
+				"Weight": 9.599999544e-05
+			},
+			{
+				"source": "BankJacks",
+				"target": "BankSharks",
+				"Weight": 0.0002250324999
+			},
+			{
+				"source": "BankJacks",
+				"target": "fleet_BankJacks",
+				"Weight": 1.00000001e-07
+			},
+			{
+				"source": "Turtles",
+				"target": "TigerSharks",
+				"Weight": 0.0003911999974
+			},
+			{
+				"source": "Turtles",
+				"target": "ReefJacks",
+				"Weight": 0.0004399999915
+			},
+			{
+				"source": "BenthicBottomfish",
+				"target": "MonkSeals",
+				"Weight": 0.01837439995
+			},
+			{
+				"source": "BenthicBottomfish",
+				"target": "ReefSharks",
+				"Weight": 0.0004892800028
+			},
+			{
+				"source": "BenthicBottomfish",
+				"target": "BankSharks",
+				"Weight": 0.0009001299943
+			},
+			{
+				"source": "BenthicBottomfish",
+				"target": "ReefJacks",
+				"Weight": 0.0004399999915
+			},
+			{
+				"source": "BenthicBottomfish",
+				"target": "BankJacks",
+				"Weight": 0.0005390000268
+			},
+			{
+				"source": "BenthicBottomfish",
+				"target": "fleet_Bottomfish",
+				"Weight": 1.00000001e-07
+			},
+			{
+				"source": "DemersalBottomfish",
+				"target": "MonkSeals",
+				"Weight": 0.0001855999935
+			},
+			{
+				"source": "DemersalBottomfish",
+				"target": "ReefSharks",
+				"Weight": 0.0002935679924
+			},
+			{
+				"source": "DemersalBottomfish",
+				"target": "BankSharks",
+				"Weight": 0.0005400779795
+			},
+			{
+				"source": "DemersalBottomfish",
+				"target": "ReefJacks",
+				"Weight": 0.0004399999915
+			},
+			{
+				"source": "DemersalBottomfish",
+				"target": "BankJacks",
+				"Weight": 0.0005390000268
+			},
+			{
+				"source": "DemersalBottomfish",
+				"target": "fleet_Bottomfish",
+				"Weight": 1.00000001e-07
+			},
+			{
+				"source": "SmallPelagics",
+				"target": "SearbirdsNearShore",
+				"Weight": 0.005680130071
+			},
+			{
+				"source": "SmallPelagics",
+				"target": "ReefSharks",
+				"Weight": 2.935680012e-05
+			},
+			{
+				"source": "SmallPelagics",
+				"target": "BankSharks",
+				"Weight": 5.400779957e-05
+			},
+			{
+				"source": "SmallPelagics",
+				"target": "ReefJacks",
+				"Weight": 0.01803999987
+			},
+			{
+				"source": "SmallPelagics",
+				"target": "BankJacks",
+				"Weight": 0.03234000361
+			},
+			{
+				"source": "SmallPelagics",
+				"target": "BenthicBottomfish",
+				"Weight": 0.002047999911
+			},
+			{
+				"source": "RFPisc",
+				"target": "SearbirdsNearShore",
+				"Weight": 0.003465098767
+			},
+			{
+				"source": "RFPisc",
+				"target": "TigerSharks",
+				"Weight": 1.920000043e-05
+			},
+			{
+				"source": "RFPisc",
+				"target": "ReefSharks",
+				"Weight": 0.000342496
+			},
+			{
+				"source": "RFPisc",
+				"target": "ReefJacks",
+				"Weight": 0.005807999981
+			},
+			{
+				"source": "RFPisc",
+				"target": "RFPisc",
+				"Weight": 0.1823852043
+			},
+			{
+				"source": "RFPisc",
+				"target": "RFBC",
+				"Weight": 0.01116024074
+			},
+			{
+				"source": "RFPlank",
+				"target": "SearbirdsNearShore",
+				"Weight": 0.002478203395
+			},
+			{
+				"source": "RFPlank",
+				"target": "TigerSharks",
+				"Weight": 1.680000011e-05
+			},
+			{
+				"source": "RFPlank",
+				"target": "ReefSharks",
+				"Weight": 0.000425673586
+			},
+			{
+				"source": "RFPlank",
+				"target": "ReefJacks",
+				"Weight": 0.005455999927
+			},
+			{
+				"source": "RFPlank",
+				"target": "BenthicBottomfish",
+				"Weight": 0.001433600007
+			},
+			{
+				"source": "RFPlank",
+				"target": "RFPisc",
+				"Weight": 0.5947343842
+			},
+			{
+				"source": "RFPlank",
+				"target": "RFBC",
+				"Weight": 0.05208112443
+			},
+			{
+				"source": "RFHerb",
+				"target": "SearbirdsNearShore",
+				"Weight": 0.002763306533
+			},
+			{
+				"source": "RFHerb",
+				"target": "TigerSharks",
+				"Weight": 2.159999852e-05
+			},
+			{
+				"source": "RFHerb",
+				"target": "MonkSeals",
+				"Weight": 0.0009280000028
+			},
+			{
+				"source": "RFHerb",
+				"target": "ReefSharks",
+				"Weight": 0.0007339200262
+			},
+			{
+				"source": "RFHerb",
+				"target": "ReefJacks",
+				"Weight": 0.02191199988
+			},
+			{
+				"source": "RFHerb",
+				"target": "BenthicBottomfish",
+				"Weight": 0.0001024000027
+			},
+			{
+				"source": "RFHerb",
+				"target": "RFPisc",
+				"Weight": 0.495611967
+			},
+			{
+				"source": "RFHerb",
+				"target": "RFBC",
+				"Weight": 0.04092088194
+			},
+			{
+				"source": "RFBC",
+				"target": "SearbirdsNearShore",
+				"Weight": 0.007544265599
+			},
+			{
+				"source": "RFBC",
+				"target": "TigerSharks",
+				"Weight": 8.879999898e-05
+			},
+			{
+				"source": "RFBC",
+				"target": "ReefSharks",
+				"Weight": 0.0005871359828
+			},
+			{
+				"source": "RFBC",
+				"target": "ReefJacks",
+				"Weight": 0.0306239992
+			},
+			{
+				"source": "RFBC",
+				"target": "BenthicBottomfish",
+				"Weight": 0.0001024000027
+			},
+			{
+				"source": "RFBC",
+				"target": "RFPisc",
+				"Weight": 0.5194013315
+			},
+			{
+				"source": "RFBC",
+				"target": "RFBC",
+				"Weight": 0.003720080396
+			},
+			{
+				"source": "BankPisc",
+				"target": "TigerSharks",
+				"Weight": 7.199999652e-05
+			},
+			{
+				"source": "BankPisc",
+				"target": "BankSharks",
+				"Weight": 0.0006300909924
+			},
+			{
+				"source": "BankPisc",
+				"target": "BankJacks",
+				"Weight": 0.007114800467
+			},
+			{
+				"source": "BankPisc",
+				"target": "BankPisc",
+				"Weight": 0.009261000099
+			},
+			{
+				"source": "BankPisc",
+				"target": "BankBC",
+				"Weight": 0.0319956252
+			},
+			{
+				"source": "BankPlank",
+				"target": "TigerSharks",
+				"Weight": 6.959999634e-05
+			},
+			{
+				"source": "BankPlank",
+				"target": "BankSharks",
+				"Weight": 0.0007831130647
+			},
+			{
+				"source": "BankPlank",
+				"target": "BankJacks",
+				"Weight": 0.006683600371
+			},
+			{
+				"source": "BankPlank",
+				"target": "BenthicBottomfish",
+				"Weight": 0.00573440004
+			},
+			{
+				"source": "BankPlank",
+				"target": "BankPisc",
+				"Weight": 0.09261000685
+			},
+			{
+				"source": "BankPlank",
+				"target": "BankBC",
+				"Weight": 0.1493129204
+			},
+			{
+				"source": "BankHerb",
+				"target": "TigerSharks",
+				"Weight": 8.160000228e-05
+			},
+			{
+				"source": "BankHerb",
+				"target": "MonkSeals",
+				"Weight": 0.001781759992
+			},
+			{
+				"source": "BankHerb",
+				"target": "BankSharks",
+				"Weight": 0.001368197533
+			},
+			{
+				"source": "BankHerb",
+				"target": "BankJacks",
+				"Weight": 0.008516200999
+			},
+			{
+				"source": "BankHerb",
+				"target": "BenthicBottomfish",
+				"Weight": 0.0004096000099
+			},
+			{
+				"source": "BankHerb",
+				"target": "BankPisc",
+				"Weight": 0.05371380028
+			},
+			{
+				"source": "BankHerb",
+				"target": "BankBC",
+				"Weight": 0.1173172901
+			},
+			{
+				"source": "BankBC",
+				"target": "TigerSharks",
+				"Weight": 0.0003600000054
+			},
+			{
+				"source": "BankBC",
+				"target": "BankSharks",
+				"Weight": 0.001080155955
+			},
+			{
+				"source": "BankBC",
+				"target": "BankJacks",
+				"Weight": 0.03751440161
+			},
+			{
+				"source": "BankBC",
+				"target": "BenthicBottomfish",
+				"Weight": 0.0004096000099
+			},
+			{
+				"source": "BankBC",
+				"target": "BankPisc",
+				"Weight": 0.1234800061
+			},
+			{
+				"source": "BankBC",
+				"target": "BankBC",
+				"Weight": 0.01066520883
+			},
+			{
+				"source": "MesoPisc",
+				"target": "MonkSeals",
+				"Weight": 0.002227199923
+			},
+			{
+				"source": "MesoPisc",
+				"target": "MesoPisc",
+				"Weight": 0.001400000086
+			},
+			{
+				"source": "MesoPlank",
+				"target": "MonkSeals",
+				"Weight": 0.005085439749
+			},
+			{
+				"source": "MesoPlank",
+				"target": "BankJacks",
+				"Weight": 0.005390000462
+			},
+			{
+				"source": "MesoPlank",
+				"target": "BenthicBottomfish",
+				"Weight": 0.00368639976
+			},
+			{
+				"source": "MesoPlank",
+				"target": "MesoPisc",
+				"Weight": 0.002800000161
+			},
+			{
+				"source": "MesoBC",
+				"target": "MonkSeals",
+				"Weight": 0.001336319927
+			},
+			{
+				"source": "MesoBC",
+				"target": "MesoPisc",
+				"Weight": 0.001400000086
+			},
+			{
+				"source": "MesoForageFish",
+				"target": "MonkSeals",
+				"Weight": 0.0001855999935
+			},
+			{
+				"source": "MesoForageFish",
+				"target": "ReefJacks",
+				"Weight": 0.000879999983
+			},
+			{
+				"source": "MesoForageFish",
+				"target": "BankJacks",
+				"Weight": 0.003234000156
+			},
+			{
+				"source": "MesoForageFish",
+				"target": "BenthicBottomfish",
+				"Weight": 0.03583999855
+			},
+			{
+				"source": "MesoForageFish",
+				"target": "DemersalBottomfish",
+				"Weight": 0.0004159999548
+			},
+			{
+				"source": "MesoForageFish",
+				"target": "SmallPelagics",
+				"Weight": 0.12894707
+			},
+			{
+				"source": "MesoForageFish",
+				"target": "MesoPisc",
+				"Weight": 0.021000001
+			},
+			{
+				"source": "MesoForageFish",
+				"target": "MesoBC",
+				"Weight": 0.00345599991
+			},
+			{
+				"source": "SubPisc",
+				"target": "MonkSeals",
+				"Weight": 0.0001484800051
+			},
+			{
+				"source": "SubPisc",
+				"target": "SubPisc",
+				"Weight": 0.001568700216
+			},
+			{
+				"source": "SubBC",
+				"target": "MonkSeals",
+				"Weight": 7.424000238e-05
+			},
+			{
+				"source": "SubBC",
+				"target": "SubPisc",
+				"Weight": 0.009412201538
+			},
+			{
+				"source": "SubPlank",
+				"target": "MonkSeals",
+				"Weight": 0.001484799947
+			},
+			{
+				"source": "SubPlank",
+				"target": "SubPisc",
+				"Weight": 0.01098090117
+			},
+			{
+				"source": "SubPlank",
+				"target": "SubBC",
+				"Weight": 0.005875200669
+			},
+			{
+				"source": "MacroHeterotrophs",
+				"target": "TigerSharks",
+				"Weight": 0.0004151999728
+			},
+			{
+				"source": "MacroHeterotrophs",
+				"target": "MonkSeals",
+				"Weight": 0.001484799947
+			},
+			{
+				"source": "MacroHeterotrophs",
+				"target": "ReefSharks",
+				"Weight": 0.0003180319869
+			},
+			{
+				"source": "MacroHeterotrophs",
+				"target": "BankSharks",
+				"Weight": 0.0005850844688
+			},
+			{
+				"source": "MacroHeterotrophs",
+				"target": "ReefJacks",
+				"Weight": 0.00175999997
+			},
+			{
+				"source": "MacroHeterotrophs",
+				"target": "BankJacks",
+				"Weight": 0.003234000156
+			},
+			{
+				"source": "MacroHeterotrophs",
+				"target": "BenthicBottomfish",
+				"Weight": 0.001433600007
+			},
+			{
+				"source": "MacroHeterotrophs",
+				"target": "DemersalBottomfish",
+				"Weight": 0.02121599775
+			},
+			{
+				"source": "MacroHeterotrophs",
+				"target": "MacroHeterotrophs",
+				"Weight": 2.790201021
+			},
+			{
+				"source": "MacroHeterotrophs",
+				"target": "Cephalopods",
+				"Weight": 7.045503062
+			},
+			{
+				"source": "MacroHeterotrophs",
+				"target": "fleet_MacroHet",
+				"Weight": 1.00000001e-07
+			},
+			{
+				"source": "Cephalopods",
+				"target": "TigerSharks",
+				"Weight": 0.0004823999999
+			},
+			{
+				"source": "Cephalopods",
+				"target": "MonkSeals",
+				"Weight": 0.003711999989
+			},
+			{
+				"source": "Cephalopods",
+				"target": "ReefSharks",
+				"Weight": 0.001399340858
+			},
+			{
+				"source": "Cephalopods",
+				"target": "BankSharks",
+				"Weight": 0.002529365151
+			},
+			{
+				"source": "Cephalopods",
+				"target": "ReefJacks",
+				"Weight": 0.002200000041
+			},
+			{
+				"source": "Cephalopods",
+				"target": "BankJacks",
+				"Weight": 0.002695000236
+			},
+			{
+				"source": "Cephalopods",
+				"target": "BenthicBottomfish",
+				"Weight": 0.001023999953
+			},
+			{
+				"source": "Cephalopods",
+				"target": "DemersalBottomfish",
+				"Weight": 0.0008319999097
+			},
+			{
+				"source": "Cephalopods",
+				"target": "RFPisc",
+				"Weight": 0.07929791294
+			},
+			{
+				"source": "Cephalopods",
+				"target": "RFBC",
+				"Weight": 0.3720080247
+			},
+			{
+				"source": "Cephalopods",
+				"target": "BankPisc",
+				"Weight": 0.01234800014
+			},
+			{
+				"source": "Cephalopods",
+				"target": "BankBC",
+				"Weight": 1.06652084
+			},
+			{
+				"source": "Cephalopods",
+				"target": "MesoPisc",
+				"Weight": 0.001400000086
+			},
+			{
+				"source": "Cephalopods",
+				"target": "MesoBC",
+				"Weight": 0.002303999883
+			},
+			{
+				"source": "Cephalopods",
+				"target": "SubPisc",
+				"Weight": 0.009412201538
+			},
+			{
+				"source": "Cephalopods",
+				"target": "SubBC",
+				"Weight": 0.00293760032
+			},
+			{
+				"source": "HeterotrophicBenthos",
+				"target": "MonkSeals",
+				"Weight": 0.0001113599997
+			},
+			{
+				"source": "HeterotrophicBenthos",
+				"target": "DemersalBottomfish",
+				"Weight": 0.01913599868
+			},
+			{
+				"source": "HeterotrophicBenthos",
+				"target": "RFPisc",
+				"Weight": 0.111017084
+			},
+			{
+				"source": "HeterotrophicBenthos",
+				"target": "RFHerb",
+				"Weight": 1.635274847
+			},
+			{
+				"source": "HeterotrophicBenthos",
+				"target": "RFBC",
+				"Weight": 3.240189833
+			},
+			{
+				"source": "HeterotrophicBenthos",
+				"target": "BankPisc",
+				"Weight": 0.01728720111
+			},
+			{
+				"source": "HeterotrophicBenthos",
+				"target": "BankHerb",
+				"Weight": 1.675690768
+			},
+			{
+				"source": "HeterotrophicBenthos",
+				"target": "BankBC",
+				"Weight": 9.289396337
+			},
+			{
+				"source": "HeterotrophicBenthos",
+				"target": "MesoBC",
+				"Weight": 0.00575999962
+			},
+			{
+				"source": "HeterotrophicBenthos",
+				"target": "SubBC",
+				"Weight": 0.02056320168
+			},
+			{
+				"source": "HeterotrophicBenthos",
+				"target": "MacroHeterotrophs",
+				"Weight": 13.95100497
+			},
+			{
+				"source": "HeterotrophicBenthos",
+				"target": "HeterotrophicBenthos",
+				"Weight": 23.99843698
+			},
+			{
+				"source": "Zooplankton",
+				"target": "Turtles",
+				"Weight": 0.08627225844
+			},
+			{
+				"source": "Zooplankton",
+				"target": "BenthicBottomfish",
+				"Weight": 0.05017599985
+			},
+			{
+				"source": "Zooplankton",
+				"target": "DemersalBottomfish",
+				"Weight": 0.0415999964
+			},
+			{
+				"source": "Zooplankton",
+				"target": "SmallPelagics",
+				"Weight": 0.7307000547
+			},
+			{
+				"source": "Zooplankton",
+				"target": "RFPlank",
+				"Weight": 5.12506826
+			},
+			{
+				"source": "Zooplankton",
+				"target": "BankPlank",
+				"Weight": 11.13157558
+			},
+			{
+				"source": "Zooplankton",
+				"target": "MesoPlank",
+				"Weight": 0.750399979
+			},
+			{
+				"source": "Zooplankton",
+				"target": "MesoForageFish",
+				"Weight": 0.6607999727
+			},
+			{
+				"source": "Zooplankton",
+				"target": "SubPlank",
+				"Weight": 0.07168500315
+			},
+			{
+				"source": "Phytoplankton",
+				"target": "Zooplankton",
+				"Weight": 66.05553693
+			},
+			{
+				"source": "BenthicAlgae",
+				"target": "Turtles",
+				"Weight": 0.7764502975
+			},
+			{
+				"source": "BenthicAlgae",
+				"target": "RFHerb",
+				"Weight": 13.09693085
+			},
+			{
+				"source": "BenthicAlgae",
+				"target": "BankHerb",
+				"Weight": 13.42062232
+			},
+			{
+				"source": "BenthicAlgae",
+				"target": "MacroHeterotrophs",
+				"Weight": 11.16080414
+			},
+			{
+				"source": "BenthicAlgae",
+				"target": "HeterotrophicBenthos",
+				"Weight": 47.99687396
+			},
+			{
+				"source": "Detritus",
+				"target": "HeterotrophicBenthos",
+				"Weight": 47.99687396
+			}
+		]
+	],
+	"links2": [
+		[
+			{
+				"source": "SearbirdsNearShore",
+				"target": "ReefSharks",
+				"TG": 14
+			},
+			{
+				"source": "SearbirdsNearShore",
+				"target": "ReefJacks",
+				"TG": 14
+			},
+			{
+				"source": "ReefSharks",
+				"target": "ReefJacks",
+				"TG": 14
+			},
+			{
+				"source": "BankSharks",
+				"target": "BankJacks",
+				"TG": 16
+			},
+			{
+				"source": "Turtles",
+				"target": "MacroHeterotrophs",
+				"TG": 6
+			},
+			{
+				"source": "Turtles",
+				"target": "Cephalopods",
+				"TG": 6
+			},
+			{
+				"source": "BenthicBottomfish",
+				"target": "DemersalBottomfish",
+				"TG": 10
+			},
+			{
+				"source": "BenthicBottomfish",
+				"target": "SmallPelagics",
+				"TG": 10
+			},
+			{
+				"source": "DemersalBottomfish",
+				"target": "SmallPelagics",
+				"TG": 10
+			},
+			{
+				"source": "RFPisc",
+				"target": "RFPlank",
+				"TG": 8
+			},
+			{
+				"source": "RFPisc",
+				"target": "RFHerb",
+				"TG": 8
+			},
+			{
+				"source": "RFPisc",
+				"target": "RFBC",
+				"TG": 8
+			},
+			{
+				"source": "RFPlank",
+				"target": "RFHerb",
+				"TG": 8
+			},
+			{
+				"source": "RFPlank",
+				"target": "RFBC",
+				"TG": 8
+			},
+			{
+				"source": "RFHerb",
+				"target": "RFBC",
+				"TG": 8
+			},
+			{
+				"source": "BankPisc",
+				"target": "BankPlank",
+				"TG": 9
+			},
+			{
+				"source": "BankPisc",
+				"target": "BankHerb",
+				"TG": 9
+			},
+			{
+				"source": "BankPisc",
+				"target": "BankBC",
+				"TG": 9
+			},
+			{
+				"source": "BankPlank",
+				"target": "BankHerb",
+				"TG": 9
+			},
+			{
+				"source": "BankPlank",
+				"target": "BankBC",
+				"TG": 9
+			},
+			{
+				"source": "BankHerb",
+				"target": "BankBC",
+				"TG": 9
+			},
+			{
+				"source": "MesoPisc",
+				"target": "MesoBC",
+				"TG": 13
+			},
+			{
+				"source": "MesoPlank",
+				"target": "MesoForageFish",
+				"TG": 7
+			},
+			{
+				"source": "SubPisc",
+				"target": "SubBC",
+				"TG": 11
+			},
+			{
+				"source": "SubPisc",
+				"target": "SubPlank",
+				"TG": 11
+			},
+			{
+				"source": "SubBC",
+				"target": "SubPlank",
+				"TG": 11
+			},
+			{
+				"source": "MacroHeterotrophs",
+				"target": "Cephalopods",
+				"TG": 6
+			}
+		]
+	]
+}

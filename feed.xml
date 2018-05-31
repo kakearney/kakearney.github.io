@@ -1,0 +1,1303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kelly A. Kearney</title>
+    <description>University of Washington&lt;br&gt; Joint Institute for the Study of the Atmosphere and Ocean&lt;br&gt; Alaska Fisheries Science Center, NOAA&lt;br&gt; 7600 Sand Point Way N.E., Building 4&lt;br&gt; Seattle, Washington 98115
+</description>
+    <link>http://kellyakearney.net/</link>
+    <atom:link href="http://kellyakearney.net/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 31 May 2018 10:48:27 -0700</pubDate>
+    <lastBuildDate>Thu, 31 May 2018 10:48:27 -0700</lastBuildDate>
+    <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>PICES 2016</title>
+        <description>&lt;p&gt;I just returned from the North Pacific Marine Science Organization (PICES) 2016 Annual Meeting in San Diego, CA.  It was a great meeting overall, and allowed me to get better acquainted with the Pacific research community that I’ve recently joined.  While there, I presented some preliminary work looking at planktonic food web pathways in the Northern Bering Sea between warm (early ice melt) and cold (late ice melt) years. The presentation was well-received, and earned a Best Oral Presentation award from the TCODE committee. See the presentation here:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/pices2016/index.html&quot; title=&quot;Kearney PICES 2016 slides&quot;&gt;A comparison of Bering Sea ecosystem energy pathways in warm versus cold years&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;On the technical side, I tried something new for my slides this time: &lt;a href=&quot;http://lab.hakim.se/reveal-js&quot;&gt;reveal.js&lt;/a&gt;, a javascript library that allows you to create slides using html.  I walked away from Powerpoint many years ago, after struggling futilely against its poor Mac interface and terrible support for vector graphics.  Since then I’ve used Keynote, which is great if I’m presenting on my own computer but risky otherwise. I usually export to pdf for conference presentations to avoid Mac-to-Windows formatting issues, but this limits me to static graphics.  The reveal.js option is platform-independent, since it runs in any browser, and I was impressed with how quickly I was able to be up and running with it; I threw in lots of graphics, animations, and even an interactive food web slide using D3, and all worked flawlessly!  Overall, I consider this experiment a success.&lt;/p&gt;
+
+&lt;p&gt;As a bonus, I can now share the presentation directly from this website (see link above), and include my speaker notes, which I feel are a critical part of any talk.&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 08 Nov 2016 00:00:00 -0800</pubDate>
+        <link>http://kellyakearney.net/2016/11/08/pices.html</link>
+        <guid isPermaLink="true">http://kellyakearney.net/2016/11/08/pices.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Plotting lines with error bounds in Matlab</title>
+        <description>&lt;p&gt;One of my most popular MatlabCentral File Exchange entries is also one of the simplest: &lt;a href=&quot;http://www.mathworks.com/matlabcentral/fileexchange/27485-boundedline-m&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;boundedline.m&lt;/code&gt;&lt;/a&gt;.  This function allows you to plot confidence intervals (or any other sort of bounds) along the length of a line using a shaded patch object.&lt;/p&gt;
+
+&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
+
+&lt;p&gt;Matlab includes the &lt;code class=&quot;highlighter-rouge&quot;&gt;errorbar&lt;/code&gt; function to plot error (or standard deviation, confidence intervals, or any sort of bounds) along a line. Here’s one of the examples from the &lt;code class=&quot;highlighter-rouge&quot;&gt;errorbar&lt;/code&gt; help page:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;count.dat&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;mean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;errorbar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;rx&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/boundedline1.png&quot; onload=&quot;this.width/=2;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;However, often users prefer to visualize error as a shaded region around the line.  To get this, you can simply combine the use of a line and a patch.  For example:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;span class=&quot;n&quot;&gt;lo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;hi&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;hp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;patch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;r&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;hold&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;hl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;facecolor&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.8&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;edgecolor&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;none&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;color&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;r&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;marker&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;x&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/boundedline2.png&quot; onload=&quot;this.width/=2;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;While the concept is simple, keeping all the cosmetic details of the line and patch objects in sync can start to become a hassle if you do this sort of plot a lot.  Before I wrote my own function to facilitate the task, I looked at several other candidates on the FileExchange.  There were a few features I was looking for in the ideal function:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It allowed bounds to be set in either the horizontal or vertical direction.  In marine sciences, variables are often plotted versus depth, with the y-axis holding the independent variable and the x-axis showing the dependent one.&lt;/li&gt;
+  &lt;li&gt;It allowed me to plot multiple lines at once.&lt;/li&gt;
+  &lt;li&gt;It allowed me to specify colors for each line/patch combo.&lt;/li&gt;
+  &lt;li&gt;It allowed the patch object to be rendered as either the same color as the line, with opacity set to a value less than one, &lt;em&gt;or&lt;/em&gt; as an opaque patch colored with a lightened version of the line color.  This is less of an issue with the new handle graphics introduced in R2014b, but prior to that, I had a lot of problems with the OpenGL renderer on my computers (OpenGL is the only renderer that supports transparency, but it also led to sporadic visual artifacts that made it unusable for publication-quality graphics); therefore, I needed the option to avoid the use of transparent patches at times.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I didn’t find any candidates that met all of these requirements, so I wrote my own.  The boundedline.m function will produce a plot identical to the line/patch combo in the second example above, but with a simpler syntax similar to the errorbar function:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;span class=&quot;n&quot;&gt;boundedline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;-rx&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/boundedline3.png&quot; onload=&quot;this.width/=2;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The actual plotting function is simple, so instead I focused on making this function as flexible as possible to the types of data one might want to plot.  I allow for lots of different calling syntaxes to define one or more lines, similar to the &lt;code class=&quot;highlighter-rouge&quot;&gt;plot&lt;/code&gt; function.  I also allow several different methods for setting the colors of each line, including the use of LineSpecs, colormaps, or the default color order for an axis.  Error bounds can be defined as symmetric on both sides, or you can set different bounds for each side.  Bounds can be constant along the length of the line, or vary.  Overall, it’s a pretty versatile function, and it’s proved very useful in my own work, and very popular with others as well.&lt;/p&gt;
+
+&lt;h2 id=&quot;dealing-with-nans-and-infs&quot;&gt;Dealing with NaNs and Infs&lt;/h2&gt;
+
+&lt;p&gt;One of the more common complaints that I received about this function was that it did not automatically deal with NaNs and Infs in the input data.  Line-plotting functions, like &lt;code class=&quot;highlighter-rouge&quot;&gt;plot&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;line&lt;/code&gt;, automatically drop the points,&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;linspace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)];&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;randperm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;numel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;randperm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;numel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Inf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/boundedline4.png&quot; onload=&quot;this.width/=2;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So why couldn’t &lt;code class=&quot;highlighter-rouge&quot;&gt;boundedline&lt;/code&gt; do the same?&lt;/p&gt;
+
+&lt;p&gt;While dropping the points from the line is pretty easy, figuring out what to do with the patch object is more complicated.  Patches do &lt;em&gt;not&lt;/em&gt; handle NaNs and Infs gracefully; a patch with a NaN-vertex plots only the outline of the patch, with no fill.&lt;/p&gt;
+
+&lt;p&gt;When I asked others what they would expect the function to do when it found NaNs in the patch, the answers varied.  Some thought those points should just be dropped from the polygon, interpolating past the NaNs.  Others wanted to see a gap in the patch similar to the gap in a line.&lt;/p&gt;
+
+&lt;p&gt;When I first wrote this function, I left it up to the users to preprocess their data and remove any NaNs, since there didn’t seem to be a consensus on the desired behavior.  I continued to get feedback on this, though, and I recently relented.  Now there are three different options for dealing with NaNs included with the boundedline function: drop the points, smooth past them, or leave a gap.&lt;/p&gt;
+
+&lt;p&gt;Here’s an example that shows these three methods in action.  The markers along the top of the first axis show where I inserted NaNs in the data.  Most real datasets won’t include such a variety of missing data, but I wanted to demonstrate behavior in all cases (data missing from the line, data missing from one or both bounds, single missing points vs longer runs of missing data, data missing at the beginning or end of a line, data with 0-width bounds vs missing bounds):&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;linspace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;65&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,:)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;ln&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;lo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;35&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;55&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;66&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;70&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;95&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;hi&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;40&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;55&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;66&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ln&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+
+&lt;span class=&quot;n&quot;&gt;nanflag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;gap&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;fill&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;remove&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ii&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nanflag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ii&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;subplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ii&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ii&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ii&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boundedline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;nan&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nanflag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ii&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ho&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outlinebounds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;linestyle&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;:&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/boundedline5.png&quot; onload=&quot;this.width/=1.5;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;&#39;fill&#39;&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;&#39;remove&#39;&lt;/code&gt; options end up looking the same; the only difference is that the former adds the interpolated points to the patch vertices, while the latter relies on the graphics engine to do this interpolation.  You may prefer the former if keeping your vertex numbers consistent with the original data is important for your analysis.&lt;/p&gt;
+
+&lt;p&gt;As you can see, the fill/remove option can be a little wonky when you have one-sided missing bounds data at the beginning or end of a line.  The gap method is better at highlighting missing data, but it doesn’t differentiate between one-sided and two-sided missing data in the bounds. The fill/remove method may be better if your intent is to mostly ignore a few sporadic missing points in a large dataset (like the missing values on the left side of this example line).&lt;/p&gt;
+
+&lt;p&gt;I hope users find that these new NaN/Inf options make this function even more convenient.  If you have any additional suggestions for improvement, or want to add a different way of handling gaps, feel free to leave a comment on the &lt;a href=&quot;http://www.mathworks.com/matlabcentral/fileexchange/27485-boundedline-m&quot;&gt;File Exchange page for boundedline.m&lt;/a&gt;, or raise an issue on the &lt;a href=&quot;https://github.com/kakearney/boundedline-pkg&quot;&gt;GitHub repo page &lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 10 Jun 2016 00:00:00 -0700</pubDate>
+        <link>http://kellyakearney.net/2016/06/10/boundedline.html</link>
+        <guid isPermaLink="true">http://kellyakearney.net/2016/06/10/boundedline.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Food webs as network graphs-- Part 3: The Code</title>
+        <description>&lt;p&gt;This is Part 3 in my three-part series on visualizing food webs as network graphs.  &lt;br /&gt;
+&lt;a href=&quot;/2016/01/19/food-webs-as-network-graphs-1.html&quot;&gt;Part 1&lt;/a&gt; – &lt;a href=&quot;/2016/01/19/food-webs-as-network-graphs-2.html&quot;&gt;Part 2&lt;/a&gt; – &lt;strong&gt;Part 3&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Update 08/24/2016: This post was written early in the development process of this tool.  Updates continue alonside manuscript preparation; the most recent code (not yet documented) can be found &lt;a href=&quot;https://github.com/kakearney/foodwebgraph-pkg&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-toolbox&quot;&gt;The toolbox&lt;/h2&gt;
+
+&lt;p&gt;The food web diagrams seen on my Ocean Sciences 2016 poster were created using code written in Matlab and javascript.  The code collection can be downloaded &lt;a href=&quot;https://github.com/kakearney/foodwebnetworkgraph-pkg&quot;&gt;from GitHub&lt;/a&gt;.  In order to run this code, you must be running Matlab R2015b or later.&lt;/p&gt;
+
+&lt;p&gt;I did originally have the goal of providing a pure javascript-plus-html version of this toolbox, making it platform independent and eliminating the need for Matlab (which I love, but is expensive).&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, the edge-bundling calculations have proven too computationally-intensive for this, at least with my rather rudimentary javascript programming skills (I’ve played around with some other implementations of force-directed edge bundling in D3, such as &lt;a href=&quot;http://bl.ocks.org/sjengle/5450007&quot;&gt;this one&lt;/a&gt;, and they too slowed to a painful crawl when I tested them on even small food webs).  And the resulting SVGs, with thousands of components (or hundreds of thousands, when attempting to add edge color gradients), were terrible to try to work with (crashed a couple browsers and Adobe Illustrator, though Inkscape was generally up to the task).&lt;/p&gt;
+
+&lt;p&gt;So, in the end, the majority of the code I developed for this process is written in Matlab, simply because that’s where I do most of my work.  Apologies to all the R and python people out there.&lt;/p&gt;
+
+&lt;p&gt;The following example will take you through the full process of using this code to create a food web diagram based on an Ecopath food web model.  For for information about each Matlab function, you can check the function help in the header of each file (type &lt;code class=&quot;highlighter-rouge&quot;&gt;help &amp;lt;functionname&amp;gt;&lt;/code&gt; from the Matlab Command Window).&lt;/p&gt;
+
+&lt;h2 id=&quot;the-process&quot;&gt;The process&lt;/h2&gt;
+
+&lt;h3 id=&quot;step-1-start-with-an-ecopath-model&quot;&gt;Step 1: Start with an Ecopath model&lt;/h3&gt;
+
+&lt;p&gt;Although this graphing process can be applied to any network food web, many of the calculations (network fluxes, trophic levels, etc.) in this particular code suite are based on my Matlab implementation of the Ecopath model.  &lt;a href=&quot;http://ecopath.org/&quot;&gt;Ecopath with Ecosim&lt;/a&gt; is a software suite, used primarily in fisheries modeling, which calculates a mass-balance snapshot of the biomass pools and fluxes in a food web.&lt;/p&gt;
+
+&lt;p&gt;You can import an Ecopath model into Matlab using one of two processes:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mdb2ewein.m&lt;/code&gt;: This function reads information directly from an EwE 6 database file (.EwEmdb file).  This function relies on the &lt;a href=&quot;https://github.com/brianb/mdbtools&quot;&gt;mdbtools&lt;/a&gt; utility to extract info the the Microsoft Access file format, so that needs to be installed prior to running this.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rpath2ewein.m&lt;/code&gt;: This function reads food web data from a set of Rpath .csv files.  &lt;a href=&quot;https://github.com/slucey/RpathDev&quot;&gt;Rpath&lt;/a&gt; is the R implementation of Ecopath with Ecosim.  It is currently still in beta testing, so this format is loosely documented for now; it will be updated once Rpath is officially released.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Alternatively, you can manually contruct the necessary input structure by following the description of the input in &lt;code class=&quot;highlighter-rouge&quot;&gt;ecopathlite.m&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;For our example, we’re using the direct import method, with one of the ecosystem models that ships with Ecopath with Ecosim.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;Ewein&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mdb2ewein&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Generic_37.EwEmdb&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;(Note: It turns out this was a somewhat poor choice of an example ecosystem.  The functional groups in this food web are already pretty cosolidated, so much so that the trophic grouping algorithm can settle into a few different local minima when run repeatedly.  So you may get slightly different results than I did when you run this code.)&lt;/p&gt;
+
+&lt;h3 id=&quot;step-2-convert-to-a-graph-object&quot;&gt;Step 2: Convert to a graph object&lt;/h3&gt;
+
+&lt;p&gt;The conversion is performed via the &lt;code class=&quot;highlighter-rouge&quot;&gt;ecopath2graph.m&lt;/code&gt; function:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ecopath2graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Ewein&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;step-3-prepare-graph-object-for-trophic-grouping&quot;&gt;Step 3: Prepare graph object for trophic grouping&lt;/h3&gt;
+
+&lt;p&gt;As discussed in the previous blog post, this involves removing out-of-system nodes and non-predatory flux edges.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;detid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;oosid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rmnode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oosid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;isdet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ismember&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Edges&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EndNodes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;detid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rmedge&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isdet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You may find you want to make some other manual changes for visualization purposes.  For example, I often limit the biomass of detrital groups, which can be much larger than the living groups, to avoid unnecessarily giant nodes in the final visualization.&lt;/p&gt;
+
+&lt;h3 id=&quot;step-4-calculate-trophic-groups&quot;&gt;Step 4: Calculate trophic groups&lt;/h3&gt;
+
+&lt;p&gt;Trophic groups can be calculated with the &lt;code class=&quot;highlighter-rouge&quot;&gt;gauzensgroupep.m&lt;/code&gt; function:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;grp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gauzensgroupep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;type&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;trophicgroup&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;step-5-position-nodes&quot;&gt;Step 5: Position nodes&lt;/h3&gt;
+
+&lt;p&gt;As discussed in the previous post, the main positioning calculations are carried out by a javascript function.  A few functions allow us to call this javascript function from within Matlab.&lt;/p&gt;
+
+&lt;p&gt;First, we need to set up input data that meets the formatting requirements of the javascript function (which uses the JSON format to list nodes and their hierarchical relationship to each other).  The second output of the &lt;code class=&quot;highlighter-rouge&quot;&gt;trophicgroupgraph.m&lt;/code&gt; function matches this format:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;G3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trophicgroupgraph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We can then pass this new graph object to the &lt;code class=&quot;highlighter-rouge&quot;&gt;renderfoodwebforce.m&lt;/code&gt; function.  The &lt;code class=&quot;highlighter-rouge&quot;&gt;renderfoodwebforce.m&lt;/code&gt; function is a wrapper that creates an empty webpage and then runs the &lt;code class=&quot;highlighter-rouge&quot;&gt;foodweblayout.js&lt;/code&gt; script with your chosen parameters.  There are a lot of user-controllable parameters; you can use the &lt;code class=&quot;highlighter-rouge&quot;&gt;&#39;test&#39;&lt;/code&gt; mode to see how changing those affect your food web.  Particularly for large food webs, small changes in things like padding (space around nodes), charge (repelling force between nodes), trophic nudging (speed at which nodes move toward their trophic level), scaling factor for initial node size (smaller space leads to smaller nodes with more room to move, while larger, closely-packed ones can get tangled up), and even the random seed (there’s a bit of randomness in the collison-avoidance code) can change the way the final layout looks.&lt;/p&gt;
+
+&lt;p&gt;Once you’ve settled on a good set of parameters, you’ll need to pull the coordinate information out of the html file and into Matlab.  At the moment, this step requires the use of &lt;a href=&quot;http://phantomjs.org/&quot;&gt;phantomJS&lt;/a&gt;.  I’m looking for a solution that doesn’t require you to install that, but for now, it’s necessary.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;opt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;drawmode&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;force&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&#39;init&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;cpack&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&#39;cpfac&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&#39;totheight&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;600&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&#39;totwidth&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&#39;fontsz&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&#39;charge&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&#39;padding&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&#39;tlnudge&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;2.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&#39;tllim&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]};&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;% Uncomment to test different parameters&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;% [hw, stat] = renderfoodwebforce(G3, &#39;mode&#39;, &#39;test&#39;, opt{:});&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;renderfoodwebforce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;mode&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;extract&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;opt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{:});&lt;/span&gt;    
+   &lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;&#39;extract&#39;&lt;/code&gt; mode, this function returns data about all the circle and text objects in the resulting webpage.  To get that data into slightly more user-friendly format, run &lt;code class=&quot;highlighter-rouge&quot;&gt;foodweblayoutdetails&lt;/code&gt;.  This adds a few new fields to the Nodes table of the graph object: x/y-cooridnates of the node center, radius of the node, x/y-coordinates of the text label, and horizontal and vertical alignment of the text label.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foodweblayoutdetails&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;step-6-run-edge-bundling&quot;&gt;Step 6: Run edge bundling&lt;/h3&gt;
+
+&lt;p&gt;We’ll run the algorithm using the logarithmic weighting function, as discussed in Part 1 of this series:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;wlim&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;minmax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;log10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Edges&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;expand&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.01&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;wtfun&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;log10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wlim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;debundle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;edgefun&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wtfun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;l&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;step-7-plot&quot;&gt;Step 7: Plot&lt;/h3&gt;
+
+&lt;p&gt;At this point, we have all the information we need to plot the final figure in Matlab.&lt;/p&gt;
+
+&lt;p&gt;One thing to note, before creating our figure, is the conversion of units that took place under the hood of step 5 (in &lt;code class=&quot;highlighter-rouge&quot;&gt;foodweblayoutdetails.m&lt;/code&gt;).  To make it easier to add a trophic level axis to the final plot, I chose to convert all positioning information from pixel space to trophic level units.  However, in order to keep all the text positioning identical to the javascript-produced figure, we need to create a new axis with the same size (in pixels) as the SVG grouping object in the webpage.  That info is stored in the &lt;code class=&quot;highlighter-rouge&quot;&gt;Ax&lt;/code&gt; output structure.  So first, we set up an appropriately-sized axis, with the color of the x axis turned off (the x-axis coordinates are arbitrary, so an axis there serves no purpose):&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;mar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;figure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;position&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ax&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ax&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;color&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;w&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ax&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;axes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;units&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;pixels&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&#39;position&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ax&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ax&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&#39;xlim&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ax&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;xlim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&#39;ylim&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ax&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ylim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&#39;xcolor&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;none&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;hold&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Plot the edges using the &lt;code class=&quot;highlighter-rouge&quot;&gt;plotdeb.m&lt;/code&gt; function:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;edg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plotdeb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;p&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;w&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;rloop&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;edg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;clipping&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;off&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Nodes can be plotted as circular patches, using the coordinate and radius details added to the graph object in the previous step:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;th&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;linspace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;arrayfun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;patch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.*&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;th&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.*&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;th&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;w&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;uni&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{:});&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;facecolor&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;clipping&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;off&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&#39;edgecolor&#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;none&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Text placement is also based on the details in the graph object:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;txt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;fontsize&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;fontname&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;Arial&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;txt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;horizontalalignment&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;VerticalAlignment&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;th&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Finally, add a label to the trophic level axis, and change the colormap to a red-to-blue one.  The colormap choice is a personal preference; red-to-blue is nearly isoluminant, so it makes a good choice here (a more isoluminant red-to-green colormap is often used in figures like these, but I try to avoid that due to colorblindness issues).&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;ylabel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Trophic Level&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;colormap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;usercolormap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]));&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The end result:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/foodwebcode.png&quot; onload=&quot;this.width/=1.5;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/2016/01/19/food-webs-as-network-graphs-1.html&quot;&gt;Part 1&lt;/a&gt; – &lt;a href=&quot;/2016/01/19/food-webs-as-network-graphs-2.html&quot;&gt;Part 2&lt;/a&gt; – &lt;strong&gt;Part 3&lt;/strong&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 19 Jan 2016 00:00:00 -0800</pubDate>
+        <link>http://kellyakearney.net/2016/01/19/food-webs-as-network-graphs-3.html</link>
+        <guid isPermaLink="true">http://kellyakearney.net/2016/01/19/food-webs-as-network-graphs-3.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Food webs as network graphs-- Part 2: Node Positioning</title>
+        <description>&lt;p&gt;This is Part 2 in my three-part series on visualizing food webs as network graphs.  &lt;br /&gt;
+&lt;a href=&quot;/2016/01/19/food-webs-as-network-graphs-1.html&quot;&gt;Part 1&lt;/a&gt; – &lt;strong&gt;Part 2&lt;/strong&gt; – &lt;a href=&quot;/2016/01/19/food-webs-as-network-graphs-3.html&quot;&gt;Part 3&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;node-layout-for-a-food-web-graph&quot;&gt;Node layout for a food web graph&lt;/h2&gt;
+
+&lt;p&gt;In the previous post, I discussed a method for bundling graph edges together to reduce clutter and reveal high-level patterns in energy flow.  However, the edge-bundling algorithm requires node positions to be set first.&lt;/p&gt;
+
+&lt;p&gt;For the purposes of a food web graph, I wanted a node-positioning algorithm with a few different features:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Node size is scaled based on functional group biomass.&lt;/li&gt;
+  &lt;li&gt;Nodes don’t overlap each other, regardless of the sizes of each node.&lt;/li&gt;
+  &lt;li&gt;Node y-position is based on trophic level, with producers at the bottom and apex predators at the top.&lt;/li&gt;
+  &lt;li&gt;Nodes that share similar predators and prey are positioned close to each other, optimizing the effect of the edge bundling algorithm.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I’ve looked at a lot of exisiting graphing tools, and I’ve never found an out-of-the-box option that meets all of these requirements.  In particular, the last two prove elusive.  Most tools allow you to specify node coordinates, but not to specify along only one axis while leaving the others free.  And most common node-positioning algorithms optimize for orthogonality of edges, which is not necessarily ideal for edge bundling.  In the end, I resorted to a custom layout function, and was able to create an algorithm that seems to work well for even very large food webs.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-building-blocks&quot;&gt;The building blocks&lt;/h2&gt;
+
+&lt;h3 id=&quot;trophic-groups&quot;&gt;Trophic groups&lt;/h3&gt;
+
+&lt;p&gt;To meet requirement 4 in our desired node-positioning characterisitcs, we first need a way of quantifying the similarity between groups.  For this, I followed the trophic group algorithm developed by Gauzens et al. (2014):&lt;/p&gt;
+
+&lt;p&gt;Gauzens B, Thébault E, Lacroix G, Legendre S (2014) Trophic groups and modules: two levels of group detection in food webs. J R Soc Interface 12:1–29&lt;br /&gt;
+&lt;a href=&quot;http://dx.doi.org/doi:10.1098/rsif.2014.1176&quot;&gt;DOI:10.1098/rsif.2014.1176&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;They define trophic similarity \(T(i,j)\) as&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;T(i,j) = \frac{|P_i \cap P_j| + |p_i \cap p_j|}{|P_i \cup P_j| + |p_i \cup p_j|}&lt;/script&gt;
+
+&lt;p&gt;where \(P_i\) and \(p_i\) are the predators and prey of group \(i\), repsectively.  This leads to a value ranging from 0 (groups \(i\) and \(j\) have no common predators or prey groups) to 1 (groups \(i\) and \(j\) have identical predators and prey).  They then apply a simulated annealing alorithm to isolate groups of nodes such that the within-group trophic similarity values are maximized.&lt;/p&gt;
+
+&lt;p&gt;To demonstrate this algorithm, we’ll use one of the food webs that ships with the &lt;a href=&quot;http://ecopath.org/&quot;&gt;Ecopath with Ecosim&lt;/a&gt; software.  This food web represents a generic fisheries ecosystem; its functional groups are already pretty consolidated, but it’s small enough that it makes for a simple example.&lt;/p&gt;
+
+&lt;p&gt;We start by reading data from the EwE database file and converting it to a Matlab graph object:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;Ewein&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mdb2ewein&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Generic_37.EwEmdb&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ecopath2graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Ewein&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;layout&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;layered&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;direction&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;up&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;nodecolor&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;k&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/foodwebex1.png&quot; onload=&quot;this.width/=1.5;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As I’ve written it, the &lt;code class=&quot;highlighter-rouge&quot;&gt;ecopath2graph.m&lt;/code&gt; function includes all Ecopath-derived fluxes, both in-system and out-of-system, in the resulting graph object.  For the trophic grouping algorithm, we’re only interested in predator-prey interactions, so we’ll delete all out-of-system fluxes (primary production, respiration losses, fisheries landings, and export) and flows to detritus:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;detid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;oosid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rmnode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oosid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;isdet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ismember&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Edges&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EndNodes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;detid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rmedge&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isdet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;layout&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;layered&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;direction&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;up&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;nodecolor&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;k&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/foodwebex2.png&quot; onload=&quot;this.width/=1.5;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We can now run the grouping algorithm, and update the colors of the nodes based on the trophic group indices:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;adj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;adjacency&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;grp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gauzensgroup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;adj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;type&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;trophicgroup&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;NodeCData&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;NodeColor&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;flat&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;ngrp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;distinguishable_colors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ngrp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;colormap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;gca&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;clim&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ngrp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;colorbar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/foodwebex3.png&quot; onload=&quot;this.width/=1.5;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This layered layout is good for visualizing the approximate trophic level of each group, since it positions nodes based on the number of edges leading to and from each, but it doesn’t always keep trophic groups near each other.  For a better option, we turn to a force layout.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-force-layout&quot;&gt;The force layout&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Force-directed_graph_drawing&quot;&gt;Force-directed layouts&lt;/a&gt; are common to many network graphing tools, and work by treating nodes of a graph like charged particles that repel each other but are connected by spring-like edges.&lt;/p&gt;
+
+&lt;p&gt;Simply switching to Matlab’s force-directed layout doesn’t exactly achieve what we want:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;force&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/foodwebex4.png&quot; onload=&quot;this.width/=1.5;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Some trophic groups are still separated from each other, and we’ve lost all sense of trophic level structure.  The force layout uses the edges (in this case, the predator-prey connections) to determine where to place nodes.  But in our case, we already have a separate metric defining which nodes we want near each other: the trophic group calculation.  So the first step in our new layout is to replace the exisiting edges with a new set that connects each node to its “trophic group” node, creating a dendrogram-like graph:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;G3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trophicgroupgraph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cdata&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ngrp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ngrp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ngrp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;layout&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;layered&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;direction&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;left&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&#39;NodeCData&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cdata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;NodeColor&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;flat&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/foodwebex5.png&quot; onload=&quot;this.width/=1.5;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We can remove the “web” node (which is just there to connect the hierarchy), and plot with Matlab’s force layout:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;G3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rmnode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;web&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;layout&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;force&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;NodeCData&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cdata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,:),&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;NodeColor&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;flat&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/foodwebex6.png&quot; onload=&quot;this.width/=1.5;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This force layout now succeeds in keeping functionally-similar nodes close to each other (requirement 4), but is missing all the other desired requirements.  Enter D3.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-d3-force-layout&quot;&gt;The D3 force layout&lt;/h2&gt;
+
+&lt;p&gt;A few months ago, a colleague introduced me to the &lt;a href=&quot;http://d3js.org/&quot;&gt;D3.js&lt;/a&gt; library.  D3.js (short for Data Driven Documents) is a javascript library designed to &quot;bind arbitrary data to a Document Object Model (DOM)&quot;… more simply, to dynamically construct interactive web graphics based on underlying datasets.  The relatively small set of tools can be used to create an endless array of &lt;a href=&quot;https://github.com/mbostock/d3/wiki/Gallery&quot;&gt;fascinating infographics&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;My experimentation with D3 led me to its &lt;a href=&quot;http://bl.ocks.org/mbostock/4062045&quot;&gt;force layout&lt;/a&gt; tool.   Unlike the Matlab implementation I demonstrated in the previous section, the D3 version allows (and in fact encourages) all sorts of interventions as the physical simulation is running.  To position nodes, I make the following adjustments:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Prior to positioning nodes, I attach circles, with area scaled to biomass of the group, to each node position.  I use D3’s circle pack layout to calculate the appropriate scaling of circles and also to initiate the node positions (this reduces some unecessary movement one would otherwise get when starting with default random positions).&lt;/li&gt;
+  &lt;li&gt;As the physical simulation of the force layout runs,  I check for collisions between node circles, and when they occur, separate the two nodes in question.&lt;/li&gt;
+  &lt;li&gt;As the force layout runs, I nudge each node’s y-coordinate towards a specified location based on its trophic level.&lt;/li&gt;
+  &lt;li&gt;After the nodes have settled into position, I use Evan Wang’s &lt;a href=&quot;https://github.com/tinker10/D3-Labeler&quot;&gt;labeler.js&lt;/a&gt; plugin to position node labels so they are either inside a node (if the node is large enough to fit the text) or outside but not overlapping any other nodes or text.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The result is below.  Reload the page to see it in action.&lt;/p&gt;
+
+&lt;div id=&quot;fwf&quot;&gt;&lt;/div&gt;
+
+&lt;p&gt;For more information on using this code, please read on to the next post.&lt;/p&gt;
+
+&lt;!--
+***************
+Scripts
+***************
+--&gt;
+
+&lt;script src=&quot;http://d3js.org/d3.v3.min.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;/assets/js/packages.js&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;/assets/js/foodweblayout.js&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;/assets/js/seedrandom.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;/assets/js/labeler.js&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;
+
+d3.json(&quot;/assets/supporting_code/gen37.json&quot;, function(data) {
+    d3.select(&quot;#fwf&quot;)
+        .datum(data)
+    .call(foodweblayout()
+	    .marl(50)
+	    .marr(50)
+	    .mart(50)
+	    .marb(50)
+	    .totwidth(600)
+	    .totheight(500)
+	    .padding(10)
+	    .tlnudge(1.0)
+	    .linkdist(5.0)
+	    .charge(-100)
+	    .hlineop(0.50)
+	    .fontsz(10)
+	    .seed(&#39;hello&#39;)
+	    .cpfac(0.40)
+	    .tllim([NaN,NaN])
+       .init(&#39;cpack&#39;)
+	    .drawmode(&#39;force&#39;));
+});
+
+&lt;/script&gt;
+
+&lt;p&gt;&lt;a href=&quot;/2016/01/19/food-webs-as-network-graphs-1.html&quot;&gt;Part 1&lt;/a&gt; – &lt;strong&gt;Part 2&lt;/strong&gt; – &lt;a href=&quot;/2016/01/19/food-webs-as-network-graphs-3.html&quot;&gt;Part 3&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 19 Jan 2016 00:00:00 -0800</pubDate>
+        <link>http://kellyakearney.net/2016/01/19/food-webs-as-network-graphs-2.html</link>
+        <guid isPermaLink="true">http://kellyakearney.net/2016/01/19/food-webs-as-network-graphs-2.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Food webs as network graphs-- Part 1: Edge Bundling</title>
+        <description>&lt;p&gt;This is Part 1 in my three-part series on visualizing food webs as network graphs.  &lt;br /&gt;
+&lt;strong&gt;Part 1&lt;/strong&gt; – &lt;a href=&quot;/2016/01/19/food-webs-as-network-graphs-2.html&quot;&gt;Part 2&lt;/a&gt; – &lt;a href=&quot;/2016/01/19/food-webs-as-network-graphs-3.html&quot;&gt;Part 3&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This series of blog posts is a supplement to my Ocean Sciences 2016 poster presentation: “Visualizing Ecosystem Energy Flow in Complex Food Web Networks: A Comparison of Three Alaskan Large Marine Ecosystems,” available for download &lt;a href=&quot;https://agu.confex.com/data/handout/agu/os16/Paper_90301_handout_5753_0.pdf&quot;&gt;here&lt;/a&gt;.  This blog post will explain the theory behind the food web visualizations, and offer a step-by-step procedure (with code) to create similar food web diagrams from your own food web network data (specifically, Ecopath model data).&lt;/p&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Food webs are a central focus of my research, and for papers and presentations, I usually like to include a visualization of the food web being discussed.  In simple models with a dozen or so state variables (e.g. biogeochemical NPZ models), a clean, visually-intuitive diagram can be constructed manually without too much effort.  As the number of nodes in the diagram increases, graphing software like Graphviz, Gephi, or the network graph modules of Python, Matlab, D3, etc. can provide some automated node placement, edge routing algorithms, and plotting tools.&lt;/p&gt;
+
+&lt;p&gt;However, all of these tools fell short when I attempted to use them on a management-oriented food web with 120+ nodes and 2000+ edges.&lt;/p&gt;
+
+&lt;p&gt;The resulting diagrams were simply too cluttered to be useful; the only information one can extract from the resulting figures is “Well, it’s complex!”  I have to laugh (sometimes at myself, because I’ve been guilty of it too!) every time I see a figure like these ones in the published literature or in a conference presentation, accompanied by a phrase like “The figure shows…” or “As you can see…”  Nope, I can’t see anything except a solid blob of ink (or pixels).&lt;/p&gt;
+
+&lt;p&gt;In my quest to turn these cluttered messes into informative figures, I stumbled into the vast and fascinating world of data visualization associated with network graphs.  Large networks are increasingly common in the world of big data, and the data visualization world has published a variety of techniques to try to reduce the visual clutter in their visual depictions.&lt;/p&gt;
+
+&lt;p&gt;This post will be the first in a three-part series where I describe the techniques I’ve adapted in order to create improved food web diagrams for my research.  The three posts will discuss&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Edge bundling&lt;/li&gt;
+  &lt;li&gt;Node positioning&lt;/li&gt;
+  &lt;li&gt;The code&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In Parts 1 and 2, I’ll go through the the background and theory, with some examples (mostly in Matlab, with a bit of javascript).  Part 3 will discuss the code underlying those examples in more detail.&lt;/p&gt;
+
+&lt;h2 id=&quot;terminology&quot;&gt;Terminology&lt;/h2&gt;
+
+&lt;p&gt;First, a bit of terminology.  Throughout this series of blog posts, I use the term “graph” in the graph theory context, i.e. a set of nodes (points, vertices) connected by edges (lines) that show the how objects in a network are connected.&lt;/p&gt;
+
+&lt;p&gt;In a food web, the nodes of the graph represent biological state variables, such as living critters (either single species or groups of species that are treated as a single functional group), fishing fleets, detrital pools, etc.  The edges represent processes that move biomass and/or energy from one group to another… primary production, grazing and predation, egestion and excretion, respiration, fisheries landings and discards, non-predatory mortality, etc.&lt;/p&gt;
+
+&lt;h2 id=&quot;divided-edge-bundling&quot;&gt;Divided edge bundling&lt;/h2&gt;
+
+&lt;p&gt;Edge bundling algorithms, as their name implies, work by gathering edges of a graph together into groups in an effort to elucidate high-level patterns amongst the tangle of lines. The rules for which edges get bundled with each other, and how strongly, vary by algorithm.  For food webs, I was looking for a variation that would pull out high-level flows (such as pelagic vs benthic food pathways) while preserving both the direction and weight of graph edges, and I found a great candidate in Selassie et al.’s divided edge bundling algorithm:&lt;/p&gt;
+
+&lt;p&gt;Selassie D, Heller B, Heer J (2011) Divided edge bundling for directional network data. IEEE Trans Vis Comput Graph 17:2354–2363 &lt;br /&gt;
+&lt;a href=&quot;http://dx.doi.org/doi:10.1109/TVCG.2011.190&quot;&gt;DOI:10.1109/TVCG.2011.190&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The divided edge bundling algorithm places control points along each edge of a network graph, and then treats those control points like charged particles that attract the control points on other edges.  The attraction between edges moving in opposite directions is offset relative to those moving in the same direction, resulting in directional lanes.&lt;/p&gt;
+
+&lt;p&gt;After playing around with Selassie’s software prototype for a while, I decided I needed to make a few tweaks to the algorithm to best apply it to food web networks.  My version consists of two functions (&lt;code class=&quot;highlighter-rouge&quot;&gt;debundle.m&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;plotdeb.m&lt;/code&gt;) written in Matlab, and builds upon the original algorithm with a few additions and changes.  I’ll elaborate on those changes in the next section, but I’ll start with an example so you can see how the algorithm works.&lt;/p&gt;
+
+&lt;p&gt;Coincidentally, I started development of my Matlab version of divided edge bundling the same week that the Mathworks released their beta version of Matlab R2015b, which included the new graph object class.  These graph objects provide a nice way to keep all graph data together, along with built-in functions for calculations like shortest path and connected components (finally, no more need to distribute the giant matlab_bgl library with my network-related code!). Because of the reliance on graph objects, you’ll need Matlab R2015b or later to run this code.&lt;/p&gt;
+
+&lt;p&gt;For demonstration purposes, we’ll start with the 3-by-3 example used in the Selassie et. al paper.  It consists of 12 nodes in a 6 x 2 grid, with edges defining 2 subgraphs (3 nodes per side in each subgraph).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/deb1.png&quot; onload=&quot;this.width/=1.75;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To produce that graph, I started with a table a node coordinates:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-none&quot; data-lang=&quot;none&quot;&gt;N = 
+
+     x     y      id 
+    ___    __    ____
+
+    -50     0    &#39;0&#39; 
+    -50    10    &#39;1&#39; 
+    -50    20    &#39;2&#39; 
+     50     0    &#39;3b&#39;
+     50    10    &#39;4b&#39;
+     50    20    &#39;5b&#39;
+    -50    30    &#39;0b&#39;
+    -50    40    &#39;1b&#39;
+    -50    50    &#39;2b&#39;
+     50    30    &#39;3&#39; 
+     50    40    &#39;4&#39; 
+     50    50    &#39;5&#39; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;and a table of edge source/target pairs:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-none&quot; data-lang=&quot;none&quot;&gt;E = 
+
+    src     tar 
+    ____    ____
+
+    &#39;0&#39;     &#39;5&#39; 
+    &#39;3&#39;     &#39;0&#39; 
+    &#39;3&#39;     &#39;1&#39; 
+    &#39;5&#39;     &#39;2&#39; 
+    &#39;5&#39;     &#39;0&#39; 
+    &#39;4&#39;     &#39;2&#39; 
+    &#39;3b&#39;    &#39;1b&#39;
+    &#39;4b&#39;    &#39;1b&#39;
+    &#39;5b&#39;    &#39;1b&#39;
+    &#39;4b&#39;    &#39;0b&#39;
+    &#39;1b&#39;    &#39;4b&#39;
+    &#39;0b&#39;    &#39;5b&#39;
+    &#39;4b&#39;    &#39;2b&#39;
+    &#39;2b&#39;    &#39;5b&#39;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;From these tables, I create a graph object.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sidx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ismember&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tidx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ismember&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;nnode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;nedge&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;adj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sparse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sidx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tidx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nedge&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nnode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nnode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;adj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;full&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;adj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;digraph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;adj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;I’ll also add the node coordinate data as extra Node table properties, which we can use for plotting and will later be required for the divided edge bundling function:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We can plot the resulting graph using Matlab’s graph plotting tools:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;figure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;color&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;w&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;XData&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;YData&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&#39;NodeColor&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;r&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;MarkerSize&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;axis&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;equal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Even with this relatively simple graph, things are getting a bit cluttered, particularly with all the arrowheads centered on the edges.&lt;/p&gt;
+
+&lt;p&gt;Using &lt;code class=&quot;highlighter-rouge&quot;&gt;plotdeb.m&lt;/code&gt; in initial mode, edges are instead rendered as partially-transparent patches that change color as they move from the source node (0 on the colorbar) to the target node (1):&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;LineStyle&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;none&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;he&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plotdeb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;initial&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;hcb&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;colorbar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;south&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/deb2.png&quot; onload=&quot;this.width/=1.75;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The edge patches also vary in width based on the weight of each edge.  In this example, all edges were the same weight, but we can see the effect if we increase the weight of the edge that runs from node 2b to node 5b:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;delete&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;he&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Edges&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;he&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plotdeb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;initial&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/deb2b.png&quot; onload=&quot;this.width/=1.75;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now we run the edge-bundling algorithm:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;debundle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;While the code runs it will print its status to the screen:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-none&quot; data-lang=&quot;none&quot;&gt;Preprocessing...
+ 100% [=================================================&amp;gt;]   14/  14
+ Elapsed time is 0.053588 seconds.
+Bundling...
+ Pass 1
+ 100% [=================================================&amp;gt;] Pass 1: 29 of 29
+ Elapsed time is 0.103037 seconds.
+ Pass 2
+ 100% [=================================================&amp;gt;] Pass 2: 29 of 29
+ Elapsed time is 0.161255 seconds.
+ Pass 3
+ 100% [=================================================&amp;gt;] Pass 3: 29 of 29
+ Elapsed time is 0.283332 seconds.
+ Pass 4
+ 100% [=================================================&amp;gt;] Pass 4: 29 of 29
+ Elapsed time is 0.572491 seconds.
+ Pass 5
+ 100% [=================================================&amp;gt;] Pass 5: 29 of 29
+ Elapsed time is 1.091047 seconds.
+Postprocessing...
+Done&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;As I’ll discuss below, my version is quite a bit slower than the original, so depending on the complexity of the graph, you may need to go get some coffee at this point.  This example only needs a few seconds, though, and we can now plot the new bundled paths for the edges.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;delete&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;he&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;he2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plotdeb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/deb3.png&quot; onload=&quot;this.width/=1.75;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In addition to showing the new bundled-together paths for each of the edges, the plotting routine changes the widths of the edge bundles to reflect the sum total of the weights of the edges at each location.  In this version, while we lose some of our ability to trace individual edges from their source to their target, we get a better picture of the main flows in the graph.  For example, we can better see the separation of the two subgraphs (b-nodes vs other nodes), and compare the total flow moving from left to right as opposed to right to left in the b-subgraph.&lt;/p&gt;
+
+&lt;h2 id=&quot;adapting-the-algorithm-to-food-webs&quot;&gt;Adapting the algorithm to food webs&lt;/h2&gt;
+
+&lt;h3 id=&quot;bundling-vs-plotting&quot;&gt;Bundling vs. plotting&lt;/h3&gt;
+
+&lt;p&gt;The original EdgeBundling application reads in a graph topology (including node positions and edge source-target pairs) from a file, accepts a few user-configurable parameters, and on command, runs the bundling calculations and plots the results to the screen.  I decided to separate the bundling (&lt;code class=&quot;highlighter-rouge&quot;&gt;debundle.m&lt;/code&gt;) and plotting (&lt;code class=&quot;highlighter-rouge&quot;&gt;plotdeb.m&lt;/code&gt;) steps, for several reasons.&lt;/p&gt;
+
+&lt;p&gt;The first benefit is flexibility.  Matlab has a full-featured graphics library, so there’s no need to limit the choices of edge color, transparency, etc. to those hard-coded in the original.  This also allows me to plot the nodes separately from the edges, and to add additional details, like the trophic level axis used in my food web diagrams.&lt;/p&gt;
+
+&lt;p&gt;The second reason for separating the calculations is speed.  I’ve profiled my code pretty thoroughly for any unnecessary bottlenecks, but Matlab is no match for the GPU-accelerated Objective-C Selassie used.  And the physical simulation complexity is \(O(E^2C)\) (where \(E\) is the number of edges and \(C\) is the number of control points per edge) for each iteration, which is asking a lot of an interpreted language.  A simulation that takes 20-30 s in the C-based software requires a couple hours in the Matlab code.  Acceptable to me, since I only need to create these figures once or twice per research project, but I didn’t want to have to rerun everything just to tweak the edge width scaling in a single figure.&lt;/p&gt;
+
+&lt;p&gt;The final reason for separating things is due to the addition of scaled weights for bundling, as described in the next section.&lt;/p&gt;
+
+&lt;h3 id=&quot;scaled-weight-function-for-bundling&quot;&gt;Scaled weight function for bundling&lt;/h3&gt;
+
+&lt;p&gt;Edge weight values are used in both the bundling and plotting steps of the divided edge bundling algorithm.&lt;/p&gt;
+
+&lt;p&gt;During the bundling portion, the forces between control points are scaled based on the weight of the edges they are on.  Because of this, bundles of low-weight edges whose weights sum to a certain value behave in the same way as a single high-weight edge of that value in terms of attracting other edges.&lt;/p&gt;
+
+&lt;p&gt;During the plotting portion, edge width at a given control point is calculated based on the sum of the weights of all control points within a threshhold radius of that point.  The result is that overlapping edges are depicted as a single edge with the cumulative weight of the bundle members.&lt;/p&gt;
+
+&lt;p&gt;In food web networks, the biomass fluxes represented by edge weights usually span at least 5-7 orders of magnitude due to trophic transfer losses at each predation link.  In the food web I happened to be working with at the time I developed this function, the weight difference between the smallest flux (longline bycatch of mammals) and the largest (primary production by small phytoplankton) spanned 14 orders of magnitude.  With this weight difference, the forces exerted at the bottom of the food web far surpassed those at the top of the food web, resulting in almost no bundling occurring beyond the first couple of trophic levels.  No good.&lt;/p&gt;
+
+&lt;p&gt;The usual remedy to this large range in fluxes is to scale them, typically with a strong transformation like a logarithm, cubic root, or square root.  Unfortunately, using such a scale loses the additive property that is relied upon for the edge bundling algorithm and visualization.&lt;/p&gt;
+
+&lt;p&gt;In the end, I decided that I was willing to sacrifice the additive property of edges during the bundling process itself, but not during the final visualization.  An optional input parameter can be passed to the &lt;code class=&quot;highlighter-rouge&quot;&gt;debundle.m&lt;/code&gt; function, telling it to scale edge weights prior to beginning its calculations.  For my work, I’ve been using the function&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;wtfun&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;log10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wmin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;where &lt;code class=&quot;highlighter-rouge&quot;&gt;wmin&lt;/code&gt; is the logarithm of the smallest weight, rounded down a bit (to keep all weight values positive as required by the algorithm).&lt;/p&gt;
+
+&lt;p&gt;For the visualization, Selassie’s code already included an optional parameter to de-linearize the edge width scaling.  The edge width equation is \(D=wg^p\), where \(D\) is the visible edge width, \(w\) is the user-assigned maximum edge width, \(g\) is the bundle weight at a control point, and \(p\) is the scaling parameter.  Selassie et al. states that the \(p\) parameter &quot;allows more subtle asymmetries in edge and bundle weight to be seen&quot;.  In the case of food web networks, we actually want these asymetries deemphasized, which can be accomplished when \(p&amp;lt;1\).  I’ve found \(p = \frac{1}{3}\) (cubic root scaling) works pretty well for food webs.  The scaling is applied after the bundle weight calculation, so edge bundles still maintain the additive property we want.&lt;/p&gt;
+
+&lt;h3 id=&quot;self-edges&quot;&gt;Self-edges&lt;/h3&gt;
+
+&lt;p&gt;The divided edge bundling algorithm removes any self edges prior to calculation, since these edges do not have a constant orientation as needed for the calculations.&lt;/p&gt;
+
+&lt;p&gt;Although they do not factor into the bundle calculations, self-edges (i.e. cannibalism) are quite prevelant in ocean ecosystem models, so I wanted to include them in the final visualizations.  For this, I included a switch that, when true, plots self-edges as circlular paths.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-next-step-node-placement&quot;&gt;The next step: Node placement&lt;/h2&gt;
+
+&lt;p&gt;While this algorithm greatly helped in cleaning up spaghetti-mess edges, it can only be applied to graphs where the coordinates of the nodes are already known (such as the geographic examples in the Selassie et al. paper).  While y-coordinates in food webs often correspond to trophic level, the x-coordinates are not constrained.&lt;/p&gt;
+
+&lt;p&gt;In their discussion, Selessie et al. noted&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A major question unaddressed in both the prior and current work is the interplay between node layout and edge bundling; Holten &amp;amp; van Wijk’s compatibility coefficients are exclusively a function of node position, so layout greatly affects bundling. Automated graph layout algorithms that tend to orthogonalize edges cause force-directed edge bundling techniques to coalesce edges ineffectively. Layout approaches that jointly optimize node placement and edge bundling might enable improved pattern perception.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So to get the best results when applying edge bundling to food webs, we need to start with a node-placement algorithm that optimizes node position for bundling rather than orthagonality.  And ideally, one that also allows contraining y-position to match trophic level while allowing free movement in the x-direction.  With no such algorithm seemingly readily available, I decided to create my own.  Read on to the next blog post to find out the details.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Part 1&lt;/strong&gt; – &lt;a href=&quot;/2016/01/19/food-webs-as-network-graphs-2.html&quot;&gt;Part 2&lt;/a&gt; – &lt;a href=&quot;/2016/01/19/food-webs-as-network-graphs-3.html&quot;&gt;Part 3&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 19 Jan 2016 00:00:00 -0800</pubDate>
+        <link>http://kellyakearney.net/2016/01/19/food-webs-as-network-graphs-1.html</link>
+        <guid isPermaLink="true">http://kellyakearney.net/2016/01/19/food-webs-as-network-graphs-1.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Using color palette tables as Matlab colormaps</title>
+        <description>&lt;p&gt;I’ll begin my series of Matlab code posts with one of the functions that I use most often in my own work: &lt;a href=&quot;https://github.com/kakearney/cptcmap-pkg&quot;&gt;cptcmap.m&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/cptcmapexample.png&quot; onload=&quot;this.width/=2;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Matlab comes with a decent selection of colormaps.  I was never a fan of the old &lt;code class=&quot;highlighter-rouge&quot;&gt;jet&lt;/code&gt; colormap (due to all the &lt;a href=&quot;http://www.mathworks.com/company/newsletters/articles/rainbow-color-map-critiques-an-overview-and-annotated-bibliography.html&quot;&gt;inherent issues&lt;/a&gt; with rainbow colormaps), but the new &lt;code class=&quot;highlighter-rouge&quot;&gt;parula&lt;/code&gt; default is a pretty good general purpose color scheme, and there are several two- or three-color gradients that are also serviceable for publication-quality graphics.&lt;/p&gt;
+
+&lt;p&gt;But what are your options when you’re looking for something more specific?  What if, like me, you love reading up on color theory and choosing just the right color scheme for each of your plots?  The &lt;code class=&quot;highlighter-rouge&quot;&gt;colormapeditor&lt;/code&gt; function allows you to play around with custom colormaps, but it’s a very manual process.  Particularly when plotting bathymetry and topography data, where I had very specific colors in mind for specific ranges of data, I found myself wishing I could define colormaps more precisely.  Early in my career, I used the Generic Mapping Tools software to plot some maps, and while GMT isn’t nearly as user-friendly as Matlab to create quick plots, it certainly produces some beautiful maps.  The GMT color palette tables show up in a lot of software used by scientists in oceanography and climate science, such as NASA GISS’s Panoply.  And there’s a wonderful assortment of color palette tables available at &lt;a href=&quot;http://soliton.vm.bytemark.co.uk/pub/cpt-city/&quot;&gt;cpt-city&lt;/a&gt;.  Why limit myself to a few Matlab colormaps when there are all these options out there?&lt;/p&gt;
+
+&lt;p&gt;So a few years ago, while at sea and repeatedly waiting for a CTD to complete it’s two- to three-hour journey to the seafloor and back, I wrote cptcmap.m to import and use GMT-style color palette tables in Matlab.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-color-palette-file-format&quot;&gt;The color palette file format&lt;/h2&gt;
+
+&lt;p&gt;The color palette format consists of a simple plain text file:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-none&quot; data-lang=&quot;none&quot;&gt;# COLOR_MODEL = RGB
+z0   R0    G0    B0    z1 R1a G1a B1a [A] [;label]
+z1   R1b   G1b   B1b   z2 R2a G2a B2a [A] [;label]
+...
+zn-1 Rn-1b Gn-1b Bn-1b zn Rn  Gn  Bn [A] [;label] 
+B Rb Gb Bb
+F Rf Gf Bf
+N Rn Gn Bn&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Comments in the color palette file are marked by lines starting with a &lt;code class=&quot;highlighter-rouge&quot;&gt;#&lt;/code&gt;.  The only comment that isn’t ignored is a comment line that specifies the color model: RGB, CMYK, or HSV.  The example above shows the RGB format.&lt;/p&gt;
+
+&lt;p&gt;The main color definition section of the file has 8 (RGB, HSV) or 10 (CMYK) columns, plus two optional columns.  Each color block is assigned a lower and upper data value (z), and color values to match these bounds.  If the lower and upper colors are the same, then that color is assigned to the full range.  If the colors are different, then a linear gradient between the two colors results.  The optional A flag and semicolon-plus-text column tell GMT how to annotate the color scale.  The &lt;code class=&quot;highlighter-rouge&quot;&gt;cptcmap&lt;/code&gt; function ignores those optional columns.&lt;/p&gt;
+
+&lt;p&gt;The lines begining with B, F, and N indicate the colors used to shade background data values (z &amp;lt; z0), foreground data values (z &amp;gt; zn), and NaN data values, repectively.  These three colors aren’t used by &lt;code class=&quot;highlighter-rouge&quot;&gt;cptcmap&lt;/code&gt; when creating a colormap, but they can be returned as optional output values.&lt;/p&gt;
+
+&lt;h2 id=&quot;converting-color-palettes-to-colormaps&quot;&gt;Converting color palettes to colormaps&lt;/h2&gt;
+
+&lt;p&gt;The trickiest part of turning a color palette into a colormap is determining the number of colors you need to resolve all the specific color ranges in a given palette.  For example:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-none&quot; data-lang=&quot;none&quot;&gt;0  255 0 0  1  255 0 0
+1  0 255 0  3  0 255 0
+3  0 0 255  6  0 0 255&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This color palette is pretty simple: red from 0-1, green from 1-3, and blue from 3-6. To resolve this in a Matlab colormap, you’ll need a 6-color colormap:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-none&quot; data-lang=&quot;none&quot;&gt;1 0 0
+0 1 0
+0 1 0
+0 0 1
+0 0 1
+0 0 1&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;with the &lt;code class=&quot;highlighter-rouge&quot;&gt;CLim&lt;/code&gt; property of your axis set to &lt;code class=&quot;highlighter-rouge&quot;&gt;[0 6]&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;By repeating colors in the colormap, you get the appropriate relative size interval for each visible color.  This is the primary task of &lt;code class=&quot;highlighter-rouge&quot;&gt;cptcmap&lt;/code&gt;; it checks all the color intervals and figures out how many times it needs to repeat colors in order to get all the color breaks in the right place.  Once it’s done that, it interpolates the proper number of colors into the new colormap, and (if the direct mapping option is chosen) changes the axis color limits to match the z-values in the color palette table.&lt;/p&gt;
+
+&lt;h2 id=&quot;resolution-considerations&quot;&gt;Resolution considerations&lt;/h2&gt;
+
+&lt;p&gt;Under the automated option, I have the number of colors in the final colormap capped at 256.  This is the maximum number of colors that can be included on some computers (Windows), and will be more than sufficient for most plots.  But you may need to specify a higher number of colors (via the &lt;code class=&quot;highlighter-rouge&quot;&gt;ncol&lt;/code&gt; input) if some of your defined color blocks cover a much smaller range than others.&lt;/p&gt;
+
+&lt;p&gt;The GMT_globe color palette (one of the GMT defaults, included with &lt;code class=&quot;highlighter-rouge&quot;&gt;cptcmap&lt;/code&gt;) demonstrates this resolution problem.  I can use the accompanying &lt;code class=&quot;highlighter-rouge&quot;&gt;cptcbar&lt;/code&gt; function to compare the discretized colormap to the “real” color palette (the &lt;code class=&quot;highlighter-rouge&quot;&gt;cptcbar&lt;/code&gt; on the right uses patches to plot the color intervals, so it is able to resolve everything exactly as it is defined in the color palette; the colorbar on the left shows the actual colormap being used in the figure):&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;span class=&quot;n&quot;&gt;ax&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;axes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cptcmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;GMT_globe&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;mapping&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;direct&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cb1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;colorbar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;location&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;west&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cb2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cptcbar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;GMT_globe&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;east&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cb1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cb2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;ylim&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1500&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/cbar1.png&quot; onload=&quot;this.width/=2;this.onload=null;&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/supporting_code/cbar2.png&quot; onload=&quot;this.width/=2;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;With only 256 colors, we aren’t quite resolving the full color detail intended for low-altitude data.  For a global map, this is perfectly acceptable:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;satbath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;worldmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;World&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;pcolorm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cptcmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;GMT_globe&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;mapping&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;direct&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/cptres1.png&quot; onload=&quot;this.width/=2;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;But zoom in on Florida, and we’re suddenly missing some important detail:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usamap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Florida&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;satbath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;MapLatLim&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;MapLonLim&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;pcolorm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cptcmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;GMT_globe&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;mapping&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;direct&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/cptres2.png&quot; onload=&quot;this.width/=2;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this case, we’ll want to up the number of colors to resolve all that fine detail in the gradients close to sea level.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;span class=&quot;n&quot;&gt;cptcmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;GMT_globe&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;mapping&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;direct&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;ncol&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/supporting_code/cptres3.png&quot; onload=&quot;this.width/=2;this.onload=null;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;limitations&quot;&gt;Limitations&lt;/h2&gt;
+
+&lt;p&gt;Right now, the &lt;code class=&quot;highlighter-rouge&quot;&gt;cptcmap.m&lt;/code&gt; function can read in either RGB or HSV color palette tables.  Matlab doesn’t do CMYK-to-RGB conversion natively, and I haven’t actually found any color palette tables that I wanted to use that were defined in CMYK color space, so I simply haven’t gotten around to writing that little conversion yet.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 18 Dec 2015 00:00:00 -0800</pubDate>
+        <link>http://kellyakearney.net/2015/12/18/cptcmap.html</link>
+        <guid isPermaLink="true">http://kellyakearney.net/2015/12/18/cptcmap.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Jekyll migration</title>
+        <description>&lt;p&gt;I’ve just migrated my website from WordPress to Jekyll.  Or rather, I’ve created a new Jekyll site and deleted my old WordPress one.  After using WordPress for the past two years, I’ve found that it was a bit bloated for my purposes, requiring too many plugins and updates for a pretty hands-off website.  And when I started attempting to blog recently, I found it overly complicated to try to embed things like javascript-based graphics.  What I really needed was a lightweight platform that would allow me to make small updates to main pages (my publications list, mainly) quickly and easily.  And since I’ve been using Markdown more and more lately, being able to write blog posts using that is a definite plus.  Jekyll coupled with GitHub Pages met these requirements nicely; I was able to create a new site in a few hours, with a few more days spent tweaking the layout to my liking and getting jekyll-scholar running nicely for my publications.&lt;/p&gt;
+
+&lt;p&gt;Many thanks to Steve Miller, whose &lt;a href=&quot;http://svmiller.com/blog/2015/08/create-your-website-in-jekyll/&quot;&gt;blog post&lt;/a&gt; on setting up an academic website proved very helpful (and whose template I stole for this site).  Also, thanks to Eric Tramel, whose &lt;a href=&quot;http://eric-tramel.github.io/working-automated-publications/&quot;&gt;blog post&lt;/a&gt; on automated publication lists I used to set up my own publications page.&lt;/p&gt;
+
+&lt;p&gt;So here we are!  I have plans to begin blogging semi-regularly, primarily to promote and explain some of my publically-available Matlab code.  I’ve also ported over one old blog post that described how I set up and maintain my GitHub repositories.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 20 Nov 2015 00:00:00 -0800</pubDate>
+        <link>http://kellyakearney.net/2015/11/20/jekyll-migration.html</link>
+        <guid isPermaLink="true">http://kellyakearney.net/2015/11/20/jekyll-migration.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Using git subtrees to manage files with overlapping dependencies</title>
+        <description>&lt;p&gt;Update 2017-02-14: This system worked really well, until it didn’t.  I accidentally committed a large file to a single repo, and that somehow propagated into several of my subtrees.  I tried to rebase the problem repo with filter-branch, and then all my subtrees were unable to sync.  Lesson learned… there’s a reason proper programmers keep their git repos small and modular.  I restarted my system from scratch, now keeping each of the little modular bits in their own repo with their own commit history (rather than one huge repo that’s constantly subtree-splitted).  I can still add each of these as subtrees to the appropriate distribution repo, but I don’t have to worry about intermingling commit history.  Much easier, and the new system has been working pretty flawlessly for about 6 months now.  I’ll write up a post on it someday.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;This post ended up much longer than I intended, so here’s the short summary: I’m going to explain how (and why) I took a single git repository consisting of a mishmash of Matlab code with lots of overlapping file dependencies, and teased it apart into project- and utility-specific repositories that could be shared with others and easily kept in sync with the main repo as I make updates in the future.&lt;/p&gt;
+
+&lt;p&gt;This is mostly to remind myself what I did. But maybe it can help some others who are facing the same task.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-background&quot;&gt;The background&lt;/h3&gt;
+
+&lt;p&gt;I learned almost everything I know about Matlab (and coding in general) by reading various newsgroups and blogs, especially the &lt;a href=&quot;http://www.mathworks.com/matlabcentral/newsreader/&quot;&gt;Matlab newsgroup&lt;/a&gt; (comp.soft-sys.matlab) and later &lt;a href=&quot;http://www.mathworks.com/matlabcentral/answers/&quot;&gt;Matlab Answers&lt;/a&gt; forum.  In return, I try to post a few of my own functions for download when others inquire on those boards about issues I have tackled.  My past method for doing this was a bit clunky and manual.  I would simply copy the relevant .m files into a new folder, zip, and upload.  I tried to repeat the copy-and-upload process every few months to keep things up to date, but wasn’t very good about tracking what I changed when, and sometimes “every few months” became “every year or two”, and occasionally I overlooked an outside dependency or two when collecting the files together.&lt;/p&gt;
+
+&lt;p&gt;When MatlabCentral started offering integration with GitHub this year, I decided to rethink my method for distributing my code to others.  I had already been using git to manage my own Matlab code for about 3 years at that point, and hoped that adding a few for-distribution repositories would be nice and easy.  That didn’t end up being the case.&lt;/p&gt;
+
+&lt;p&gt;The biggest issue that I encountered in finding a solution involved overlapping file dependencies.  Most git tutorials that I found online related to submodules and subtrees and other methods for sharing code between projects seemed to assume that I was approaching things as a proper computer programmer, with nicely organized code managed by project-specific git repositories.  When it came to overlapping dependencies, the tutorials usually assumed that the shared code involved small utility libraries, often developed by third parties, with code that is changed much less frequently than the main piece of software being developed.&lt;/p&gt;
+
+&lt;p&gt;But I’m not a proper computer programmer.  I’m a scientist, and like most  scientists, my code organization is a bit of a mess.  When I began this, I had one git repository, covering the folder where I kept all Matlab code that needed to be added to my Matlab path.  The purpose of that repo was simply to keep my toolboxes in sync between different computers; I initialized a single git repository in the main folder, added a remote repository on Dropbox, and then cloned the repo onto all of my computers.  With a periodic pushes and pulls to and from the Dropbox origin, I could now keep my Matlab toolboxes in sync; as a nice side effect, I also now had a log of changes.  Organization within this main folder was minimal: two subfolders, one for code that I downloaded from others, and one for code I wrote myself.  The external code folder was pretty nicely organized, maintaining the folder structure of each acquired toolbox.  The personal folder was, well, not… plotting tools, basic math and matrix manipulation, high-frequency acoustics, graph theory, food webs, climate models, biogeochemistry… The files were loosely organized into a few folders, but those folders were meaningless; file dependencies crisscrossed all over the repo.&lt;/p&gt;
+
+&lt;p&gt;Matlab itself offers some tools to figure out the child functions called by an individual function (&lt;code class=&quot;highlighter-rouge&quot;&gt;matlab.codetools.requiredFilesAndProducts&lt;/code&gt; in R2014b… older versions offered &lt;code class=&quot;highlighter-rouge&quot;&gt;depfun&lt;/code&gt;, which was pretty buggy and unreliable, so I used a third-party function, &lt;a href=&quot;http://www.mathworks.com/matlabcentral/fileexchange/17291-fdep--a-pedestrian-function-dependencies-finder&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fdep&lt;/code&gt;&lt;/a&gt;.  What I ideally wanted, for distribution purposes, was to be able to use those lists of files to define a git repository.  But git, unfortunately, doesn’t work that way.  I looked at git submodules, but those assume that the submodule files are relatively static, not at all the case here. I definitely wanted a solution that would allow me to update any given function at any time without worrying about (or remembering) which other other files might call or be called by it.  Submodules looked like they could quickly become a nightmare.  The other potential candidate for sharing code between repositories seemed to be git subtrees, and this is where I eventually found my solution.  Getting everything set up ended up being more complicated than I anticipated, and involved a good deal of experimentation (not to mention a few dozen hard resets), but in the end, I did build a system of repos that met all my requirements:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The main repo still looks more or less the same, and maintains the benefit of my original disorganized collection: no necessity to assign any function to a single project, allowing me to constantly update functions, and use them in any bit of my research, with any function potentially using any other function at some point down the road.  I can dump any new function into these folders to add it to my Matlab path, without having to update said path manually.&lt;/li&gt;
+  &lt;li&gt;If I decide to share a particular function (or functions), I can easily set up a new repository which includes that function and all the dependent functions required to properly run it.  These project-specific repos are the ones I upload to GitHub.&lt;/li&gt;
+  &lt;li&gt;Going forward, as I update my code, I can quickly push the changes from the main repo to the project-specific ones without having to remember what went with what.  And the file dependencies don’t have to be static either… if I decide to change code such that a shared-out function gains a need for or no longer needs a certain other function, the function will be added to or deleted from the project repository automatically.&lt;/li&gt;
+  &lt;li&gt;Going in the opposite direction, if someone decides to collaborate and send changes via a pull request on GitHub, I can merge those changes and then push them back both to my main working repo and any other project repos that use that code. (Theoretically, at least… I haven’t yet had any experience with pull requests.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;setting-up-the-subtrees&quot;&gt;Setting up the subtrees&lt;/h3&gt;
+
+&lt;p&gt;So… many… subtrees! 145, to be exact (at least for now).  Here’s how they came to be:&lt;/p&gt;
+
+&lt;h4 id=&quot;step-1-organize-all-my-files-into-folders&quot;&gt;Step 1: Organize all my files into folders&lt;/h4&gt;
+
+&lt;p&gt;I couldn’t get around the fact that git operates on folders, not files.  So my first step was to do a little bit of organization in the existing main repo.  I basically wanted to package files into folders where their foldermates were going to accompany them into any shared-out repo they might travel to.  This did &lt;strong&gt;not&lt;/strong&gt; take into consideration file dependency (I’ll deal with that later).  Many files ended up in folders by themselves; the larger groups included 5-10 files relating to very specific categories.  For example, files to read and write a specific file format ended up together… I can’t foresee a scenario where I would want to give out one and not the other, and even if a shared-out utility called just one, it wouldn’t be too annoying (it might even prove useful) for the end user if the others tagged along in the package.&lt;/p&gt;
+
+&lt;p&gt;Here’s a quick diagram showing my basic folder structure after everything was organized&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-none&quot; data-lang=&quot;none&quot;&gt;.
+├── ExternalToolboxes
+│   ├── Ex1
+│   ├── Ex2
+│   ├── FileExchange
+│   │   ├── fex1
+│   │   ├── fex2
+|   |   └── fex3
+│   └── Ex3
+├── PersonalToolboxes
+│   ├── Per1
+│   ├── Per2
+│   ├── GeneralUtilities
+│   │   ├── gu1
+│   │   ├── gu2
+|   |   └── gu3
+│   ├── Per3
+│   └── Per4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;I decided to keep all the little one- or two-function groups under the GeneralUtilities umbrella folder.  Likewise, I continued to keep all the utilities I had downloaded from the File Exchange under a single parent folder.&lt;/p&gt;
+
+&lt;h4 id=&quot;step-2-choose-a-file-or-set-of-files-to-share&quot;&gt;Step 2: Choose a file (or set of files) to share&lt;/h4&gt;
+
+&lt;p&gt;For this example, I’ll use one of the functions I had put on the FileExchange: contourfcmap.m.&lt;/p&gt;
+
+&lt;h4 id=&quot;step-3-determine-the-file-dependencies-of-the-files&quot;&gt;Step 3: Determine the file dependencies of the file(s)&lt;/h4&gt;
+
+&lt;p&gt;I figured out file and toolbox dependencies using Matlab’s built-in tools:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;matlab&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;codetools&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;requiredFilesAndProducts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;which&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;contourfcmap&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This particular example uses a mix of my own functions and ones I downloaded from others. It also requires a few extra toolboxes for full functionality.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&#39;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-none&quot; data-lang=&quot;none&quot;&gt;ans = 
+
+    &#39;~/Main/ExternalToolboxes/FileExchange/contourcs/contourcs.m&#39;
+    &#39;~/Main/ExternalToolboxes/FileExchange/function_handle/function_handle.m&#39;
+    &#39;~/Main/PersonalToolboxes/GeneralUtilities/contourfcmap/contourfcmap.m&#39;
+    &#39;~/Main/PersonalToolboxes/GeneralUtilities/fillnan/fillnan.m&#39;
+    &#39;~/Main/PersonalToolboxes/GeneralUtilities/multiplepolyint/multiplepolyint.m&#39;
+    &#39;~/Main/PersonalToolboxes/GeneralUtilities/parsepv/parsepv.m&#39;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-matlab&quot; data-lang=&quot;matlab&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&#39;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-none&quot; data-lang=&quot;none&quot;&gt;ans = 
+
+    &#39;MATLAB&#39;
+    &#39;Image Processing Toolbox&#39;
+    &#39;Mapping Toolbox&#39;
+    &#39;Statistics Toolbox&#39;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;step-4-split-folders-into-subtrees&quot;&gt;Step 4: Split folders into subtrees&lt;/h4&gt;
+
+&lt;p&gt;Starting with the first dependency in the list (contourcs), I initialized a bare repository locally:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/GitRepos
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;mkdir contourcs-repo
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;contourcs-repo 
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git init --bare&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Then I created a subtree branch including the folder where contourcs.m lived:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/Main
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git subtree split --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ExternalToolboxes/FileExchange/contourcs -b contourcs-split --squash&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Then I pushed that branch to the bare repo, setting it as the master branch:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git push ~/GitRepos/contourcs-repo contourcs-split:master&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Next, I wanted to create a remote origin. I wanted my remote origins to be hosted on a server I could access from any computer (rather than sticking with my old Dropbox method). I originally focused on GitHub, since that was my intended target for the final project repos (so I could take advantage of the MatlabCentral File Exchange integration). But for this particular step, I wanted to keep the single-folder intermediary repos private. GitHub charges for this feature on a per-repository basis… seeing that I was eventually going to create over 100 repositories, that wasn’t going to work for me. Luckily, Bitbucket offers an unlimited number of private repositories, and charges on a per-person basis. With just me needing access to the private repos, this remains free. So Bitbucket won the job of hosting my intermediate repos.&lt;/p&gt;
+
+&lt;p&gt;I initialized a new repository on Bitbucket (taking advantage of their REST API to do this from the command line), then added it as a remote repository&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/GitRepos/contourcs-repo
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;curl --user myusername:mypassword https://api.bitbucket.org/1.0/repositories/ --data &lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;contourcs.git --data &lt;span class=&quot;nv&quot;&gt;is_private&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git remote add origin git@bitbucket.org:kakearney/contourcs.git
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git push origin master&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;At this point, the local repo (contourcs-repo) has served its purpose, and can be deleted if you want. In retrospect, I think I could probably skip that step and push directly from the subtree split branch to Bitbucket, but the example I copied to create a split subtree used the bare-repo intermediate, so I decided better safe than sorry.&lt;/p&gt;
+
+&lt;h4 id=&quot;step-5-replace-the-folders-from-the-main-folder-with-their-subtree-equivalents&quot;&gt;Step 5: Replace the folders from the main folder with their subtree equivalents&lt;/h4&gt;
+
+&lt;p&gt;First, I added the subtree repos as remotes to the main repo:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/Main
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git remote add contourcs-remote git@bitbucket.org:kakearney/contourcs.git&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Then I deleted the original folder and added it back as a subtree:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git rm -r ExternalToolboxes/FileExchange/contourcs
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git add -A
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git commit -m &lt;span class=&quot;s2&quot;&gt;&quot;Removing contourcs in prep for subtree&quot;&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git subtree add --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ExternalToolboxes/FileExchange/contourcs contourcs-remote master&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;I’m not sure if the delete-and-add step is strictly necessary. Pretty sure it isn’t (again, it’s something I copied from an example). But it has the nice side effect of adding a commit to my main git log documenting that a subtree addition took place. This will be very useful in later steps. The net effect, though, is no change to the file structure of the main repo.&lt;/p&gt;
+
+&lt;h4 id=&quot;step-6-repeat-steps-4-and-5-with-all-folders-from-the-file-dependency-list&quot;&gt;Step 6: Repeat steps 4 and 5 with all folders from the file-dependency list&lt;/h4&gt;
+
+&lt;p&gt;For this example, I repeat the process for the other 5 files in the list. I now have a collection of 6 Bitbucket repositories, one for each parent folder of the dependent files. The main repo is unchanged, except for the fact that it has gained 6 new remotes, and 6 new branches.&lt;/p&gt;
+
+&lt;h4 id=&quot;step-7-set-up-a-new-project-repository&quot;&gt;Step 7: Set up a new project repository&lt;/h4&gt;
+
+&lt;p&gt;Now it’s time to create the new project repository, which will be the one shared out to others. First create a new repo, adding a few empty files that will be useful down the road.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/GitRepos
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;mkdir contourfcmap-pkg
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;contourfcmap-pkg
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;touch .gitignore
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;touch README.md
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git init
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git add -A
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git commit &lt;span class=&quot;s2&quot;&gt;&quot;Initial commit&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Next, add the appropriate subtree remotes, and use them to add the necessary files:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git remote add contourcs-remote git@bitbucket.org:kakearney/contourcs.git
+git remote add function_handle-remote git@bitbucket.org:kakearney/function_handle.git
+git remote add contourfcmap-remote git@bitbucket.org:kakearney/contourfcmap.git
+git remote add fillnan-remote git@bitbucket.org:kakearney/fillnan.git
+git remote add multiplepolyint-remote git@bitbucket.org:kakearney/multiplepolyint.git
+git remote add parsepv-remote git@bitbucket.org:kakearney/parsepv.git
+git subtree add --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;contourcs contourcs-remote master
+git subtree add --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;function_handle function_handle-remote master
+git subtree add --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;contourfcmap contourfcmap-remote master
+git subtree add --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;fillnan fillnan-remote master
+git subtree add --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;multiplepolyint multiplepolyint-remote master 
+git subtree add --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;parsepv parsepv-remote master&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;All the required files will now be copied into this project folder.&lt;/p&gt;
+
+&lt;h4 id=&quot;step-8-upload-to-github&quot;&gt;Step 8: Upload to GitHub&lt;/h4&gt;
+
+&lt;p&gt;This repo is now ready for public view, so I added it to GitHub. I used a utility call &lt;a href=&quot;https://github.com/github/hub&quot;&gt;hub&lt;/a&gt; (available through Homebrew and MacPorts for fellow Mac users) to create the new repo from the command line; this command automatically sets the new GitHub repo as the origin.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;hub create contourfcmap-pkg -d &lt;span class=&quot;s2&quot;&gt;&quot;Create a filled contour plot in Matlab, with better color-to-value clarity&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The contourfcmap utility is now available to anyone who wants to use it, packaged together with all the files necessary to run it fully.&lt;/p&gt;
+
+&lt;h4 id=&quot;step-9-repeat-procedure-for-all-other-sets-of-files-i-want-to-share&quot;&gt;Step 9: Repeat procedure for all other sets of files I want to share&lt;/h4&gt;
+
+&lt;p&gt;Choose a new file (or set of files… and they don’t have to come from the same starting folder), and repeat Steps 2-8. The only change the next time through is that at the beginning of Step 4, I first use the following command to go through the main repo’s log and list the subtrees that have already been created:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/Main
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git log | grep git-subtree-dir | tr -d &lt;span class=&quot;s1&quot;&gt;&#39;&#39;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;&#39;&lt;/span&gt; | cut -d &lt;span class=&quot;s2&quot;&gt;&quot;:&quot;&lt;/span&gt; -f2 | sort | uniq&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;If a folder is already included in the list, I don’t have to repeat Steps 4-5 for it.&lt;/p&gt;
+
+&lt;h4 id=&quot;step-10-remember-which-subtrees-go-where&quot;&gt;Step 10: Remember which subtrees go where&lt;/h4&gt;
+
+&lt;p&gt;And by remember, I mean write it down! I only made it through setup for about two or three of these before I realized maintenance was going to be a pain if I didn’t keep careful track of everything. I ended up writing a Matlab script to automate all the steps listed above for the 145 packages you can find on my &lt;a href=&quot;http://kellyakearney.net/matlab-utilities/&quot;&gt;Matlab Utilities&lt;/a&gt; page. I also added a few steps to check for changes in file dependencies, and to add and delete subtree remotes as necessary when things change. At Step 4, the script writes the command necessary to push changes from the main repo to the new subtree remote to a file:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Pushing subtrees from main repo to remotes&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/Main
+
+git subtree push --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;PersonalToolboxes/GeneralUtilities/aggregate aggregate-remote master
+git subtree push --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;PersonalToolboxes/GeneralUtilities/aggregatehist aggregatehist-remote master
+git subtree push --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;PersonalToolboxes/GeneralUtilities/parsepv parsepv-remote master
+git subtree push --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;PersonalToolboxes/GeneralUtilities/arcasciiread arcasciiread-remote master
+git subtree push --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;PersonalToolboxes/GeneralUtilities/arrowpolygon arrowpolygon-remote master
+git subtree push --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;PersonalToolboxes/GeneralUtilities/aviread16bitcol aviread16bitcol-remote master
+git subtree push --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;PersonalToolboxes/GeneralUtilities/barareaneg barareaneg-remote master
+git subtree push --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;PersonalToolboxes/GeneralUtilities/barpatch barpatch-remote master
+git subtree push --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;PersonalToolboxes/GeneralUtilities/bezier bezier-remote master
+git subtree push --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;PersonalToolboxes/GeneralUtilities/bilread bilread-remote master
+git subtree push --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;PersonalToolboxes/GeneralUtilities/cellstr2 cellstr2-remote master
+...etc...&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Likewise, at Step 7, it writes the corresponding commands to pull the correct files to the project-specific repos:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Updating distribution packages&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;** aggregate-pkg&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/GitRepos/aggregate-pkg
+git subtree pull --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;aggregate aggregate-remote master
+git push origin master
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;** aggregatehist-pkg&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/GitRepos/aggregatehist-pkg
+git subtree pull --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;aggregate aggregate-remote master
+git subtree pull --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;aggregatehist aggregatehist-remote master
+git subtree pull --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;parsepv parsepv-remote master
+git push origin master
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;** arcasciiread-pkg&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/GitRepos/arcasciiread-pkg
+git subtree pull --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;arcasciiread arcasciiread-remote master
+git push origin master
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;** arrowpolygon-pkg&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/GitRepos/arrowpolygon-pkg
+git subtree pull --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;arrowpolygon arrowpolygon-remote master
+git push origin master
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;** aviread16bitcol-pkg&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/GitRepos/aviread16bitcol-pkg
+git subtree pull --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;aviread16bitcol aviread16bitcol-remote master
+git push origin master
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;** barareaneg-pkg&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/GitRepos/barareaneg-pkg
+git subtree pull --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;barareaneg barareaneg-remote master
+git push origin master
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;** barpatch-pkg&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/GitRepos/barpatch-pkg
+git subtree pull --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;barpatch barpatch-remote master
+git push origin master
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;** bezier-pkg&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/GitRepos/bezier-pkg
+git subtree pull --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;bezier bezier-remote master
+git push origin master
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;** bilread-pkg&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/GitRepos/bilread-pkg
+git subtree pull --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;bilread bilread-remote master
+git subtree pull --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;cellstr2 cellstr2-remote master
+git subtree pull --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;parsepv parsepv-remote master
+git subtree pull --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;regexpfound regexpfound-remote master
+git push origin master
+
+...etc...&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;step-11-return-to-work&quot;&gt;Step 11: Return to work&lt;/h4&gt;
+
+&lt;p&gt;While the initial setup was a little messy, the maintenance is quite simple. I can now continue to work as I used to, largely ignoring the new project repos.&lt;/p&gt;
+
+&lt;p&gt;My Matlab startup script hardcodes addpath commands for all the bigger utilities (listed in my file tree above as Per1, Per2, Ex1, Ex2, etc), and also adds all the folders under ExternalToolboxes/FilesExchange and PersonalToolboxes/GeneralUtilities. So I can add new tools to either of those latter folders without having to worry about updating my path.&lt;/p&gt;
+
+&lt;p&gt;Like before, if I make any changes to my code, I update the main git repo with new commits as necessary. And every so often, I run the pushsubtrees.sh and pullsubtrees.sh scripts from Step 10, which automatically adds those changes to all the shared-out project repos.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 02 Feb 2015 00:00:00 -0800</pubDate>
+        <link>http://kellyakearney.net/2015/02/02/using-git-subtrees-to-manage-files-with-overlapping-dependencies.html</link>
+        <guid isPermaLink="true">http://kellyakearney.net/2015/02/02/using-git-subtrees-to-manage-files-with-overlapping-dependencies.html</guid>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

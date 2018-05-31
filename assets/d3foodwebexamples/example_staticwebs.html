@@ -1,0 +1,223 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>d3-foodweb</title>
+  <meta name="description" content="Examples for d3-foodweb static">
+  <meta name="author" content="Kelly Kearney">
+	<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css">
+	
+	<style>
+	body {
+		background-color: white;
+		margin: 50px;
+		text-align: left;
+		font-family: Tahoma, Geneva, sans-serif;
+	}
+	p {
+		margin-bottom: 20px;
+		width: 600px;
+	}
+	
+	.d3-tip {
+	  line-height: 1;
+	  padding: 12px;
+	  background: rgba(0, 0, 0, 0.8);
+	  color: #fff;
+	  border-radius: 5px;
+	  pointer-events: none;
+		font-size: 8pt;
+		font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	}
+	
+
+	.d3-tip:after {
+	  box-sizing: border-box;
+	  display: inline;
+	  font-size: 10px;
+	  width: 100%;
+	  line-height: 1;
+	  color: rgba(0, 0, 0, 0.8);
+	  position: absolute;
+	  pointer-events: none;
+	}
+	
+	.d3-tip.n:after {
+	  content: "\25BC";
+	  margin: -1px 0 0 0;
+	  top: 100%;
+	  left: 0;
+	  text-align: center;
+	}
+	
+	</style>
+	
+
+</head>
+
+<body>
+	<h2>d3-foodweb Examples</h2>
+	<h3>Tampa Bay</h3>
+	
+	<p>An example that ships with Ecopath with Ecosim.
+ 
+	<p>Straight-line edges</p>
+	<div id="tampa1"></div>
+	
+	<p>Bundled edges</p>
+	<div id="tampa2"></div>
+	
+	<h3>Albatross Bay</h3>
+	
+	<p>Acquired EwE6 model from Tom Okey on 04/01/2016.  Description from the Ecopath file: "A preliminary ecosystem model of Albatross Bay, Gulf of Carpentaria, Australia. This trophodynamic model was constructed to understand the causes of recent worrisome declines in the catches of banana prawns. It has 99 functional groups, explicit estuary and offshore sub-webs, life-stage-based sub-models for key prawn groups, and catch and discard information for eight fisheries. Fisheries time series are incorporated."</p> 
+	<p>Straight-line edges, colored based on whether nodes connect to banana prawns</p>
+	<div id="albatross1"></div>
+	
+	<p>Bundled edges, colored using colors from EwE file</p>
+	<div id="albatross2"></div>
+	
+	<h3>The Bering Sea</h3>
+	
+	<p>Developed by Aydin et al. for use in several comparative analyses looking at Alaskan ecosystems.  Citations:
+		<ul>
+			<li>Aydin K, Mueter F (2007) The Bering Sea-A dynamic food web perspective. Deep Res Part II Top Stud Oceanogr 54:2501–2525</li>
+			<li>Aydin K, Gaichas S, Ortiz I, Kinzey D, Friday N (2007) A Comparison of the Bering Sea, Gulf of Alaska, and Aleutian Islands Large Marine Ecosystems Through Food Web Modeling. NOAA Tech Memo</li>
+		</ul>
+	</p>
+	
+	<p>Straight edges, with colors showing benthic (blue) vs pelagic (red) food sources</p>
+	<div id="bering1"></div>
+	<p>Bundled edges</p>
+	<div id="bering2"></div>
+	
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="d3-foodweb.min.js"></script>
+	<script>
+
+	var tampacolor = d3.scaleOrdinal()
+		.domain([0,1,2,3])
+		.range(["#e41a1c", "#4daf4a", "#377eb8", "#984ea3"])
+		.unknown("#ffffff");
+
+	d3.json("tb_positioned.json", function(data) {
+		d3.select("#tampa1")
+			.datum(data)
+		.call(d3.foodwebstatic()
+			.paddingLeft(50)
+			.paddingTop(10)
+			.paddingRight(10)
+			.paddingBottom(60)
+			.totwidth(640)
+			.totheight(480)
+			.tllim([1,5])
+			.rlim( [2,50])
+			.blim( [NaN,NaN])
+			.lwmax(50)
+			.colfun(tampacolor)
+		);
+	});
+	
+	d3.json("tb_bundled.json", function(data) {
+		d3.select("#tampa2")
+			.datum(data)
+		.call(d3.foodwebstatic()
+			.paddingLeft(50)
+			.paddingTop(10)
+			.paddingRight(10)
+			.paddingBottom(60)
+			.totwidth(640)
+			.totheight(480)
+			.tllim([1,5])
+			.rlim( [2,50])
+			.blim( [NaN,NaN])
+			.lwmax(50)
+			.colfun(tampacolor)
+		);
+	});
+
+	var beringcolor = d3.scaleLinear()
+		.domain([0, 1])
+		.range(["crimson", "steelblue"]);
+
+	d3.json("bering_positioned.json", function(data) {
+		d3.select("#bering1")
+			.datum(data)
+		.call(d3.foodwebstatic()
+			.paddingLeft(50)
+			.paddingTop(10)
+			.paddingRight(10)
+			.paddingBottom(30)
+			.totwidth(800)
+			.totheight(550)
+			.tllim([1,5.75])
+			.rlim( [1,30])
+			.blim( [NaN,NaN])
+			.lwmax(30)
+			.colfun(beringcolor)
+		);
+	});
+	
+	d3.json("bering_bundled.json", function(data) {
+		d3.select("#bering2")
+			.datum(data)
+		.call(d3.foodwebstatic()
+			.paddingLeft(50)
+			.paddingTop(10)
+			.paddingRight(10)
+			.paddingBottom(30)
+			.totwidth(800)
+			.totheight(550)
+			.tllim([1,5.75])
+			.rlim( [1,30])
+			.blim( [NaN,NaN])
+			.lwmax(30)
+			.colfun(beringcolor)
+		);
+	});
+	
+	var albcolor = d3.scaleOrdinal()
+		.domain([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100])
+		.range(["#191919","#ff3219","#51ff1f","#1c1f1f","#ff381c","#57ff25","#1f2525","#ff3e1f","#5dff2b","#222b2b","#ff4422","#63ff31","#253131","#ff4a25","#68fb36","#273636","#ff4f27","#6ef53c","#2b3c3c","#ff552b","#74ef42","#2d4242","#ff5b2d","#7ae948","#ff6131","#80e34e","#334e4e","#fe6733","#86dd54","#375454","#fa6d37","#8cd75a","#395a5a","#f87339","#92d160","#3d6060","#f4793d","#97cc65","#3f6565","#f27e3f","#9dc66b","#426b6b","#ef8442","#a3c071","#457171","#ec8a45","#a9ba77","#487777","#e99048","#afb47d","#4b7d7d","#e6964b","#b5ae83","#4e8383","#e39c4e","#bba889","#518989","#e0a251","#c1a28f","#548f8f","#dda854","#c79c95","#579595","#daae57","#cc979a","#599a9a","#d8b359","#d291a0","#5da0a0","#d4b95d","#d88ba6","#5fa6a6","#d2bf5f","#de85ac","#63acac","#cec563","#e47fb2","#65b2b2","#cccb65","#ea79b8","#69b8b8","#c8d169","#f073be","#6bbebe","#c6d76b","#f66dc4","#6fc4c4","#c2dd6f","#fb68c9","#71c9c9","#c0e271","#ff62cf","#74cfcf","#bde874","#ff5cd5","#77d5d5","#baee77","#ff56db","#7adbdb","#929591"])
+		.unknown("#ffffff");
+
+	d3.json("albatross_positioned.json", function(data) {
+		d3.select("#albatross1")
+			.datum(data)
+		.call(d3.foodwebstatic()
+			.paddingLeft(50)
+			.paddingTop(10)
+			.paddingRight(10)
+			.paddingBottom(50)
+			.totwidth(640)
+			.totheight(480)
+			.tllim([0.5,5.5])
+			.rlim( [2,40])
+			.blim( [NaN,NaN])
+			.lwmax(20)
+		);
+	});
+	
+	d3.json("albatross_bundled.json", function(data) {
+		d3.select("#albatross2")
+			.datum(data)
+		.call(d3.foodwebstatic()
+			.paddingLeft(50)
+			.paddingTop(10)
+			.paddingRight(10)
+			.paddingBottom(50)
+			.totwidth(640)
+			.totheight(480)
+			.tllim([0.5,5.5])
+			.rlim( [2,40])
+			.blim( [NaN,NaN])
+			.lwmax(20)
+			.colfun(albcolor)
+		);
+	});
+	
+	
+	</script>
+</body>
+</html>

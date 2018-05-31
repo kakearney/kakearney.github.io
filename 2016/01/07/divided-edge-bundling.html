@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Adapting divided edge bundling for food web diagrams</title>
+  <meta name="description" content="Food webs as network graphs, Part 1">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://kellyakearney.net/2016/01/07/divided-edge-bundling.html">
+  <link rel="alternate" type="application/rss+xml" title="Kelly A. Kearney" href="http://kellyakearney.net/feed.xml" />
+<link rel='stylesheet' id='open-sans-css'  href='//fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&#038;subset=latin%2Clatin-ext&#038;ver=4.2.4' type='text/css' media='all' />
+<link href='http://fonts.googleapis.com/css?family=Titillium+Web:600italic,600,400,400italic' rel='stylesheet' type='text/css'>
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Kelly A. Kearney</a>
+
+
+    <nav class="site-nav">
+
+      <a href="#" class="menu-icon menu.open">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>  
+
+    <div class="trigger"><h1>Main Navigation</h1>
+
+ <ul class="menu">
+
+    
+    
+     <li><a href="/research/" class="page-link">Research</a>
+    
+    </li>
+    
+    
+     <li><a href="/blog/" class="page-link">Technical Blog</a>
+    
+    </li>
+    
+    
+     <li><a href="/publications/" class="page-link">Publications</a>
+    
+    </li>
+    
+    </ul>
+
+
+<!-- <ul class="menu">
+        <li> <a class="page-link" href="/about">About</a></li>
+        <li> <a class="page-link"  href="/blog">Blog</a>
+        <li> <a class="page-link" href="/blog">CV</a>
+        <li> <a class="page-link" href="/blog">For Students</a></li>
+        <li> <a class="page-link"  href="/blog">Research</a></a>
+        <li> <a class="page-link" href="/blog">Teaching</a>
+<ul class="sub-menu">
+	<li><a href="http://svmiller.com/teaching/posc-1020-introduction-to-international-relations/">POSC 1020 – Introduction to International Relations</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3410-quantitative-methods-in-political-science/">POSC 3410 – Quantitative Methods in Political Science</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3610-international-politics-in-crisis/">POSC 3610 – International Politics in Crisis</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3630-united-states-foreign-policy/">POSC 3630 – United States Foreign Policy</a></li>
+</ul></li>
+        <li> <a class="page-link" href="/blog">Miscellany</a>
+<ul class="sub-menu">
+	<li><a href="http://svmiller.com/teaching/posc-1020-introduction-to-international-relations/">Clean USAID Greenbook Data</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3410-quantitative-methods-in-political-science/">Journal of Peace Research *.bst File</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3610-international-politics-in-crisis/">My Custom Beamer Style</a></li>
+</ul> 
+
+</li>
+</ul> -->
+
+     </div>  
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Adapting divided edge bundling for food web diagrams</h1>
+    <p class="post-meta">Posted on January 7, 2016   
+
+  in
+  
+
+
+</p>
+  </header>
+
+  <article class="post-content">
+    <h2 id="food-webs-as-network-graphs-part-1">Food webs as network graphs, Part 1</h2>
+
+<p>Food webs are the central focus of my research, and for papers and presentations, I usually like to include a visualization of the food web being discussed.  In simple models with a dozen or so state variables (e.g. biogeochemical NPZ models), a clean, visually-intuitive diagram can be constructed manually without too much effort.  As the number of nodes in the diagram increases, graphing software like Graphviz, Gephi, or the network graph modules of Python, Matlab, D3, etc. can provide some automated node placement, edge routing algorithms, and plotting tools.</p>
+
+<p>However, all of these tools fell short when I attempted to use them on a management-oriented food web with 120+ nodes and 2000+ edges.</p>
+
+<p>TODO: scary graphs?</p>
+
+<p>The resulting diagrams were simply too cluttered to be useful; the only information one can extract from the resulting figures is “Well, it’s complex!”  I laugh to myself every time I see a figure like these ones in the published literature or in a conference presentation, accompanied by a phrase like “The figure shows… “ or “As you can see…”  No, no I can’t see anything except a solid blob of ink (or pixels).</p>
+
+<p>In my quest to turn these cluttered messes into informative figures, I stumbled into the vast and fascinating world of data visualization associated with network graphs.  Large networks are increasingly common in the world of big data, and the data visualization world has published a variety of techniques to try to reduce the visual clutter in their visual depictions.  This post will be the first in a two-part series where I describe the techniques I’ve adapted in order to create improved food web diagrams for my research.</p>
+
+<h2 id="divided-edge-bundling">Divided edge bundling</h2>
+
+<p>Edge bundling algorithms involve rerouting graph edge paths towards each other in an effort to elucidate high-level patterns amongst the tangle of lines.  For food webs, I was looking for a variation that depicted these high-level flows while preserving both the direction and weight of graph edges, and I found a great candidate in Selassie et al.’s divided edge bundling algorithm:</p>
+
+<p>Selassie D, Heller B, Heer J (2011) Divided edge bundling for directional network data. IEEE Trans Vis Comput Graph 17:2354–2363 <br />
+<a href="http://dx.doi.org/doi:10.1109/TVCG.2011.190">DOI:10.1109/TVCG.2011.190</a></p>
+
+<p>The divided edge bundling algorithm places control points along each edge of a network graph, and then treats those control points like charged particles that attract the control points on other edges.  The attraction between edges moving in opposite directions is offset relative to those moving in the same direction, resulting in directional lanes.</p>
+
+<p>After playing around with Selassie’s software prototype for a while, I decided I needed to make a few tweaks to the algorithm to best apply it to food web networks.  My version consists of two functions (<code class="highlighter-rouge">debundle.m</code> and <code class="highlighter-rouge">plotdeb.m</code>) written in Matlab, and builds upon the original algorithm with a few additions and changes.  I’ll elaborate on those changes in the next section, but I’ll start with an example so you can see how the algorithm works.</p>
+
+<p>Coincidentally, I started development of my Matlab version of divided edge bundling the same week that the Mathworks released their beta version of R2015b, which included the new graph object class.  These graph objects provide a nice way to keep all graph data together, along with built-in functions for calculations like shortest path and connected components (finally, no more need to distribute the giant matlab_bgl library with my network-related code!). Because of the reliance on graph objects, you’ll need Matlab R2015b or later to run this code.</p>
+
+<p>For demonstration purposes, we’ll start with the 3-by-3 example used in the Selassie et. al paper.  I’ll start with a table a node coordinates:</p>
+
+<figure class="highlight"><pre><code class="language-none" data-lang="none">N = 
+
+     x     y      id 
+    ___    __    ____
+
+    -50     0    '0' 
+    -50    10    '1' 
+    -50    20    '2' 
+     50     0    '3b'
+     50    10    '4b'
+     50    20    '5b'
+    -50    30    '0b'
+    -50    40    '1b'
+    -50    50    '2b'
+     50    30    '3' 
+     50    40    '4' 
+     50    50    '5' </code></pre></figure>
+
+<p>and a table of edge source/target pairs:</p>
+
+<figure class="highlight"><pre><code class="language-none" data-lang="none">E = 
+
+    src     tar 
+    ____    ____
+
+    '0'     '5' 
+    '3'     '0' 
+    '3'     '1' 
+    '5'     '2' 
+    '5'     '0' 
+    '4'     '2' 
+    '3b'    '1b'
+    '4b'    '1b'
+    '5b'    '1b'
+    '4b'    '0b'
+    '1b'    '4b'
+    '0b'    '5b'
+    '4b'    '2b'
+    '2b'    '5b'</code></pre></figure>
+
+<p>From these tables, I create a graph object.</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td><td class="code"><pre><span class="p">[</span><span class="o">~</span><span class="p">,</span> <span class="n">sidx</span><span class="p">]</span> <span class="o">=</span> <span class="nb">ismember</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">src</span><span class="p">,</span> <span class="n">N</span><span class="o">.</span><span class="n">id</span><span class="p">);</span>
+<span class="p">[</span><span class="o">~</span><span class="p">,</span> <span class="n">tidx</span><span class="p">]</span> <span class="o">=</span> <span class="nb">ismember</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="nb">tar</span><span class="p">,</span> <span class="n">N</span><span class="o">.</span><span class="n">id</span><span class="p">);</span>
+
+<span class="n">nnode</span> <span class="o">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">N</span><span class="o">.</span><span class="n">x</span><span class="p">);</span>
+<span class="n">nedge</span> <span class="o">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">src</span><span class="p">);</span>
+<span class="n">adj</span> <span class="o">=</span> <span class="nb">sparse</span><span class="p">(</span><span class="n">sidx</span><span class="p">,</span> <span class="n">tidx</span><span class="p">,</span> <span class="nb">ones</span><span class="p">(</span><span class="n">nedge</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">nnode</span><span class="p">,</span> <span class="n">nnode</span><span class="p">);</span>
+<span class="n">adj</span> <span class="o">=</span> <span class="nb">full</span><span class="p">(</span><span class="n">adj</span><span class="p">);</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">digraph</span><span class="p">(</span><span class="n">adj</span><span class="p">,</span> <span class="n">id</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>I’ll also add the node coordinate data as extra Node table properties, which we can use for plotting and will later be required of the divided edge bundling function:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="n">G</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">(:);</span>
+<span class="n">G</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">(:);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We can plot the resulting graph using Matlab’s graph plotting tools:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="nb">figure</span><span class="p">(</span><span class="s1">'color'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">);</span>
+<span class="n">h</span> <span class="o">=</span> <span class="nb">plot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">'XData'</span><span class="p">,</span> <span class="n">G</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="s1">'YData'</span><span class="p">,</span> <span class="n">G</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="k">...</span>
+    <span class="s1">'NodeColor'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">,</span> <span class="s1">'MarkerSize'</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+<span class="nb">axis</span> <span class="n">equal</span><span class="p">;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="/assets/supporting_code/deb1.png" onload="this.width/=2;this.onload=null;" /></p>
+
+<p>Even with this relatively simple graph, things are getting a bit cluttered, particularly with all the arrowheads centered on the edges.</p>
+
+<p>Using <code class="highlighter-rouge">plotdeb.m</code> in initial mode, edges are instead rendered as partially-transparent patches that change color as they move from the source node (0 on the colorbar) to the target node (1):</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="nb">set</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="s1">'LineStyle'</span><span class="p">,</span> <span class="s1">'none'</span><span class="p">);</span>
+<span class="n">he</span> <span class="o">=</span> <span class="n">plotdeb</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">'initial'</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+<span class="n">hcb</span> <span class="o">=</span> <span class="nb">colorbar</span><span class="p">(</span><span class="s1">'south'</span><span class="p">);</span> <span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="/assets/supporting_code/deb2.png" onload="this.width/=2;this.onload=null;" /></p>
+
+<p>The edge patches also vary in width based on the weight of each edge.  In this example, all edges were the same weight, but we can see the effect if we increase the weight of the edge that runs from node 2b to node 5b:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="nb">delete</span><span class="p">(</span><span class="n">he</span><span class="p">);</span>
+<span class="n">G</span><span class="o">.</span><span class="n">Edges</span><span class="o">.</span><span class="n">Weight</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">he</span> <span class="o">=</span> <span class="n">plotdeb</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">'initial'</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="/assets/supporting_code/deb2b.png" onload="this.width/=2;this.onload=null;" /></p>
+
+<p>Now we run the edge-bundling algorithm:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">G</span> <span class="o">=</span> <span class="n">debundle</span><span class="p">(</span><span class="n">G</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>While the code runs it will print its status to the screen:</p>
+
+<figure class="highlight"><pre><code class="language-none" data-lang="none">Preprocessing...
+ 100% [=================================================&gt;]   14/  14
+ Elapsed time is 0.053588 seconds.
+Bundling...
+ Pass 1
+ 100% [=================================================&gt;] Pass 1: 29 of 29
+ Elapsed time is 0.103037 seconds.
+ Pass 2
+ 100% [=================================================&gt;] Pass 2: 29 of 29
+ Elapsed time is 0.161255 seconds.
+ Pass 3
+ 100% [=================================================&gt;] Pass 3: 29 of 29
+ Elapsed time is 0.283332 seconds.
+ Pass 4
+ 100% [=================================================&gt;] Pass 4: 29 of 29
+ Elapsed time is 0.572491 seconds.
+ Pass 5
+ 100% [=================================================&gt;] Pass 5: 29 of 29
+ Elapsed time is 1.091047 seconds.
+Postprocessing...
+Done</code></pre></figure>
+
+<p>As I’ll discuss below, my version is quite a bit slower than the original, so depending on the complexity of the graph, you may need to go get some coffee at this point.  This example only needs a few seconds, though, and we can now plot the new bundled paths for the edges.</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="nb">delete</span><span class="p">(</span><span class="n">he</span><span class="p">);</span>
+<span class="n">he2</span> <span class="o">=</span> <span class="n">plotdeb</span><span class="p">(</span><span class="n">G</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="/assets/supporting_code/deb3.png" onload="this.width/=2;this.onload=null;" /></p>
+
+<p>In addition to showing the new bundled-together paths for each of the edges, the plotting routine changes the widths of the edge bundles to reflect the sum total of the weights of the edges at each location.  In this version, while we lose some of our ability to trace individual edges from their source to their target, we get a better picture of the main flows in the graph.  For example, we can better see the separation of the two subgraphs (b-nodes vs other nodes), and compare the total flow moving from left to right as opposed to right to left in the b-subgraph.</p>
+
+<h2 id="adapting-the-algorithm-to-food-webs">Adapting the algorithm to food webs</h2>
+
+<h3 id="bundling-vs-plotting">Bundling vs. plotting</h3>
+
+<p>The original EdgeBundling application reads in a graph topology (including node positions and edge source-target pairs) from a file, accepts a few user-configurable parameters, and on command, runs the bundling calculations and plots the results to the screen.  I decided to separate the bundling (<code class="highlighter-rouge">debundle.m</code>) and plotting (<code class="highlighter-rouge">plotdeb.m</code>) steps, for several reasons.</p>
+
+<p>The first benefit is flexibility.  Matlab has a full-featured graphics library, so there’s no need to limit the choices of edge color, transparency, etc. to those hard-coded in the original.  This also allows me to plot the nodes separately from the edges, and to add additional details, like the trophic level axis used in my food web diagrams.</p>
+
+<p>The second reason for separating the calculations is speed.  I’ve profiled my code pretty thoroughly for any unnecessary bottlenecks, but Matlab is no match for the GPU-accelerated Objective-C Selassie used.  And the physical simulation complexity is \(O(E^2C)\) (where \(E\) is the number of edges and \(C\) is the number of control points per edge) for each iteration, which is asking a lot of an interpreted language.  A simulation that takes 20-30 s in the C-based software requires a couple hours in the Matlab code.  Acceptable to me, since I only need to create these figures once or twice per research project, but I didn’t want to have to rerun everything just to tweak the edge width scaling in a single figure.</p>
+
+<p>The final reason for separating things is due to the addition of scaled weights for bundling, as described in the next section.</p>
+
+<h3 id="scaled-weight-function-for-bundling">Scaled weight function for bundling</h3>
+
+<p>Edge weight values are used in both the bundling and plotting steps of the divided edge bundling algorithm.</p>
+
+<p>During the bundling portion, the forces between control points are scaled based on the weight of the edges they are on.  Because of this, bundles of low-weight edges whose weights sum to a certain value behave in the same way as a single high-weight edge of that value in terms of attracting other edges.</p>
+
+<p>During the plotting portion, edge width at a given control point is calculated based on the sum of the weights of all control points within a threshhold radius of that point.  The result is that overlapping edges are depicted as a single edge with the cumulative weight of the bundle members.</p>
+
+<p>In food web networks, the biomass fluxes represented by edge weights usually span at least 5-7 orders of magnitude due to trophic transfer losses at each predation link.  In the food web I happened to be working with as the time I developed this function, the weight difference between the smallest flux (longline bycatch of mammals) and the largest (primary production by small phytoplankton) spanned 14 orders of magnitude.  With this weight difference, the forces exerted at the bottom of the food web far surpassed those at the top of the food web, resulting in almost no bundling occurring beyond the first couple of trophic levels.  No good.</p>
+
+<p>The usual remedy to this large range in fluxes is to scale them, typically with a strong transformation like a logarithm, cubic root, or square root.  Unfortunately, using such a scale loses the additive property that is relied upon for the edge bundling algorithm and visualization.</p>
+
+<p>In the end, I decided that I was willing to sacrifice the additive property of edges during the bundling process itself, but not during the final visualization.  An optional input parameter can be passed to the <code class="highlighter-rouge">debundle.m</code> function, telling it to scale edge weights prior to beginning its calculations.  For my work, I’ve been using the function</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">wtfun</span> <span class="o">=</span> <span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="nb">log10</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">wmin</span><span class="p">;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>where <code class="highlighter-rouge">wmin</code> is the logarithm of the smallest weight, rounded down a bit (to keep all weight values positive as required by the algorithm).</p>
+
+<p>For the visualization, Selassie’s code already included an optional parameter to de-linearize the edge width scaling.  The edge width equation is \(D=wg^p\), where \(D\) is the visible edge width, \(w\) is the user-assigned maximum edge width, \(g\) is the bundle weight at a control point, and \(p\) is the scaling parameter.  Selassie et al. states that the \(p\) parameter “allows more subtle asymmetries in edge and bundle weight to be seen”.  In the case of food networks, we actually want these asymetries deemphasized, which can be accomplished when \(p&lt;1\).  I’ve found \(p = \frac{1}{3}\) (cubic root scaling) works pretty well for food webs.  The scaling is applied after the bundle weight calculation, so edge bundles still maintain the additive property we want.</p>
+
+<h3 id="self-edges">Self-edges</h3>
+
+<p>The divided edge bundling algorithm removes any self edges prior to calculation, since these edges would not have a single orientation as needed for the calculations.</p>
+
+<p>Although they do not factor into the bundle calculations, self-edges (i.e. cannibalism) are quite prevelant in ocean ecosystem models, so I wanted to include them in the final visualizations.  For this, I included a switch that, when true, plots self-edges as circlular paths.</p>
+
+<h2 id="node-placement">Node placement</h2>
+
+<p>While this algorithm greatly helped in cleaning up spaghetti-mess edges, it can only be applied to graphs where the coordinates of the nodes are already known (such as the geographic examples in the Selassie et al. paper).  While y-coordinates in food webs often correspond to trophic level, the x-coordinates are not constrained.</p>
+
+<p>In their discussion, Selessie et al. noted</p>
+
+<blockquote>
+  <p>A major question unaddressed in both the prior and current work is the interplay between node layout and edge bundling; Holten &amp; van Wijk’s compatibility coefficients are exclusively a function of node position, so layout greatly affects bundling. Automated graph layout algorithms that tend to orthogonalize edges cause force-directed edge bundling techniques to coalesce edges ineffectively. Layout approaches that jointly optimize node placement and edge bundling might enable improved pattern perception.</p>
+</blockquote>
+
+<p>So to get the best results when applying edge bundling to food webs, we need to start with a node-placement algorithm that optimizes node position for bundling rather than orthagonality.  And ideally, one that also allows contraining y-position to match trophic level while allowing free movement in the x-direction.  With no such algorithm seemingly readily available, I decided to create my own.  Read on to the next post to find out the details.</p>
+
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+<!--     <h2 class="footer-heading">Kelly A. Kearney</h2> -->
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li><strong>Kelly A. Kearney</strong></li>
+
+          <li><a href="mailto:kakearney@gmail.com">kakearney@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/kakearney">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">kakearney</span>
+            </a>
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+         <p class="text">
+University of Washington<br> Joint Institute for the Study of the Atmosphere and Ocean<br> Alaska Fisheries Science Center, NOAA<br> 7600 Sand Point Way N.E., Building 4<br> Seattle, Washington 98115
+ 
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+
+</html>

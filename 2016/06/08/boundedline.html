@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Plotting lines with error bounds/confidence intervals/etc.</title>
+  <meta name="description" content="One of my most popular MatlabCentral File Exchange entries is also one of the simplest: boundedline.m.  This function allows you to plot confidence intervals...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://kellyakearney.net/2016/06/08/boundedline.html">
+  <link rel="alternate" type="application/rss+xml" title="Kelly A. Kearney" href="http://kellyakearney.net/feed.xml" />
+<link rel='stylesheet' id='open-sans-css'  href='//fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&#038;subset=latin%2Clatin-ext&#038;ver=4.2.4' type='text/css' media='all' />
+<link href='http://fonts.googleapis.com/css?family=Titillium+Web:600italic,600,400,400italic' rel='stylesheet' type='text/css'>
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Kelly A. Kearney</a>
+
+
+    <nav class="site-nav">
+
+      <a href="#" class="menu-icon menu.open">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>  
+
+    <div class="trigger"><h1>Main Navigation</h1>
+
+ <ul class="menu">
+
+    
+    
+     <li><a href="/research/" class="page-link">Research</a>
+    
+    </li>
+    
+    
+     <li><a href="/blog/" class="page-link">Technical Blog</a>
+    
+    </li>
+    
+    
+     <li><a href="/publications/" class="page-link">Publications</a>
+    
+    </li>
+    
+    </ul>
+
+
+<!-- <ul class="menu">
+        <li> <a class="page-link" href="/about">About</a></li>
+        <li> <a class="page-link"  href="/blog">Blog</a>
+        <li> <a class="page-link" href="/blog">CV</a>
+        <li> <a class="page-link" href="/blog">For Students</a></li>
+        <li> <a class="page-link"  href="/blog">Research</a></a>
+        <li> <a class="page-link" href="/blog">Teaching</a>
+<ul class="sub-menu">
+	<li><a href="http://svmiller.com/teaching/posc-1020-introduction-to-international-relations/">POSC 1020 – Introduction to International Relations</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3410-quantitative-methods-in-political-science/">POSC 3410 – Quantitative Methods in Political Science</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3610-international-politics-in-crisis/">POSC 3610 – International Politics in Crisis</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3630-united-states-foreign-policy/">POSC 3630 – United States Foreign Policy</a></li>
+</ul></li>
+        <li> <a class="page-link" href="/blog">Miscellany</a>
+<ul class="sub-menu">
+	<li><a href="http://svmiller.com/teaching/posc-1020-introduction-to-international-relations/">Clean USAID Greenbook Data</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3410-quantitative-methods-in-political-science/">Journal of Peace Research *.bst File</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3610-international-politics-in-crisis/">My Custom Beamer Style</a></li>
+</ul> 
+
+</li>
+</ul> -->
+
+     </div>  
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Plotting lines with error bounds/confidence intervals/etc.</h1>
+    <p class="post-meta">Posted on June 8, 2016   
+
+  in
+  
+
+
+</p>
+  </header>
+
+  <article class="post-content">
+    <p>One of my most popular MatlabCentral File Exchange entries is also one of the simplest: <code class="highlighter-rouge">boundedline.m</code>.  This function allows you to plot confidence intervals (or any other sort of bounds) along the length of a line using a shaded patch object.</p>
+
+<h2 id="background">Background</h2>
+
+<p>Matlab includes the <code class="highlighter-rouge">errorbar</code> function to plot error (or standard deviation, confidence intervals, or any sort of bounds) along a line. Here’s one of the examples from the <code class="highlighter-rouge">errorbar</code> help page:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="n">count</span> <span class="o">=</span> <span class="nb">load</span><span class="p">(</span><span class="s1">'count.dat'</span><span class="p">);</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="nb">size</span><span class="p">(</span><span class="n">count</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">'</span><span class="p">;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="nb">mean</span><span class="p">(</span><span class="n">count</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">e</span> <span class="o">=</span> <span class="nb">std</span><span class="p">(</span><span class="n">count</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="nb">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="s1">'rx'</span><span class="p">);</span></code></pre></figure>
+
+<p><img src="/assets/supporting_code/boundedline1.png" onload="this.width/=2;this.onload=null;" /></p>
+
+<p>However, often users prefer to visualize error as a shaded region around the line.  To get this, you can simply combine the use of a line and a patch.  For example:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="n">lo</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">e</span><span class="p">;</span>
+<span class="n">hi</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">e</span><span class="p">;</span>
+
+<span class="n">hp</span> <span class="o">=</span> <span class="nb">patch</span><span class="p">([</span><span class="n">x</span><span class="p">;</span> <span class="n">x</span><span class="p">(</span><span class="k">end</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">);</span> <span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)],</span> <span class="p">[</span><span class="n">lo</span><span class="p">;</span> <span class="n">hi</span><span class="p">(</span><span class="k">end</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">);</span> <span class="n">lo</span><span class="p">(</span><span class="mi">1</span><span class="p">)],</span> <span class="s1">'r'</span><span class="p">);</span>
+<span class="nb">hold</span> <span class="n">on</span><span class="p">;</span>
+<span class="n">hl</span> <span class="o">=</span> <span class="nb">line</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="n">hp</span><span class="p">,</span> <span class="s1">'facecolor'</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span> <span class="mf">0.8</span> <span class="mf">0.8</span><span class="p">],</span> <span class="s1">'edgecolor'</span><span class="p">,</span> <span class="s1">'none'</span><span class="p">);</span>
+<span class="nb">set</span><span class="p">(</span><span class="n">hl</span><span class="p">,</span> <span class="s1">'color'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">,</span> <span class="s1">'marker'</span><span class="p">,</span> <span class="s1">'x'</span><span class="p">);</span></code></pre></figure>
+
+<p><img src="/assets/supporting_code/boundedline2.png" onload="this.width/=2;this.onload=null;" /></p>
+
+<p>While the concept is simple, keeping all the cosmetic details of the line and patch objects in sync can start to become a hassle if you do this sort of plot a lot.  Before I wrote my own function to facilitate the task, I looked at several other candidates on the FileExchange.  There were a few features I was looking for in the ideal function:</p>
+
+<ul>
+  <li>It allowed bounds to be set in either the horizontal or vertical direction.  In marine sciences, variables are often plotted versus depth, with the y-axis holding the independent variable and the x-axis showing the dependent one.</li>
+  <li>It allowed me to plot multiple lines at once.</li>
+  <li>It allowed me to specify colors for each line/patch combo.</li>
+  <li>It allowed the patch object to be rendered as either the same color as the line, with opacity set to a value less than one, <em>or</em> as an opaque patch colored with a lightened version of the line color.  This is less of an issue with the new handle graphics introduced in R2014b, but prior to that, I had a lot of problems with the OpenGL renderer on my computers (OpenGL is the only renderer that supports transparency, but it also led to sporadic visual artifacts that made it unusable for publication-quality graphics); therefore, I needed the option to avoid the use of transparent patches at times.</li>
+</ul>
+
+<p>I didn’t find any candidates that met all of these requirements, so I wrote my own.  The boundedline.m function will produce a plot identical to the line/patch combo in the second example above, but with a simpler syntax similar to the errorbar function:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="n">boundedline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">e</span><span class="p">,</span> <span class="s1">'-rx'</span><span class="p">)</span></code></pre></figure>
+
+<p><img src="/assets/supporting_code/boundedline3.png" onload="this.width/=2;this.onload=null;" /></p>
+
+<p>The actual plotting function is simple, so instead I focused on making this function as flexible as possible to the types of data one might want to plot.  I allow for lots of different calling syntaxes to define one or more lines, similar to the <code class="highlighter-rouge">plot</code> function.  I also allow several different methods for setting the colors of each line, including the use of LineSpecs, colormaps, or the default color order for an axis.  Error bounds can be defined as symmetric on both sides, or you can set different bounds for each side.  Bounds can be constant along the length of the line, or vary.  Overall, it’s a pretty versatile function, and it’s proved very useful in my own work, and very popular with others as well.</p>
+
+<h2 id="dealing-with-nans-and-infs">Dealing with NaNs and Infs</h2>
+
+<p>One of the more common complaints that I received about this function was that it did not automatically deal with NaNs and Infs in the input data.  Line-plotting functions, like <code class="highlighter-rouge">plot</code> and <code class="highlighter-rouge">line</code>, automatically drop the points,</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="n">x</span> <span class="o">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sin</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="nb">cos</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="mi">5</span><span class="o">*</span><span class="nb">sin</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="mi">4</span><span class="o">*</span><span class="nb">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)];</span>
+<span class="n">e</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
+
+<span class="n">y</span><span class="p">(</span><span class="nb">randperm</span><span class="p">(</span><span class="nb">numel</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="mi">5</span><span class="p">))</span> <span class="o">=</span> <span class="n">NaN</span><span class="p">;</span>
+<span class="n">y</span><span class="p">(</span><span class="nb">randperm</span><span class="p">(</span><span class="nb">numel</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="mi">5</span><span class="p">))</span> <span class="o">=</span> <span class="n">Inf</span><span class="p">;</span>
+
+<span class="nb">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span></code></pre></figure>
+
+<p><img src="/assets/supporting_code/boundedline4.png" onload="this.width/=2;this.onload=null;" /></p>
+
+<p>So why couldn’t <code class="highlighter-rouge">boundedline</code> do the same?</p>
+
+<p>While dropping the points from the line is pretty easy, figuring out what to do with the patch object is more complicated.  Patches do <em>not</em> handle NaNs and Infs gracefully; a patch with a NaN-vertex plots only the outline of the patch, with no fill.</p>
+
+<p>When I asked others what they would expect the function to do when it found NaNs in the patch, the answers varied.  Some thought those points should just be dropped from the polygon, interpolating past the NaNs.  Others wanted to see a gap in the patch similar to the gap in a line.</p>
+
+<p>When I first wrote this function, I left it up to the users to preprocess their data and remove any NaNs, since there didn’t seem to be a concensus on the desired behavior.  I continued to get feedback on this, though, and I recently relented.  Now there are three different options for dealing with NaNs included with the boundedline function: drop the points, smooth past them, or leave a gap.</p>
+
+<p>Here’s an example that shows these three methods in action.  The markers along the top of the first axis show where I inserted NaNs in the data.  Most real datasets won’t include such a variety of missing data, but I wanted to demonstrate behavior in all cases (data missing from the line, data missing from one or both bounds, single missing points vs longer runs of missing data, data missing at the beginning or end of a line, data with 0-width bounds vs missing bounds):</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="n">x</span> <span class="o">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="n">y</span> <span class="o">=</span> <span class="nb">sin</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="n">e</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mf">0.2</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">e</span><span class="p">(</span><span class="mi">60</span><span class="p">:</span><span class="mi">65</span><span class="p">,:)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="n">ln</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span> <span class="mi">12</span> <span class="mi">25</span><span class="p">:</span><span class="mi">30</span><span class="p">];</span>
+<span class="n">lo</span> <span class="o">=</span> <span class="p">[</span><span class="mi">35</span> <span class="mi">50</span><span class="p">:</span><span class="mi">55</span> <span class="mi">66</span><span class="p">:</span><span class="mi">70</span> <span class="mi">95</span><span class="p">:</span><span class="mi">100</span><span class="p">];</span>
+<span class="n">hi</span> <span class="o">=</span> <span class="p">[</span><span class="mi">40</span> <span class="mi">50</span><span class="p">:</span><span class="mi">55</span> <span class="mi">66</span><span class="p">:</span><span class="mi">70</span><span class="p">];</span>
+
+<span class="n">y</span><span class="p">(</span><span class="n">ln</span><span class="p">)</span> <span class="o">=</span> <span class="n">NaN</span><span class="p">;</span>
+<span class="n">e</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">NaN</span><span class="p">;</span>
+<span class="n">e</span><span class="p">(</span><span class="n">hi</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="n">NaN</span><span class="p">;</span>
+
+
+<span class="n">nanflag</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'gap'</span><span class="p">,</span> <span class="s1">'fill'</span><span class="p">,</span> <span class="s1">'remove'</span><span class="p">};</span>
+<span class="k">for</span> <span class="n">ii</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">nanflag</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span> <span class="o">=</span> <span class="nb">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">ii</span><span class="p">);</span>
+    <span class="p">[</span><span class="n">hl</span><span class="p">(</span><span class="n">ii</span><span class="p">),</span> <span class="n">hp</span><span class="p">(</span><span class="n">ii</span><span class="p">)]</span> <span class="o">=</span> <span class="n">boundedline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">e</span><span class="p">,</span> <span class="s1">'nan'</span><span class="p">,</span> <span class="n">nanflag</span><span class="p">{</span><span class="n">ii</span><span class="p">});</span>
+<span class="k">end</span>
+<span class="n">ho</span> <span class="o">=</span> <span class="n">outlinebounds</span><span class="p">(</span><span class="n">hl</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+<span class="nb">set</span><span class="p">(</span><span class="n">hl</span><span class="p">,</span> <span class="s1">'linestyle'</span><span class="p">,</span> <span class="s1">':'</span><span class="p">);</span></code></pre></figure>
+
+<p><img src="/assets/supporting_code/boundedline5.png" onload="this.width/=1.5;this.onload=null;" /></p>
+
+<p>The <code class="highlighter-rouge">'fill'</code> and <code class="highlighter-rouge">'remove'</code> options end up looking the same; the only difference is that the former adds the interpolated points to the patch vertices, while the latter relies on the graphics engine to do this interpolation.  You may prefer the former if keeping your vertex numbers consistent is important for your analysis.</p>
+
+<p>As you can see, the fill/remove option can be a little wonky when you have one-sided missing bounds data at the beginning or end of a line.  The gap method is better at highlighting missing data, but it doesn’t differentiate between one-sided and two-sided missig data in the bounds. The fill/remove method may be better if your intent is to mostly ignore a few sporadic missing points in a large dataset.</p>
+
+<h2 id="legend-entries-for-a-boundedline">Legend entries for a boundedline</h2>
+
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+<!--     <h2 class="footer-heading">Kelly A. Kearney</h2> -->
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li><strong>Kelly A. Kearney</strong></li>
+
+          <li><a href="mailto:kakearney@gmail.com">kakearney@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/kakearney">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">kakearney</span>
+            </a>
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+         <p class="text">
+University of Washington<br> Joint Institute for the Study of the Atmosphere and Ocean<br> Alaska Fisheries Science Center, NOAA<br> 7600 Sand Point Way N.E., Building 4<br> Seattle, Washington 98115
+ 
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+
+</html>

@@ -1,0 +1,617 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/night.css">
+				<!-- <link rel="stylesheet" href="css/print/pdf.css"> -->
+				<style>
+					.bar { fill: steelblue; }
+				</style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+								
+								<!--- =========== -->
+								
+								<section style="text-align: left;">
+									<h3>A comparison of Bering Sea ecosystem energy pathways in warm versus cold years</h3>
+									<br>
+									<h4><span style="text-decoration: underline;">Kelly Kearney</span>, Al Hermann, Ivonne Ortiz, and Kerim Aydin</h4>
+									<h4>Ed Farley, Ellen Yasumishi</h4>
+									<br>
+									<h4>2016 PICES Annual Meeting</h4>
+								</section>
+                
+								<!--- =========== -->
+								
+								<section>
+									<h3>Yukon and Kuskokwim River Chinook salmon</h3>
+
+									<br>
+									<ul style="width: 55%; text-align: left; float: left;">
+										<li style="margin-bottom: 30">Returns have been declining over the past several years</li>
+										<li style="margin-bottom: 30">Hypothesis: first spring and winter at sea are critical period for juvenile survival</li>
+										<li style="margin-bottom: 30">How do warm and cold years differ?
+											<ul>
+												<li style="margin: 5">Physics?</li>
+												<li style="margin: 5">Primary production?</li>
+												<li style="margin: 5">Pathways to mesozooplankton and benthos?</li>
+											</ul>
+										</li>
+									</ul>
+									<div width="30%" style="float: right">
+										<image src="yukonReturns.png" width="300px"><br>
+										<image src="kuskokwimReturns.png" width="300px">
+										<!-- <image src="Farley.NBS.Workshop.Nov3_yukontrend.jpg" width="20%"> -->
+									</div>
+
+
+									<aside class="notes">
+										<ul>
+											<li>Over the last decade, Chinook salmon returns in the Yukon and Kuskokwim rivers have been declining.</li>
+											<li>Mechanism behind declines not clear; has lead to conservative management</li>
+											<li>Hypothesis: relates to environmental conditions during first year at sea... needs to support high enough growth rates to escape size-selective predation and to build up sufficient lipid reserves</li>
+											<li>This talk will focus on the biogeochemical side of the question: how does the physics of the region differ in warm and cold years, how does this affect primary production, and how does that filter up to zooplankton?
+											<li>Note: Not implying that salmon returns are necessarily linked to warm/cold periods; this just provides convenient way to look at variability.
+								    </ul>
+									</aside>
+
+								</section>
+								
+								<!--- =========== -->
+								
+								<section> 
+									
+									<section data-background-transition="none" data-background-image="map1.png">
+										<h3>The ROMS Bering10K domain</h3>
+										
+										<aside class="notes">
+											This analysis is based on results from a ROMS model.
+										</aside>
+										
+									</section>
+
+									<section data-background-transition="none" data-background-image="map2.png">
+										<h3>The ROMS Bering10K domain</h3>
+										
+										<aside class="notes">
+											<ul>
+												<li>Domain covers the Bering Sea, 10-km horizontal resolution, 10 vertical layers</li>
+												<li>Boundary conditions provided by CFS reanalysis</li>
+											</ul>
+										</aside>
+										
+									</section>
+
+									<section data-background-transition="none" data-background-image="map3.png">
+										<h3>The ROMS Bering10K domain</h3>
+										
+										<aside class="notes">
+											<ul>
+												<li>Regional strata: defined by bottom depth and biophysical characteristics</li>
+												<li>Inner: 0-50m, well-mixed</li>
+												<li>Middle: 50-100m, well-mixed in winter, two layers in summer</li>
+												<li>Outer: 100-200m, more gradually stratified</li>
+												<li>Most model validation prior to this study focused on the southeastern Bering Sea.
+												<li>YK juvenile Chinook found predominantly on the inner shelf north of the transition zone.  Our bio data will be taken from that region</li>
+											</ul>
+										</aside>
+										
+									</section>
+									
+								</section>
+								
+								<!--- =========== -->
+								
+								<section>
+									<h3>Warm vs Cold: oscillating control hypothesis</h3>
+									<img class="stretch plain" src="icetemp.png">
+								
+									<aside class="notes">
+										<ul>
+											<li>Ice plays large role in Bering Sea environmental conditions</li>
+											<li>Oscillating Control Hypothesis: cold years > more ice > earlier spring bloom with less Z grazing (thermal inhibition) > less Z-centric energy pathways</li>
+										  <li>We'll compare 2005 (warm year) and 2009 (cold year), see if we get these tradeoffs in the model on the north inner shelf.
+											<li>(This ran as an animation when I presented it, but that huge gif file was removed for archiving on this blog).
+										</ul>
+									</aside>
+								</section>
+								
+								<!--- =========== -->
+								
+								<section>
+									
+									<section>
+										<h3>How does sea ice perform in the ROMS model?</h3>
+										<img class="stretch plain" src="iceextent.png">
+								
+										<aside class="notes">
+											<ul>
+												<li>But first... how well does our model capture ice dynamics? 
+												<li>Using newer version of ice code, recently updated by Kate Hedstrom</li>
+												<li>Maximum ice extent in the model matches observations pretty well, in both years.</li>
+											</ul>
+										</aside>
+									</section>
+									
+									<section>
+										<h3>How does sea ice perform in the ROMS model?</h3>
+										<img class="stretch plain" src="icemeltday_2005.png">
+								
+										<aside class="notes">
+											<ul>
+												<li>More important than extent, though is timing</li>
+												<li>Start of ice-free period allows for initial phytoplankton bloom</li>
+												<li>Major features are decent, but...
+											</ul>
+										</aside>
+									</section>
+									
+									<section>
+										<h3>How does sea ice perform in the ROMS model?</h3>
+										<img class="stretch plain" src="icemeltdiff_2005.png">
+								
+										<aside class="notes">
+											<ul>
+												<li>Overall, model is a bit late.
+												<li>2005: IQR = -6.5, 23.466, median =  11.211 days</li>
+											</ul>
+										</aside>
+									</section>
+									
+									<section>
+										<h3>How does sea ice perform in the ROMS model?</h3>
+										<img class="stretch plain" src="icemeltday_2009.png">
+								
+										<aside class="notes">
+											<ul>
+												<li>2009: again, broad patterns okay but late, especially mid-shelf.
+											</ul>
+										</aside>
+									</section>
+									
+									<section>
+										<h3>How does sea ice perform in the ROMS model?</h3>
+										<img class="stretch plain" src="icemeltdiff_2009.png">
+								
+										<aside class="notes">
+											<ul>
+												<li>2009: IQR = 1.9, 34.08, median =  18.5 days</li>
+												<li>Corresponds to cold pool location; need more surface melt?</li>
+											</ul>
+										</aside>
+									</section>
+									
+									
+								</section>
+								
+								<!--- =========== -->
+								
+								<section data-state="foodwebslide">
+									
+									<h3>The BESTNPZ food web</h3>
+									<div id="foodwebdiv"></div>
+																		
+									<aside class="notes">
+										<ul>
+											<li>Bering Sea Ecosystem Study model runs within ROMS.</li>
+											<li>Model includes 2 phyto, variety of zoop, ice, and benthos</li>
+										</ul>
+									</aside>
+								</section>
+								
+								<!--- =========== -->
+								
+								<section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb01.svg">
+											
+											<aside class="notes">
+												<ul>
+													<li>Color, node size, and edge width correspond to values normalized across the two-year period.</li>
+													<li>At peak of phyto bloom, warm year favors small P pathway, cold year favors large P.</li>
+													<li>But mesozoo and benthos don't really differ between the two years</li>
+													<li>Explannations?
+														<ul>
+															<li>Model is right, warm/cold regimes less pronounced in north.  Obs might support this, but we need to do a more thorough validation.  Next on TODO list!</li>
+															<li>Model is missing key behavior... copepod energetics/lipid content?  Diapause? MZL feeding preferences?</li>
+														</ul>
+													<li>(Scroll up and down for animation)</li>
+												</ul>
+											</aside>
+											
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb02.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb03.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb04.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb05.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb06.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb07.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb08.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb09.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb10.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb11.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb12.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb13.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb14.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb15.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb16.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb17.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb18.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb19.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb20.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb21.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb22.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb23.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb24.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb25.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb26.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb27.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb28.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb29.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb30.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb31.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb32.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb33.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb34.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb35.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb36.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb37.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb38.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb39.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb40.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb41.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb42.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb43.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb44.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb45.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb46.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb47.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb48.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb49.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb50.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb51.svg">
+									</section>
+									<section data-transition="none">
+									    <h3>Do food web pathways differ?</h3>
+									    <img class="stretch plain" src="foodweb52.svg">
+									</section>
+								</section>
+								
+								<!--- =========== -->
+								
+								<section>
+									<h3>Conclusions</h3>
+									
+									<br>
+									<ul style="text-align: left;">
+										<li style="margin-bottom: 20">Modeled sea ice extent matches observations, but melt is late.</li>
+										<li style="margin-bottom: 20">Primary production pathways  differ between warm and cold years.</li>
+										<li style="margin-bottom: 20">Modeled mesozooplankton and benthos are not strongly sensitive to these differing food pathways.</li>
+										</li>
+									</ul>
+								
+								
+								
+								
+								
+            </div>
+        </div>
+        <script src="js/reveal.js"></script>
+				<script src="d3/d3.min.js"></script>
+				<script src="d3-scale-chromatic/d3-scale-chromatic.min.js"></script>
+        <script>
+            Reveal.initialize({
+            	center: false,
+							transition: 'none',
+							showNotes: true
+            });
+						
+						Reveal.addEventListener('foodwebslide', function() {
+							  
+								var width = 800,
+										height = 600;
+										
+								d3.selectAll(".foodwebsvg").remove();
+										
+								var svg = d3.select("#foodwebdiv").append("svg")
+									  .attr("class", "foodwebsvg")
+										.attr("width", width)
+										.attr("height", height)
+										.attr("x", 0)
+										.attr("y", 0);
+
+								var data = {"nodes": [{"x": 0.1538461538,"y": 0.4090909091,"id": "NO3","type": "nutrient","bavg": 12405.24561},{"x": 0.1538461538,"y": 0.5,"id": "NH4","type": "nutrient","bavg": 138.0311417},{"x": 0.3076923077,"y": 0.3409090909,"id": "PhS","type": "producer","bavg": 1415.497005},{"x": 0.3076923077,"y": 0.5681818182,"id": "PhL","type": "producer","bavg": 1204.20885},{"x": 0.4615384615,"y": 0.4545454545,"id": "MZL","type": "consumer","bavg": 221.330828},{"x": 0.6153846154,"y": 0.3636363636,"id": "Cop","type": "consumer","bavg": 68.48929841},{"x": 0.6153846154,"y": 0.4545454545,"id": "NCaS","type": "consumer","bavg": 45.32857314},{"x": 0.7692307692,"y": 0.4090909091,"id": "EupS","type": "consumer","bavg": 46.04234605},{"x": 0.6153846154,"y": 0.5454545455,"id": "NCaO","type": "consumer","bavg": 6.104555445},{"x": 0.7692307692,"y": 0.5,"id": "EupO","type": "consumer","bavg": 46.04417082},{"x": 0.2307692308,"y": 0.7272727273,"id": "Det","type": "nutrient","bavg": 502.201894},{"x": 0.6923076923,"y": 0.7272727273,"id": "DetF","type": "nutrient","bavg": 208.0382592},{"x": 0.9230769231,"y": 0.4545454545,"id": "Jel","type": "consumer","bavg": 163.5121985},{"x": 0.6923076923,"y": 0.9090909091,"id": "Ben","type": "consumer","bavg": 1896.010405},{"x": 0.2307692308,"y": 0.9090909091,"id": "DetBen","type": "nutrient","bavg": 90.57463873},{"x": 0.3076923077,"y": 0.1363636364,"id": "IcePhL","type": "producer","bavg": 1.99613435},{"x": 0.1538461538,"y": 0.09090909091,"id": "IceNO3","type": "nutrient","bavg": 0.05409254966},{"x": 0.1538461538,"y": 0.1818181818,"id": "IceNH4","type": "nutrient","bavg": 0.006372388541}],"edges": [{"source": "NO3","target": "PhS","type": "Gpp","weight": 60.00893305},{"source": "NO3","target": "PhL","type": "Gpp","weight": 81.30866183},{"source": "NH4","target": "PhS","type": "Gpp","weight": 89.64043221},{"source": "NH4","target": "PhL","type": "Gpp","weight": 74.59695518},{"source": "IceNO3","target": "IcePhL","type": "Gpp","weight": 0.7644378614},{"source": "IceNH4","target": "IcePhL","type": "Gpp","weight": 0.2125174647},{"source": "PhS","target": "MZL","type": "Gra","weight": 48.18358707},{"source": "PhS","target": "Cop","type": "Gra","weight": 27.81956108},{"source": "PhS","target": "NCaS","type": "Gra","weight": 10.12716791},{"source": "PhS","target": "EupS","type": "Gra","weight": 10.43324514},{"source": "PhS","target": "NCaO","type": "Gra","weight": 1.487261318},{"source": "PhS","target": "EupO","type": "Gra","weight": 0.0001315954887},{"source": "PhS","target": "Ben","type": "Gra","weight": 0.1296717989},{"source": "PhL","target": "MZL","type": "Gra","weight": 2.516379267},{"source": "PhL","target": "Cop","type": "Gra","weight": 0.2587148133},{"source": "PhL","target": "NCaS","type": "Gra","weight": 3.636891786e-05},{"source": "PhL","target": "EupS","type": "Gra","weight": 0},{"source": "PhL","target": "NCaO","type": "Gra","weight": 7.277302274},{"source": "PhL","target": "EupO","type": "Gra","weight": 2.911497154},{"source": "PhL","target": "Ben","type": "Gra","weight": 0.09606928974},{"source": "MZL","target": "Cop","type": "Gra","weight": 5.779412332e-05},{"source": "MZL","target": "NCaS","type": "Gra","weight": 0.01295450201},{"source": "MZL","target": "EupS","type": "Gra","weight": 0.7232645985},{"source": "MZL","target": "NCaO","type": "Gra","weight": 0.07966532788},{"source": "MZL","target": "EupO","type": "Gra","weight": 2.054569383e-07},{"source": "Cop","target": "EupS","type": "Gra","weight": 0},{"source": "Cop","target": "EupO","type": "Gra","weight": 7.277303057},{"source": "Cop","target": "Jel","type": "Gra","weight": 2.911497343},{"source": "NCaS","target": "Jel","type": "Gra","weight": 0.09606929892},{"source": "EupS","target": "Jel","type": "Gra","weight": 5.779412464e-05},{"source": "NCaO","target": "Jel","type": "Gra","weight": 1.78468865},{"source": "EupO","target": "Jel","type": "Gra","weight": 0.9046980591},{"source": "Det","target": "Ben","type": "Gra","weight": 0.8727711934},{"source": "DetF","target": "Ben","type": "Gra","weight": 0.07516323667},{"source": "DetBen","target": "Ben","type": "Gra","weight": 0.8727713387},{"source": "IcePhL","target": "Cop","type": "Gra","weight": 2.035536374},{"source": "IcePhL","target": "NCaS","type": "Gra","weight": 11.64469448},{"source": "IcePhL","target": "EupS","type": "Gra","weight": 5.53097948},{"source": "IcePhL","target": "NCaO","type": "Gra","weight": 1.542044466},{"source": "IcePhL","target": "EupO","type": "Gra","weight": 2.140081166},{"source": "MZL","target": "Det","type": "Ege","weight": 22.80094444},{"source": "Cop","target": "DetF","type": "Ege","weight": 6.614341791},{"source": "NCaS","target": "DetF","type": "Ege","weight": 0.8714406746},{"source": "EupS","target": "DetF","type": "Ege","weight": 3.085477954},{"source": "NCaO","target": "DetF","type": "Ege","weight": 0.2447653906},{"source": "EupO","target": "DetF","type": "Ege","weight": 3.085478248},{"source": "Jel","target": "DetF","type": "Ege","weight": 0},{"source": "PhS","target": "NH4","type": "Res","weight": 25.52039093},{"source": "PhL","target": "NH4","type": "Res","weight": 20.25443819},{"source": "MZL","target": "NH4","type": "Res","weight": 14.95167002},{"source": "Cop","target": "NH4","type": "Res","weight": 0.2613244773},{"source": "NCaS","target": "NH4","type": "Res","weight": 0.08153875401},{"source": "EupS","target": "NH4","type": "Res","weight": 0.1471754495},{"source": "NCaO","target": "NH4","type": "Res","weight": 0.0289291754},{"source": "EupO","target": "NH4","type": "Res","weight": 0.1471755018},{"source": "Jel","target": "NH4","type": "Res","weight": 1.847718828},{"source": "Ben","target": "NH4","type": "Res","weight": 6.459444397},{"source": "IcePhL","target": "IceNO3","type": "Res","weight": 0.5197390546},{"source": "IcePhL","target": "IceNH4","type": "Res","weight": 0.4070421527},{"source": "NH4","target": "NO3","type": "Dec","weight": 0.807499357},{"source": "Det","target": "NH4","type": "Dec","weight": 0.9003699758},{"source": "DetF","target": "NH4","type": "Dec","weight": 0.3437019328},{"source": "DetBen","target": "NH4","type": "Dec","weight": 10.32197298},{"source": "IceNH4","target": "IceNO3","type": "Dec","weight": 0.007535602323},{"source": "PhS","target": "Det","type": "Mor","weight": 14.15497006},{"source": "PhL","target": "Det","type": "Mor","weight": 12.04208849},{"source": "MZL","target": "Det","type": "Mor","weight": 29.27758011},{"source": "Cop","target": "DetF","type": "Mor","weight": 11.87977902},{"source": "NCaS","target": "DetF","type": "Mor","weight": 5.412620432},{"source": "EupS","target": "DetF","type": "Mor","weight": 5.483324101},{"source": "NCaO","target": "DetF","type": "Mor","weight": 0.3397413376},{"source": "EupO","target": "DetF","type": "Mor","weight": 5.483324757},{"source": "Jel","target": "DetF","type": "Mor","weight": 2.91019757},{"source": "Ben","target": "DetBen","type": "Mor","weight": 8.089059586},{"source": "IcePhL","target": "IceNH4","type": "Mor","weight": 0.01925058389},{"source": "Ben","target": "NH4","type": "Exc","weight": 4.355310907},{"source": "Ben","target": "DetBen","type": "Exc","weight": 4.355310907}]}
+								
+								// Size and color scales
+
+								var rlim = [0, 40],
+										blim = [0, 2000];
+								var b2r = d3.scaleSqrt()
+									.domain(blim)
+									.range(rlim)
+									.clamp(true);
+			
+								var flxlim = [0, 100],
+										lwlim = [0, 15];
+								var flx2lw = d3.scalePow()
+										.exponent(1/5)
+										.domain(flxlim)
+										.range(lwlim)
+										.clamp(true);
+									
+								cmap = d3.schemeCategory20;
+								var nodecscaledark = d3.scaleOrdinal()
+									.domain(["nutrient", "producer", "consumer"])
+									.range([cmap[2], cmap[4], cmap[0]]);
+								var nodecscalelight = d3.scaleOrdinal()
+									.domain(["nutrient", "producer", "consumer"])
+									.range([cmap[3], cmap[5], cmap[1]]);
+								var edgecscale = d3.scaleOrdinal()
+									.domain(['Gpp', 'Gra', 'Ege', 'Res', 'Dec', 'Mor', 'Twi', 'Exc'])
+									.range(d3.schemeDark2); // schemeSet3
+								var edgedrscale = d3.scaleOrdinal()
+									.domain(['Gpp', 'Gra', 'Ege', 'Res', 'Dec', 'Mor', 'Twi', 'Exc'])
+									.range( [ 2,     2,     1.8,     2,     2,   1.4,     2,   1.6]);
+									
+								// Circles, paths, text
+										
+							 water = svg.append("line")
+							    .attr("x1", 0)
+							    .attr("y1", 150)
+							    .attr("x2", 800)
+							    .attr("y2", 150)
+									.attr("stroke-width", 3)
+							    .style("stroke", d3.schemePastel1[1]);
+							 floor = svg.append("line")
+							    .attr("x1", 0)
+							    .attr("y1", 500)
+							    .attr("x2", 800)
+							    .attr("y2", 500)
+									.attr("stroke-width", 3)
+							    .attr("stroke", d3.schemeSet2[6]);
+									
+								var link = svg.append("g")
+								      .attr("class", "links")
+								    .selectAll("line")
+								    .data(data.edges)
+								    .enter().append("path")
+											.attr("stroke", "#a6a6a6")
+											.attr("stroke", function(d) {return edgecscale(d.type); })
+											// .attr("stroke-width", function(d) {return d.type == "Gpp" || d.type == "Gra" ? 3: 2 ; })
+											.attr("stroke-width", function(d) {return flx2lw(d.weight); })
+											.attr("fill", "none");
+										
+										
+							  var node = svg.selectAll(".node")
+							      .data(data.nodes)
+							    .enter().append("g")
+							      .attr("class", "node");
+
+							  node.append("circle")
+							      .attr("r", function(d) {return b2r(d.bavg); })
+							      .attr("fill",   function (d) {return nodecscalelight(d.type); })
+									  .attr("stroke", "#111") // function (d) {return nodecscaledark(d.type); })
+									  .attr("stroke-width", 1)
+										.call(d3.drag()
+						          .on("start", dragstarted)
+						          .on("drag", dragged)
+						          .on("end", dragended));
+
+							  node.append("text")
+										.attr("text-anchor", "middle")
+										.attr("dy",   function(d) {return (b2r(d.bavg) > 20) ? "0.35em" : b2r(d.bavg)+20; })
+										.attr("fill", function(d) {return (b2r(d.bavg) > 20) ? "black" : "#eee"; })
+										.attr("font-size", "16pt")
+										.attr("font-weight", "bold")
+										// .attr("stroke", "#D3D3D3")
+										// .attr("stroke-width", "1px")
+							      .text(function(d) { return d.id });
+
+								var simulation = d3.forceSimulation()
+								    .force("link", d3.forceLink().id(function(d) { return d.id; }).strength(0.0))
+								    .force("charge", d3.forceManyBody())
+										.force("xpos", d3.forceX().strength(0.1).x(function (d) {return d.x * width;}))
+										.force("ypos", d3.forceY().strength(0.1).y(function (d) {return d.y * height;}))
+										.force("collide", d3.forceCollide().radius(function (d) {return b2r(d.bavg)+5;}));
+
+								simulation
+							      .nodes(data.nodes)
+							      .on("tick", ticked);
+
+							  simulation.force("link")
+							      .links(data.edges);
+
+							  function ticked() {
+											
+									link
+											.attr("d", function(d) {
+												var dx = d.target.x - d.source.x,
+											    	dy = d.target.y - d.source.y,
+											    	dr = Math.sqrt(dx * dx + dy * dy)*edgedrscale(d.type);
+												return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
+											});
+											
+									node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+							  }
+								
+								function dragstarted(d) {
+								  if (!d3.event.active) simulation.alphaTarget(1.0).restart();
+								  d.fx = d.x;
+								  d.fy = d.y;
+								}
+
+								function dragged(d) {
+								  d.fx = d3.event.x;
+								  d.fy = d3.event.y;
+								}
+
+								function dragended(d) {
+								  if (!d3.event.active) simulation.alphaTarget(0);
+								  d.fx = null;
+								  d.fy = null;
+								}
+
+						} );
+						
+        </script>
+						
+				
+				
+
+								
+						
+						
+    </body>
+</html>

@@ -1,0 +1,404 @@
+{
+	"nodes": [
+		{
+			"Name": "Baleen whales",
+			"B": 0.00100000005,
+			"type": 0,
+			"TL": 3.499434938,
+			"parent": "lev1_05",
+			"TG": 5
+		},
+		{
+			"Name": "Toothed whales",
+			"B": 0.00200000009,
+			"type": 0,
+			"TL": 4.182959753,
+			"parent": "lev1_05",
+			"TG": 5
+		},
+		{
+			"Name": "Seals",
+			"B": 0.00300000003,
+			"type": 0,
+			"TL": 4.457682456,
+			"parent": "lev1_05",
+			"TG": 5
+		},
+		{
+			"Name": "Birds",
+			"B": 0.00100000005,
+			"type": 0,
+			"TL": 3.816617023,
+			"parent": "lev1_03",
+			"TG": 3
+		},
+		{
+			"Name": "Sharks, large",
+			"B": 0.100000001,
+			"type": 0,
+			"TL": 4.38218162,
+			"parent": "lev1_03",
+			"TG": 3
+		},
+		{
+			"Name": "Sharks, small medium",
+			"B": 0.300000012,
+			"type": 0,
+			"TL": 4.035045768,
+			"parent": "lev1_03",
+			"TG": 3
+		},
+		{
+			"Name": "Rays, large",
+			"B": 0.100000001,
+			"type": 0,
+			"TL": 3.829900235,
+			"parent": "lev1_03",
+			"TG": 3
+		},
+		{
+			"Name": "Rays, small medium",
+			"B": 0.300000012,
+			"type": 0,
+			"TL": 3.868934254,
+			"parent": "lev1_10",
+			"TG": 10
+		},
+		{
+			"Name": "Pelagics, large",
+			"B": 0.400000006,
+			"type": 0,
+			"TL": 4.343752505,
+			"parent": "lev1_05",
+			"TG": 5
+		},
+		{
+			"Name": "Pelagics, medium",
+			"B": 1.20000005,
+			"type": 0,
+			"TL": 3.784283622,
+			"parent": "lev1_05",
+			"TG": 5
+		},
+		{
+			"Name": "Pelagics, small, carniv.",
+			"B": 5,
+			"type": 0,
+			"TL": 3.07894737,
+			"parent": "lev1_02",
+			"TG": 2
+		},
+		{
+			"Name": "Pelagics, small, herbiv.",
+			"B": 2.5,
+			"type": 0,
+			"TL": 2.222222232,
+			"parent": "lev1_02",
+			"TG": 2
+		},
+		{
+			"Name": "Benthopelagics, large",
+			"B": 0.200000003,
+			"type": 0,
+			"TL": 3.717611177,
+			"parent": "lev1_03",
+			"TG": 3
+		},
+		{
+			"Name": "Benthopelagics, small medium",
+			"B": 0.400000006,
+			"type": 0,
+			"TL": 3.792415331,
+			"parent": "lev1_03",
+			"TG": 3
+		},
+		{
+			"Name": "Demersals, large",
+			"B": 0.5,
+			"type": 0,
+			"TL": 4.22840905,
+			"parent": "lev1_03",
+			"TG": 3
+		},
+		{
+			"Name": "Demersals, medium",
+			"B": 2,
+			"type": 0,
+			"TL": 4.21287076,
+			"parent": "lev1_10",
+			"TG": 10
+		},
+		{
+			"Name": "Demersals, small",
+			"B": 5,
+			"type": 0,
+			"TL": 3.623265311,
+			"parent": "lev1_09",
+			"TG": 9
+		},
+		{
+			"Name": "Reeffish, large",
+			"B": 0.100000001,
+			"type": 0,
+			"TL": 4.227199321,
+			"parent": "lev1_03",
+			"TG": 3
+		},
+		{
+			"Name": "Reeffish, medium",
+			"B": 0.5,
+			"type": 0,
+			"TL": 3.816868409,
+			"parent": "lev1_10",
+			"TG": 10
+		},
+		{
+			"Name": "Flatfish, large",
+			"B": 0.100000001,
+			"type": 0,
+			"TL": 4.179489338,
+			"parent": "lev1_10",
+			"TG": 10
+		},
+		{
+			"Name": "Flatfish, small medium",
+			"B": 1,
+			"type": 0,
+			"TL": 3.748192755,
+			"parent": "lev1_10",
+			"TG": 10
+		},
+		{
+			"Name": "Reeffish, small",
+			"B": 1,
+			"type": 0,
+			"TL": 3.094502923,
+			"parent": "lev1_07",
+			"TG": 7
+		},
+		{
+			"Name": "Bathypelagics",
+			"B": 0.5,
+			"type": 0,
+			"TL": 3.11357341,
+			"parent": "lev1_07",
+			"TG": 7
+		},
+		{
+			"Name": "Bathydemersals",
+			"B": 0.200000003,
+			"type": 0,
+			"TL": 3.481799741,
+			"parent": "lev1_04",
+			"TG": 4
+		},
+		{
+			"Name": "Jellyfish",
+			"B": 1,
+			"type": 0,
+			"TL": 2.836734689,
+			"parent": "lev1_07",
+			"TG": 7
+		},
+		{
+			"Name": "Cephalopods",
+			"B": 0.5,
+			"type": 0,
+			"TL": 2.991959063,
+			"parent": "lev1_05",
+			"TG": 5
+		},
+		{
+			"Name": "Shrimps",
+			"B": 2,
+			"type": 0,
+			"TL": 2.15555556,
+			"parent": "lev1_09",
+			"TG": 9
+		},
+		{
+			"Name": "Lobsters, crabs",
+			"B": 0.5,
+			"type": 0,
+			"TL": 3.176417223,
+			"parent": "lev1_09",
+			"TG": 9
+		},
+		{
+			"Name": "Macrobenthos",
+			"B": 10,
+			"type": 0,
+			"TL": 2.993197295,
+			"parent": "lev1_09",
+			"TG": 9
+		},
+		{
+			"Name": "Meiobenthos",
+			"B": 15,
+			"type": 0,
+			"TL": 2.55555555,
+			"parent": "lev1_04",
+			"TG": 4
+		},
+		{
+			"Name": "Corals",
+			"B": 0.100000001,
+			"type": 1,
+			"TL": 1.555000006,
+			"parent": "lev1_01",
+			"TG": 1
+		},
+		{
+			"Name": "Softcorals, sponges, etc",
+			"B": 2,
+			"type": 0,
+			"TL": 2.499999996,
+			"parent": "lev1_01",
+			"TG": 1
+		},
+		{
+			"Name": "Krill",
+			"B": 1,
+			"type": 0,
+			"TL": 2.789473676,
+			"parent": "lev1_02",
+			"TG": 2
+		},
+		{
+			"Name": "Zooplankton, other",
+			"B": 10,
+			"type": 0,
+			"TL": 2,
+			"parent": "lev1_04",
+			"TG": 4
+		},
+		{
+			"Name": "Phytoplankton",
+			"B": 15,
+			"type": 1,
+			"TL": 1,
+			"parent": "lev1_08",
+			"TG": 8
+		},
+		{
+			"Name": "Benthic plants",
+			"B": 2,
+			"type": 1,
+			"TL": 1,
+			"parent": "lev1_11",
+			"TG": 11
+		},
+		{
+			"Name": "Detritus",
+			"B": 100,
+			"type": 2,
+			"TL": 1,
+			"parent": "lev1_08",
+			"TG": 8
+		},
+		{
+			"Name": "Fleet1",
+			"B": 3.407000032,
+			"type": 3,
+			"TL": 4.648655012,
+			"parent": "lev1_06",
+			"TG": 6
+		},
+		{
+			"Name": "lev1_01",
+			"B": 0,
+			"type": 5,
+			"TL": "_NaN_",
+			"parent": "web",
+			"TG": 0
+		},
+		{
+			"Name": "lev1_02",
+			"B": 0,
+			"type": 5,
+			"TL": "_NaN_",
+			"parent": "web",
+			"TG": 0
+		},
+		{
+			"Name": "lev1_03",
+			"B": 0,
+			"type": 5,
+			"TL": "_NaN_",
+			"parent": "web",
+			"TG": 0
+		},
+		{
+			"Name": "lev1_04",
+			"B": 0,
+			"type": 5,
+			"TL": "_NaN_",
+			"parent": "web",
+			"TG": 0
+		},
+		{
+			"Name": "lev1_05",
+			"B": 0,
+			"type": 5,
+			"TL": "_NaN_",
+			"parent": "web",
+			"TG": 0
+		},
+		{
+			"Name": "lev1_06",
+			"B": 0,
+			"type": 5,
+			"TL": "_NaN_",
+			"parent": "web",
+			"TG": 0
+		},
+		{
+			"Name": "lev1_07",
+			"B": 0,
+			"type": 5,
+			"TL": "_NaN_",
+			"parent": "web",
+			"TG": 0
+		},
+		{
+			"Name": "lev1_08",
+			"B": 0,
+			"type": 5,
+			"TL": "_NaN_",
+			"parent": "web",
+			"TG": 0
+		},
+		{
+			"Name": "lev1_09",
+			"B": 0,
+			"type": 5,
+			"TL": "_NaN_",
+			"parent": "web",
+			"TG": 0
+		},
+		{
+			"Name": "lev1_10",
+			"B": 0,
+			"type": 5,
+			"TL": "_NaN_",
+			"parent": "web",
+			"TG": 0
+		},
+		{
+			"Name": "lev1_11",
+			"B": 0,
+			"type": 5,
+			"TL": "_NaN_",
+			"parent": "web",
+			"TG": 0
+		},
+		{
+			"Name": "web",
+			"B": 0,
+			"type": 6,
+			"TL": "_NaN_",
+			"parent": "null",
+			"TG": 0
+		}
+	]
+}

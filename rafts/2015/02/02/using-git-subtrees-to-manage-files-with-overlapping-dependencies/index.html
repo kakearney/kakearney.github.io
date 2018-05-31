@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Using git subtrees to manage files with overlapping dependencies</title>
+  <meta name="description" content="This post ended up much longer than I intended, so here’s the short summary: I’m going to explain how (and why) I took a single git repository consisting of ...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://kellyakearney.net/2015/02/02/using-git-subtrees-to-manage-files-with-overlapping-dependencies/">
+  <link rel="alternate" type="application/rss+xml" title="Kelly A. Kearney" href="http://kellyakearney.net/feed.xml" />
+<link rel='stylesheet' id='open-sans-css'  href='//fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&#038;subset=latin%2Clatin-ext&#038;ver=4.2.4' type='text/css' media='all' />
+<link href='http://fonts.googleapis.com/css?family=Titillium+Web:600italic,600,400,400italic' rel='stylesheet' type='text/css'>
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Kelly A. Kearney</a>
+
+
+    <nav class="site-nav">
+
+      <a href="#" class="menu-icon menu.open">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>  
+
+    <div class="trigger"><h1>Main Navigation</h1>
+
+ <ul class="menu">
+
+    
+    
+     <li><a href="/research/" class="page-link">Research</a>
+    
+    </li>
+    
+    
+     <li><a href="/blog/" class="page-link">Technical Blog</a>
+    
+    </li>
+    
+    
+     <li><a href="/publications/" class="page-link">Publications</a>
+    
+    </li>
+    
+    </ul>
+
+
+<!-- <ul class="menu">
+        <li> <a class="page-link" href="/about">About</a></li>
+        <li> <a class="page-link"  href="/blog">Blog</a>
+        <li> <a class="page-link" href="/blog">CV</a>
+        <li> <a class="page-link" href="/blog">For Students</a></li>
+        <li> <a class="page-link"  href="/blog">Research</a></a>
+        <li> <a class="page-link" href="/blog">Teaching</a>
+<ul class="sub-menu">
+	<li><a href="http://svmiller.com/teaching/posc-1020-introduction-to-international-relations/">POSC 1020 – Introduction to International Relations</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3410-quantitative-methods-in-political-science/">POSC 3410 – Quantitative Methods in Political Science</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3610-international-politics-in-crisis/">POSC 3610 – International Politics in Crisis</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3630-united-states-foreign-policy/">POSC 3630 – United States Foreign Policy</a></li>
+</ul></li>
+        <li> <a class="page-link" href="/blog">Miscellany</a>
+<ul class="sub-menu">
+	<li><a href="http://svmiller.com/teaching/posc-1020-introduction-to-international-relations/">Clean USAID Greenbook Data</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3410-quantitative-methods-in-political-science/">Journal of Peace Research *.bst File</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3610-international-politics-in-crisis/">My Custom Beamer Style</a></li>
+</ul> 
+
+</li>
+</ul> -->
+
+     </div>  
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Using git subtrees to manage files with overlapping dependencies</h1>
+    <p class="post-meta">Posted on February 2, 2015   
+
+  in
+  
+
+
+</p>
+  </header>
+
+  <article class="post-content">
+    <p>This post ended up much longer than I intended, so here’s the short summary: I’m going to explain how (and why) I took a single git repository consisting of a mishmash of Matlab code with lots of overlapping file dependencies, and teased it apart into project- and utility-specific repositories that could be shared with others and easily kept in sync with the main repo as I make updates in the future.</p>
+
+<p>This is mostly to remind myself what I did. But maybe it can help some others who are facing the same task.</p>
+
+<h3 id="the-background">The background</h3>
+
+<p>I learned almost everything I know about Matlab (and coding in general) by reading various newsgroups and blogs, especially the <a href="http://www.mathworks.com/matlabcentral/newsreader/">Matlab newsgroup</a> (comp.soft-sys.matlab) and later <a href="http://www.mathworks.com/matlabcentral/answers/">Matlab Answers</a> forum.  In return, I try to post a few of my own functions for download when others inquire on those boards about issues I have tackled.  My past method for doing this was a bit clunky and manual.  I would simply copy the relevant .m files into a new folder, zip, and upload.  I tried to repeat the copy-and-upload process every few months to keep things up to date, but wasn’t very good about tracking what I changed when, and sometimes “every few months” became “every year or two”, and occasionally I overlooked an outside dependency or two when collecting the files together.</p>
+
+<p>When MatlabCentral started offering integration with GitHub this year, I decided to rethink my method for distributing my code to others.  I had already been using git to manage my own Matlab code for about 3 years at that point, and hoped that adding a few for-distribution repositories would be nice and easy.  That didn’t end up being the case.</p>
+
+<p>The biggest issue that I encountered in finding a solution involved overlapping file dependencies.  Most git tutorials that I found online related to submodules and subtrees and other methods for sharing code between projects seemed to assume that I was approaching things as a proper computer programmer, with nicely organized code managed by project-specific git repositories.  When it came to overlapping dependencies, the tutorials usually assumed that the shared code involved small utility libraries, often developed by third parties, with code that is changed much less frequently than the main piece of software being developed.</p>
+
+<p>But I’m not a proper computer programmer.  I’m a scientist, and like most  scientists, my code organization is a bit of a mess.  When I began this, I had one git repository, covering the folder where I kept all Matlab code that needed to be added to my Matlab path.  The purpose of that repo was simply to keep my toolboxes in sync between different computers; I initialized a single git repository in the main folder, added a remote repository on Dropbox, and then cloned the repo onto all of my computers.  With a periodic pushes and pulls to and from the Dropbox origin, I could now keep my Matlab toolboxes in sync; as a nice side effect, I also now had a log of changes.  Organization within this main folder was minimal: two subfolders, one for code that I downloaded from others, and one for code I wrote myself.  The external code folder was pretty nicely organized, maintaining the folder structure of each acquired toolbox.  The personal folder was, well, not… plotting tools, basic math and matrix manipulation, high-frequency acoustics, graph theory, food webs, climate models, biogeochemistry… The files were loosely organized into a few folders, but those folders were meaningless; file dependencies crisscrossed all over the repo.</p>
+
+<p>Matlab itself offers some tools to figure out the child functions called by an individual function (<code class="highlighter-rouge">matlab.codetools.requiredFilesAndProducts</code> in R2014b… older versions offered <code class="highlighter-rouge">depfun</code>, which was pretty buggy and unreliable, so I used a third-party function, <a href="http://www.mathworks.com/matlabcentral/fileexchange/17291-fdep--a-pedestrian-function-dependencies-finder"><code class="highlighter-rouge">fdep</code></a>.  What I ideally wanted, for distribution purposes, was to be able to use those lists of files to define a git repository.  But git, unfortunately, doesn’t work that way.  I looked at git submodules, but those assume that the submodule files are relatively static, not at all the case here. I definitely wanted a solution that would allow me to update any given function at any time without worrying about (or remembering) which other other files might call or be called by it.  Submodules looked like they could quickly become a nightmare.  The other potential candidate for sharing code between repositories seemed to be git subtrees, and this is where I eventually found my solution.  Getting everything set up ended up being more complicated than I anticipated, and involved a good deal of experimentation (not to mention a few dozen hard resets), but in the end, I did build a system of repos that met all my requirements:</p>
+
+<ul>
+  <li>The main repo still looks more or less the same, and maintains the benefit of my original disorganized collection: no necessity to assign any function to a single project, allowing me to constantly update functions, and use them in any bit of my research, with any function potentially using any other function at some point down the road.  I can dump any new function into these folders to add it to my Matlab path, without having to update said path manually.</li>
+  <li>If I decide to share a particular function (or functions), I can easily set up a new repository which includes that function and all the dependent functions required to properly run it.  These project-specific repos are the ones I upload to GitHub.</li>
+  <li>Going forward, as I update my code, I can quickly push the changes from the main repo to the project-specific ones without having to remember what went with what.  And the file dependencies don’t have to be static either… if I decide to change code such that a shared-out function gains a need for or no longer needs a certain other function, the function will be added to or deleted from the project repository automatically.</li>
+  <li>Going in the opposite direction, if someone decides to collaborate and send changes via a pull request on GitHub, I can merge those changes and then push them back both to my main working repo and any other project repos that use that code. (Theoretically, at least… I haven’t yet had any experience with pull requests.)</li>
+</ul>
+
+<h3 id="setting-up-the-subtrees">Setting up the subtrees</h3>
+
+<p>So… many… subtrees! 145, to be exact (at least for now).  Here’s how they came to be:</p>
+
+<h4 id="step-1-organize-all-my-files-into-folders">Step 1: Organize all my files into folders</h4>
+
+<p>I couldn’t get around the fact that git operates on folders, not files.  So my first step was to do a little bit of organization in the existing main repo.  I basically wanted to package files into folders where their foldermates were going to accompany them into any shared-out repo they might travel to.  This did <strong>not</strong> take into consideration file dependency (I’ll deal with that later).  Many files ended up in folders by themselves; the larger groups included 5-10 files relating to very specific categories.  For example, files to read and write a specific file format ended up together… I can’t foresee a scenario where I would want to give out one and not the other, and even if a shared-out utility called just one, it wouldn’t be too annoying (it might even prove useful) for the end user if the others tagged along in the package.</p>
+
+<p>Here’s a quick diagram showing my basic folder structure after everything was organized</p>
+
+<figure class="highlight"><pre><code class="language-none" data-lang="none">.
+├── ExternalToolboxes
+│   ├── Ex1
+│   ├── Ex2
+│   ├── FileExchange
+│   │   ├── fex1
+│   │   ├── fex2
+|   |   └── fex3
+│   └── Ex3
+├── PersonalToolboxes
+│   ├── Per1
+│   ├── Per2
+│   ├── GeneralUtilities
+│   │   ├── gu1
+│   │   ├── gu2
+|   |   └── gu3
+│   ├── Per3
+│   └── Per4</code></pre></figure>
+
+<p>I decided to keep all the little one- or two-function groups under the GeneralUtilities umbrella folder.  Likewise, I continued to keep all the utilities I had downloaded from the File Exchange under a single parent folder.</p>
+
+<h4 id="step-2-choose-a-file-or-set-of-files-to-share">Step 2: Choose a file (or set of files) to share</h4>
+
+<p>For this example, I’ll use one of the functions I had put on the FileExchange: contourfcmap.m.</p>
+
+<h4 id="step-3-determine-the-file-dependencies-of-the-files">Step 3: Determine the file dependencies of the file(s)</h4>
+
+<p>I figured out file and toolbox dependencies using Matlab’s built-in tools:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="p">[</span><span class="n">f</span><span class="p">,</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">matlab</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">requiredFilesAndProducts</span><span class="p">(</span><span class="nb">which</span><span class="p">(</span><span class="s1">'contourfcmap'</span><span class="p">));</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>This particular example uses a mix of my own functions and ones I downloaded from others. It also requires a few extra toolboxes for full functionality.</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">f</span><span class="o">'</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-none" data-lang="none">ans = 
+
+    '~/Main/ExternalToolboxes/FileExchange/contourcs/contourcs.m'
+    '~/Main/ExternalToolboxes/FileExchange/function_handle/function_handle.m'
+    '~/Main/PersonalToolboxes/GeneralUtilities/contourfcmap/contourfcmap.m'
+    '~/Main/PersonalToolboxes/GeneralUtilities/fillnan/fillnan.m'
+    '~/Main/PersonalToolboxes/GeneralUtilities/multiplepolyint/multiplepolyint.m'
+    '~/Main/PersonalToolboxes/GeneralUtilities/parsepv/parsepv.m'</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="p">{</span><span class="n">p</span><span class="o">.</span><span class="n">Name</span><span class="p">}</span><span class="o">'</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-none" data-lang="none">ans = 
+
+    'MATLAB'
+    'Image Processing Toolbox'
+    'Mapping Toolbox'
+    'Statistics Toolbox'</code></pre></figure>
+
+<h4 id="step-4-split-folders-into-subtrees">Step 4: Split folders into subtrees</h4>
+
+<p>Starting with the first dependency in the list (contourcs), I initialized a bare repository locally:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span><span class="nb">cd</span> ~/GitRepos
+<span class="gp">$ </span>mkdir contourcs-repo
+<span class="gp">$ </span><span class="nb">cd </span>contourcs-repo 
+<span class="gp">$ </span>git init --bare</code></pre></figure>
+
+<p>Then I created a subtree branch including the folder where contourcs.m lived:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span><span class="nb">cd</span> ~/Main
+<span class="gp">$ </span>git subtree split --prefix<span class="o">=</span>ExternalToolboxes/FileExchange/contourcs -b contourcs-split --squash</code></pre></figure>
+
+<p>Then I pushed that branch to the bare repo, setting it as the master branch:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>git push ~/GitRepos/contourcs-repo contourcs-split:master</code></pre></figure>
+
+<p>Next, I wanted to create a remote origin. I wanted my remote origins to be hosted on a server I could access from any computer (rather than sticking with my old Dropbox method). I originally focused on GitHub, since that was my intended target for the final project repos (so I could take advantage of the MatlabCentral File Exchange integration). But for this particular step, I wanted to keep the single-folder intermediary repos private. GitHub charges for this feature on a per-repository basis… seeing that I was eventually going to create over 100 repositories, that wasn’t going to work for me. Luckily, Bitbucket offers an unlimited number of private repositories, and charges on a per-person basis. With just me needing access to the private repos, this remains free. So Bitbucket won the job of hosting my intermediate repos.</p>
+
+<p>I initialized a new repository on Bitbucket (taking advantage of their REST API to do this from the command line), then added it as a remote repository</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span><span class="nb">cd</span> ~/GitRepos/contourcs-repo
+<span class="gp">$ </span>curl --user myusername:mypassword https://api.bitbucket.org/1.0/repositories/ --data <span class="nv">name</span><span class="o">=</span>contourcs.git --data <span class="nv">is_private</span><span class="o">=</span><span class="nb">true</span>
+<span class="gp">$ </span>git remote add origin git@bitbucket.org:kakearney/contourcs.git
+<span class="gp">$ </span>git push origin master</code></pre></figure>
+
+<p>At this point, the local repo (contourcs-repo) has served its purpose, and can be deleted if you want. In retrospect, I think I could probably skip that step and push directly from the subtree split branch to Bitbucket, but the example I copied to create a split subtree used the bare-repo intermediate, so I decided better safe than sorry.</p>
+
+<h4 id="step-5-replace-the-folders-from-the-main-folder-with-their-subtree-equivalents">Step 5: Replace the folders from the main folder with their subtree equivalents</h4>
+
+<p>First, I added the subtree repos as remotes to the main repo:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span><span class="nb">cd</span> ~/Main
+<span class="gp">$ </span>git remote add contourcs-remote git@bitbucket.org:kakearney/contourcs.git</code></pre></figure>
+
+<p>Then I deleted the original folder and added it back as a subtree:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>git rm -r ExternalToolboxes/FileExchange/contourcs
+<span class="gp">$ </span>git add -A
+<span class="gp">$ </span>git commit -m <span class="s2">"Removing contourcs in prep for subtree"</span>
+<span class="gp">$ </span>git subtree add --prefix<span class="o">=</span>ExternalToolboxes/FileExchange/contourcs contourcs-remote master</code></pre></figure>
+
+<p>I’m not sure if the delete-and-add step is strictly necessary. Pretty sure it isn’t (again, it’s something I copied from an example). But it has the nice side effect of adding a commit to my main git log documenting that a subtree addition took place. This will be very useful in later steps. The net effect, though, is no change to the file structure of the main repo.</p>
+
+<h4 id="step-6-repeat-steps-4-and-5-with-all-folders-from-the-file-dependency-list">Step 6: Repeat steps 4 and 5 with all folders from the file-dependency list</h4>
+
+<p>For this example, I repeat the process for the other 5 files in the list. I now have a collection of 6 Bitbucket repositories, one for each parent folder of the dependent files. The main repo is unchanged, except for the fact that it has gained 6 new remotes, and 6 new branches.</p>
+
+<h4 id="step-7-set-up-a-new-project-repository">Step 7: Set up a new project repository</h4>
+
+<p>Now it’s time to create the new project repository, which will be the one shared out to others. First create a new repo, adding a few empty files that will be useful down the road.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span><span class="nb">cd</span> ~/GitRepos
+<span class="gp">$ </span>mkdir contourfcmap-pkg
+<span class="gp">$ </span><span class="nb">cd </span>contourfcmap-pkg
+<span class="gp">$ </span>touch .gitignore
+<span class="gp">$ </span>touch README.md
+<span class="gp">$ </span>git init
+<span class="gp">$ </span>git add -A
+<span class="gp">$ </span>git commit <span class="s2">"Initial commit"</span></code></pre></figure>
+
+<p>Next, add the appropriate subtree remotes, and use them to add the necessary files:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git remote add contourcs-remote git@bitbucket.org:kakearney/contourcs.git
+git remote add function_handle-remote git@bitbucket.org:kakearney/function_handle.git
+git remote add contourfcmap-remote git@bitbucket.org:kakearney/contourfcmap.git
+git remote add fillnan-remote git@bitbucket.org:kakearney/fillnan.git
+git remote add multiplepolyint-remote git@bitbucket.org:kakearney/multiplepolyint.git
+git remote add parsepv-remote git@bitbucket.org:kakearney/parsepv.git
+git subtree add --prefix<span class="o">=</span>contourcs contourcs-remote master
+git subtree add --prefix<span class="o">=</span>function_handle function_handle-remote master
+git subtree add --prefix<span class="o">=</span>contourfcmap contourfcmap-remote master
+git subtree add --prefix<span class="o">=</span>fillnan fillnan-remote master
+git subtree add --prefix<span class="o">=</span>multiplepolyint multiplepolyint-remote master 
+git subtree add --prefix<span class="o">=</span>parsepv parsepv-remote master</code></pre></figure>
+
+<p>All the required files will now be copied into this project folder.</p>
+
+<h4 id="step-8-upload-to-github">Step 8: Upload to GitHub</h4>
+
+<p>This repo is now ready for public view, so I added it to GitHub. I used a utility call <a href="https://github.com/github/hub">hub</a> (available through Homebrew and MacPorts for fellow Mac users) to create the new repo from the command line; this command automatically sets the new GitHub repo as the origin.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>hub create contourfcmap-pkg -d <span class="s2">"Create a filled contour plot in Matlab, with better color-to-value clarity"</span></code></pre></figure>
+
+<p>The contourfcmap utility is now available to anyone who wants to use it, packaged together with all the files necessary to run it fully.</p>
+
+<h4 id="step-9-repeat-procedure-for-all-other-sets-of-files-i-want-to-share">Step 9: Repeat procedure for all other sets of files I want to share</h4>
+
+<p>Choose a new file (or set of files… and they don’t have to come from the same starting folder), and repeat Steps 2-8. The only change the next time through is that at the beginning of Step 4, I first use the following command to go through the main repo’s log and list the subtrees that have already been created:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span><span class="nb">cd</span> ~/Main
+<span class="gp">$ </span>git log | grep git-subtree-dir | tr -d <span class="s1">''</span> <span class="s1">''</span> | cut -d <span class="s2">":"</span> -f2 | sort | uniq</code></pre></figure>
+
+<p>If a folder is already included in the list, I don’t have to repeat Steps 4-5 for it.</p>
+
+<h4 id="step-10-remember-which-subtrees-go-where">Step 10: Remember which subtrees go where</h4>
+
+<p>And by remember, I mean write it down! I only made it through setup for about two or three of these before I realized maintenance was going to be a pain if I didn’t keep careful track of everything. I ended up writing a Matlab script to automate all the steps listed above for the 145 packages you can find on my <a href="http://kellyakearney.net/matlab-utilities/">Matlab Utilities</a> page. I also added a few steps to check for changes in file dependencies, and to add and delete subtree remotes as necessary when things change. At Step 4, the script writes the command necessary to push changes from the main repo to the new subtree remote to a file:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></td><td class="code"><pre><span class="c">#!/bin/sh</span>
+
+<span class="nb">echo</span> <span class="s2">"Pushing subtrees from main repo to remotes"</span>
+
+<span class="nb">cd</span> ~/Main
+
+git subtree push --prefix<span class="o">=</span>PersonalToolboxes/GeneralUtilities/aggregate aggregate-remote master
+git subtree push --prefix<span class="o">=</span>PersonalToolboxes/GeneralUtilities/aggregatehist aggregatehist-remote master
+git subtree push --prefix<span class="o">=</span>PersonalToolboxes/GeneralUtilities/parsepv parsepv-remote master
+git subtree push --prefix<span class="o">=</span>PersonalToolboxes/GeneralUtilities/arcasciiread arcasciiread-remote master
+git subtree push --prefix<span class="o">=</span>PersonalToolboxes/GeneralUtilities/arrowpolygon arrowpolygon-remote master
+git subtree push --prefix<span class="o">=</span>PersonalToolboxes/GeneralUtilities/aviread16bitcol aviread16bitcol-remote master
+git subtree push --prefix<span class="o">=</span>PersonalToolboxes/GeneralUtilities/barareaneg barareaneg-remote master
+git subtree push --prefix<span class="o">=</span>PersonalToolboxes/GeneralUtilities/barpatch barpatch-remote master
+git subtree push --prefix<span class="o">=</span>PersonalToolboxes/GeneralUtilities/bezier bezier-remote master
+git subtree push --prefix<span class="o">=</span>PersonalToolboxes/GeneralUtilities/bilread bilread-remote master
+git subtree push --prefix<span class="o">=</span>PersonalToolboxes/GeneralUtilities/cellstr2 cellstr2-remote master
+...etc...<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Likewise, at Step 7, it writes the corresponding commands to pull the correct files to the project-specific repos:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55</pre></td><td class="code"><pre><span class="c">#!/bin/sh</span>
+
+<span class="nb">echo</span> <span class="s2">"Updating distribution packages"</span>
+
+<span class="nb">echo</span> <span class="s2">"** aggregate-pkg"</span>
+<span class="nb">cd</span> ~/GitRepos/aggregate-pkg
+git subtree pull --prefix<span class="o">=</span>aggregate aggregate-remote master
+git push origin master
+
+<span class="nb">echo</span> <span class="s2">"** aggregatehist-pkg"</span>
+<span class="nb">cd</span> ~/GitRepos/aggregatehist-pkg
+git subtree pull --prefix<span class="o">=</span>aggregate aggregate-remote master
+git subtree pull --prefix<span class="o">=</span>aggregatehist aggregatehist-remote master
+git subtree pull --prefix<span class="o">=</span>parsepv parsepv-remote master
+git push origin master
+
+<span class="nb">echo</span> <span class="s2">"** arcasciiread-pkg"</span>
+<span class="nb">cd</span> ~/GitRepos/arcasciiread-pkg
+git subtree pull --prefix<span class="o">=</span>arcasciiread arcasciiread-remote master
+git push origin master
+
+<span class="nb">echo</span> <span class="s2">"** arrowpolygon-pkg"</span>
+<span class="nb">cd</span> ~/GitRepos/arrowpolygon-pkg
+git subtree pull --prefix<span class="o">=</span>arrowpolygon arrowpolygon-remote master
+git push origin master
+
+<span class="nb">echo</span> <span class="s2">"** aviread16bitcol-pkg"</span>
+<span class="nb">cd</span> ~/GitRepos/aviread16bitcol-pkg
+git subtree pull --prefix<span class="o">=</span>aviread16bitcol aviread16bitcol-remote master
+git push origin master
+
+<span class="nb">echo</span> <span class="s2">"** barareaneg-pkg"</span>
+<span class="nb">cd</span> ~/GitRepos/barareaneg-pkg
+git subtree pull --prefix<span class="o">=</span>barareaneg barareaneg-remote master
+git push origin master
+
+<span class="nb">echo</span> <span class="s2">"** barpatch-pkg"</span>
+<span class="nb">cd</span> ~/GitRepos/barpatch-pkg
+git subtree pull --prefix<span class="o">=</span>barpatch barpatch-remote master
+git push origin master
+
+<span class="nb">echo</span> <span class="s2">"** bezier-pkg"</span>
+<span class="nb">cd</span> ~/GitRepos/bezier-pkg
+git subtree pull --prefix<span class="o">=</span>bezier bezier-remote master
+git push origin master
+
+<span class="nb">echo</span> <span class="s2">"** bilread-pkg"</span>
+<span class="nb">cd</span> ~/GitRepos/bilread-pkg
+git subtree pull --prefix<span class="o">=</span>bilread bilread-remote master
+git subtree pull --prefix<span class="o">=</span>cellstr2 cellstr2-remote master
+git subtree pull --prefix<span class="o">=</span>parsepv parsepv-remote master
+git subtree pull --prefix<span class="o">=</span>regexpfound regexpfound-remote master
+git push origin master
+
+...etc...<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h4 id="step-11-return-to-work">Step 11: Return to work</h4>
+
+<p>While the initial setup was a little messy, the maintenance is quite simple. I can now continue to work as I used to, largely ignoring the new project repos.</p>
+
+<p>My Matlab startup script hardcodes addpath commands for all the bigger utilities (listed in my file tree above as Per1, Per2, Ex1, Ex2, etc), and also adds all the folders under ExternalToolboxes/FilesExchange and PersonalToolboxes/GeneralUtilities. So I can add new tools to either of those latter folders without having to worry about updating my path.</p>
+
+<p>Like before, if I make any changes to my code, I update the main git repo with new commits as necessary. And every so often, I run the pushsubtrees.sh and pullsubtrees.sh scripts from Step 10, which automatically adds those changes to all the shared-out project repos.</p>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+<!--     <h2 class="footer-heading">Kelly A. Kearney</h2> -->
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li><strong>Kelly A. Kearney</strong></li>
+
+          <li><a href="mailto:kakearney@gmail.com">kakearney@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/kakearney">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">kakearney</span>
+            </a>
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+         <p class="text">
+University of Washington<br> Joint Institute for the Study of the Atmosphere and Ocean<br> Alaska Fisheries Science Center, NOAA<br> 7600 Sand Point Way N.E., Building 4<br> Seattle, Washington 98115
+ 
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+
+</html>

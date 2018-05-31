@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Food webs as network graphs-- Part 2: Node Positioning</title>
+  <meta name="description" content="Node layout for a food web graph">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://kellyakearney.net/2016/01/14/food-web-layout.html">
+  <link rel="alternate" type="application/rss+xml" title="Kelly A. Kearney" href="http://kellyakearney.net/feed.xml" />
+<link rel='stylesheet' id='open-sans-css'  href='//fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&#038;subset=latin%2Clatin-ext&#038;ver=4.2.4' type='text/css' media='all' />
+<link href='http://fonts.googleapis.com/css?family=Titillium+Web:600italic,600,400,400italic' rel='stylesheet' type='text/css'>
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Kelly A. Kearney</a>
+
+
+    <nav class="site-nav">
+
+      <a href="#" class="menu-icon menu.open">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>  
+
+    <div class="trigger"><h1>Main Navigation</h1>
+
+ <ul class="menu">
+
+    
+    
+     <li><a href="/research/" class="page-link">Research</a>
+    
+    </li>
+    
+    
+     <li><a href="/blog/" class="page-link">Technical Blog</a>
+    
+    </li>
+    
+    
+     <li><a href="/publications/" class="page-link">Publications</a>
+    
+    </li>
+    
+    </ul>
+
+
+<!-- <ul class="menu">
+        <li> <a class="page-link" href="/about">About</a></li>
+        <li> <a class="page-link"  href="/blog">Blog</a>
+        <li> <a class="page-link" href="/blog">CV</a>
+        <li> <a class="page-link" href="/blog">For Students</a></li>
+        <li> <a class="page-link"  href="/blog">Research</a></a>
+        <li> <a class="page-link" href="/blog">Teaching</a>
+<ul class="sub-menu">
+	<li><a href="http://svmiller.com/teaching/posc-1020-introduction-to-international-relations/">POSC 1020 – Introduction to International Relations</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3410-quantitative-methods-in-political-science/">POSC 3410 – Quantitative Methods in Political Science</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3610-international-politics-in-crisis/">POSC 3610 – International Politics in Crisis</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3630-united-states-foreign-policy/">POSC 3630 – United States Foreign Policy</a></li>
+</ul></li>
+        <li> <a class="page-link" href="/blog">Miscellany</a>
+<ul class="sub-menu">
+	<li><a href="http://svmiller.com/teaching/posc-1020-introduction-to-international-relations/">Clean USAID Greenbook Data</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3410-quantitative-methods-in-political-science/">Journal of Peace Research *.bst File</a></li>
+	<li><a href="http://svmiller.com/teaching/posc-3610-international-politics-in-crisis/">My Custom Beamer Style</a></li>
+</ul> 
+
+</li>
+</ul> -->
+
+     </div>  
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Food webs as network graphs-- Part 2: Node Positioning</h1>
+    <p class="post-meta">Posted on January 14, 2016   
+
+  in
+  
+
+
+</p>
+  </header>
+
+  <article class="post-content">
+    <h2 id="node-layout-for-a-food-web-graph">Node layout for a food web graph</h2>
+
+<p>This post is the second in a three-part series discussing food web network graphs.  In the previous post, I discussed a method for bundling graph edges together to reduce clutter and reveal high-level patterns in energy flow.  However, the edge-bundling algorithm requires node positions to be set first.</p>
+
+<p>For the purposes of a food web graph, I wanted a node-positioning algorithm with a few different features:</p>
+
+<ol>
+  <li>Node size is scaled based on functional group biomass.</li>
+  <li>Nodes don’t overlap each other, regardless of the sizes of each node.</li>
+  <li>Node y-position is based on trophic level, with producers at the bottom and apex predators at the top.</li>
+  <li>Nodes that share similar predators and prey are positioned close to each other, optimizing the effect of the edge bundling algorithm.</li>
+</ol>
+
+<p>I’ve looked at a lot of exisiting graphing tools, and I’ve never found an out-of-the-box option that meets all of these requirements.  In particular, the last two prove elusive.  Most tools allow you to specify node coordinates, but not to specify along only one axis while leaving the others free.  And most common node-positioning algorithms optimize for orthogonality of edges, which is not necessarily ideal for edge bundling.  In the end, I resorted to a custom layout function, and was able to create an algorithm that seems to work well for even very large food webs.</p>
+
+<h2 id="the-building-blocks">The building blocks</h2>
+
+<h3 id="trophic-groups">Trophic groups</h3>
+
+<p>To meet requirement 4 in our desired node-positioning characterisitcs, we first need a way of quantifying the similarity between groups.  For this, I followed the trophic group algorithm developed by Gauzens et al., 2014:</p>
+
+<p>Gauzens B, Thébault E, Lacroix G, Legendre S (2014) Trophic groups and modules: two levels of group detection in food webs. J R Soc Interface 12:1–29<br />
+<a href="http://dx.doi.org/doi:10.1098/rsif.2014.1176">DOI:10.1098/rsif.2014.1176</a></p>
+
+<p>They define trophic similarity \(T(i,j)\) as</p>
+
+<script type="math/tex; mode=display">T(i,j) = \frac{|P_i \cap P_j| + |p_i \cap p_j|}{|P_i \cup P_j| + |p_i \cup p_j|}</script>
+
+<p>where \(P_i\) and \(p_i\) are the predators and prey of group \(i\), repsectively.  This leads to a value ranging from 0 (groups \(i\) and \(j\) have no common predators or prey groups) to 1 (groups \(i\) and \(j\) have identical predators and prey).  They then apply a simulated annealing alorithm to isolate groups of nodes such that the within-group trophic similarity values are maximized.</p>
+
+<p>To demonstrate this algorithm, we’ll use one of the food webs that ships with the <a href="http://ecopath.org/">Ecopath with Ecosim</a> software.  This food web represents a generic fisheries ecosystem; its functional groups are already pretty consolidated, but it’s small enough that it makes for a simple example.</p>
+
+<p>We start by reading data from the EwE database file and converting it to a Matlab graph object:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="n">Ewein</span> <span class="o">=</span> <span class="n">mdb2ewein</span><span class="p">(</span><span class="s1">'Generic_37.EwEmdb'</span><span class="p">);</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">ecopath2graph</span><span class="p">(</span><span class="n">Ewein</span><span class="p">);</span>
+
+<span class="nb">plot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">'layout'</span><span class="p">,</span> <span class="s1">'layered'</span><span class="p">,</span> <span class="s1">'direction'</span><span class="p">,</span> <span class="s1">'up'</span><span class="p">,</span> <span class="s1">'nodecolor'</span><span class="p">,</span> <span class="s1">'k'</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="/assets/supporting_code/foodwebex1.png" onload="this.width/=1.5;this.onload=null;" /></p>
+
+<p>As I’ve written it, the <code class="highlighter-rouge">ecopath2graph.m</code> function includes all Ecopath-derived fluxes, both in-system and out-of-system, in the resulting graph object.  For the trophic grouping algorithm, we’re only interested in predator-prey interactions, so we’ll delete all out-of-system fluxes (primary production, respiration losses, fisheries landings, and export) and flows to detritus:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</pre></td><td class="code"><pre><span class="n">G2</span> <span class="o">=</span> <span class="n">G</span><span class="p">;</span>
+
+<span class="n">detid</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="nb">type</span> <span class="o">==</span> <span class="mi">2</span><span class="p">);</span>
+<span class="n">oosid</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="nb">type</span> <span class="o">==</span> <span class="mi">4</span><span class="p">);</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">rmnode</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">oosid</span><span class="p">);</span>
+<span class="n">isdet</span> <span class="o">=</span> <span class="nb">ismember</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">Edges</span><span class="o">.</span><span class="n">EndNodes</span><span class="p">(:,</span><span class="mi">2</span><span class="p">),</span> <span class="n">detid</span><span class="p">);</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">rmedge</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="nb">find</span><span class="p">(</span><span class="n">isdet</span><span class="p">));</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="nb">plot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">'layout'</span><span class="p">,</span> <span class="s1">'layered'</span><span class="p">,</span> <span class="s1">'direction'</span><span class="p">,</span> <span class="s1">'up'</span><span class="p">,</span> <span class="s1">'nodecolor'</span><span class="p">,</span> <span class="s1">'k'</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="/assets/supporting_code/foodwebex2.png" onload="this.width/=1.5;this.onload=null;" /></p>
+
+<p>We can now run the grouping algorithm, and update the colors of the nodes based on the trophic group indices:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</pre></td><td class="code"><pre><span class="n">adj</span> <span class="o">=</span> <span class="n">adjacency</span><span class="p">(</span><span class="n">G2</span><span class="p">);</span>
+<span class="n">grp</span> <span class="o">=</span> <span class="n">gauzensgroup</span><span class="p">(</span><span class="n">adj</span><span class="p">,</span> <span class="s1">'type'</span><span class="p">,</span> <span class="s1">'trophicgroup'</span><span class="p">);</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="s1">'NodeCData'</span><span class="p">,</span> <span class="n">grp</span><span class="p">,</span> <span class="s1">'NodeColor'</span><span class="p">,</span> <span class="s1">'flat'</span><span class="p">);</span>
+
+<span class="n">ngrp</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">grp</span><span class="p">);</span>
+<span class="n">col</span> <span class="o">=</span> <span class="n">distinguishable_colors</span><span class="p">(</span><span class="n">ngrp</span><span class="p">);</span>
+<span class="nb">colormap</span><span class="p">(</span><span class="n">col</span><span class="p">);</span>
+<span class="nb">set</span><span class="p">(</span><span class="nb">gca</span><span class="p">,</span> <span class="s1">'clim'</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span> <span class="n">ngrp</span><span class="p">]</span><span class="o">+</span><span class="mf">0.5</span><span class="p">);</span>
+<span class="nb">colorbar</span><span class="p">;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="/assets/supporting_code/foodwebex3.png" onload="this.width/=1.5;this.onload=null;" /></p>
+
+<p>This layered layout is good for visualizing the approximate trophic level of each group, since it positions nodes based on the number of edges leading to and from each, but it doesn’t always keep trophic groups near each other.  For a better option, we turn to a force layout.</p>
+
+<h3 id="the-force-layout">The force layout</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Force-directed_graph_drawing">Force-directed layouts</a> are common to many network graphing tools, and work by treating nodes of a graph like charged particles that repel each other but are connected by spring-like edges.</p>
+
+<p>Simply switching to Matlab’s force-directed layout doesn’t exactly achieve what we want:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">layout</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="s1">'force'</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="/assets/supporting_code/foodwebex4.png" onload="this.width/=1.5;this.onload=null;" /></p>
+
+<p>Some trophic groups are still separated from each other, and we’ve lost all sense of trophic level structure.  The force layout uses the edges (in this case, the predator-prey connections) to determine where to place nodes.  But in our case, we already have a separate metric defining which nodes we want near each other: the trophic group calculation.  So the first step in our new layout is to replace the exisiting edges with a new set that connects each node to its “trophic group” node, creating a dendrogram-like graph:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="n">G3</span> <span class="o">=</span> <span class="n">trophicgroupgraph</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span> <span class="n">grp</span><span class="p">);</span>
+<span class="n">cdata</span> <span class="o">=</span> <span class="p">[</span><span class="n">grp</span><span class="p">;</span> <span class="nb">ones</span><span class="p">(</span><span class="n">ngrp</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">ngrp</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span> <span class="n">ngrp</span><span class="o">+</span><span class="mi">2</span><span class="p">];</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="nb">plot</span><span class="p">(</span><span class="n">G3</span><span class="p">,</span> <span class="s1">'layout'</span><span class="p">,</span> <span class="s1">'layered'</span><span class="p">,</span> <span class="s1">'direction'</span><span class="p">,</span> <span class="s1">'left'</span><span class="p">,</span> <span class="k">...</span>
+    <span class="s1">'NodeCData'</span><span class="p">,</span> <span class="n">cdata</span><span class="p">,</span> <span class="s1">'NodeColor'</span><span class="p">,</span> <span class="s1">'flat'</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="/assets/supporting_code/foodwebex5.png" onload="this.width/=1.5;this.onload=null;" /></p>
+
+<p>We can remove the “web” node (which is just there to connect the hierarchy), and plot with Matlab’s force layout:</p>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="n">G3</span> <span class="o">=</span> <span class="n">rmnode</span><span class="p">(</span><span class="n">G3</span><span class="p">,</span> <span class="s1">'web'</span><span class="p">);</span>
+<span class="n">h</span> <span class="o">=</span> <span class="nb">plot</span><span class="p">(</span><span class="n">G3</span><span class="p">,</span> <span class="s1">'layout'</span><span class="p">,</span> <span class="s1">'force'</span><span class="p">,</span> <span class="s1">'NodeCData'</span><span class="p">,</span> <span class="n">cdata</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">,:),</span> <span class="s1">'NodeColor'</span><span class="p">,</span> <span class="s1">'flat'</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="/assets/supporting_code/foodwebex6.png" onload="this.width/=1.5;this.onload=null;" /></p>
+
+<p>This force layout now succeeds in keeping functionally-similar nodes close to each other (requirement 4), but is missing all the other desired requirements.  Enter D3.</p>
+
+<h2 id="the-d3-force-layout">The D3 force layout</h2>
+
+<p>A few months ago, a colleague introduced me to the <a href="http://d3js.org/">D3.js</a> library.  D3.js (short for Data Driven Documents) is a javascript library designed to “bind arbitrary data to a Document Object Model (DOM)”… more simply, to dynamically construct interactive web graphics based on underlying datasets.  The relatively small set of tools can be used to create an endless array of <a href="https://github.com/mbostock/d3/wiki/Gallery">fascinating infographics</a>.</p>
+
+<p>My experimentation with D3 led me to its <a href="http://bl.ocks.org/mbostock/4062045">force layout</a> tool.   Unlike the Matlab implementation I demonstrated in the previous section, the D3 version allows (and in fact encourages) all sorts of interventions as the physical simulation is running.  To position nodes, I make the following adjustments:</p>
+
+<ul>
+  <li>Prior to positioning nodes, I attach circles, with area scaled to biomass of the group, to each node position.  I use D3’s circle pack layout to calculate the appropriate scaling of circles and also to initiate the node positions (this reduces some unecessary movement one would otherwise get when starting with default random positions).</li>
+  <li>As the physical simulation of the force layout runs,  I check for collisions between node circles, and when they occur, separate the two nodes in question.</li>
+  <li>As the force layout runs, I nudge each node’s y-coordinate towards a specified location based on its trophic level.</li>
+  <li>After the nodes have settled into position, I use Evan Wang’s <a href="https://github.com/tinker10/D3-Labeler">labeler.js</a> plugin to position node labels so they are either inside a node (if the node is large enough to fit the text) or outside but not overlapping any other nodes or text.</li>
+</ul>
+
+<p>The result is below.  Reload the page to see it in action.</p>
+
+<div id="fwf"></div>
+
+<p>For more information on using this code, please read on to the next post.</p>
+
+<!--
+***************
+Scripts
+***************
+-->
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<script src="/assets/js/packages.js"></script>
+
+<script src="/assets/js/foodweblayout.js"></script>
+
+<script src="/assets/js/seedrandom.min.js"></script>
+
+<script src="/assets/js/D3-labeler/labeler.js"></script>
+
+<script>
+
+d3.json("/assets/supporting_code/gen37.json", function(data) {
+    d3.select("#fwf")
+        .datum(data)
+    .call(foodweblayout()
+	    .marl(50)
+	    .marr(50)
+	    .mart(50)
+	    .marb(50)
+	    .totwidth(600)
+	    .totheight(500)
+	    .padding(10)
+	    .tlnudge(1.0)
+	    .linkdist(5.0)
+	    .charge(-100)
+	    .hlineop(0.50)
+	    .fontsz(10)
+	    .seed('hello')
+	    .cpfac(0.40)
+	    .tllim([NaN,NaN])
+       .init('cpack')
+	    .drawmode('force'));
+});
+
+</script>
+
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+<!--     <h2 class="footer-heading">Kelly A. Kearney</h2> -->
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li><strong>Kelly A. Kearney</strong></li>
+
+          <li><a href="mailto:kakearney@gmail.com">kakearney@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/kakearney">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">kakearney</span>
+            </a>
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+         <p class="text">
+University of Washington<br> Joint Institute for the Study of the Atmosphere and Ocean<br> Alaska Fisheries Science Center, NOAA<br> 7600 Sand Point Way N.E., Building 4<br> Seattle, Washington 98115
+ 
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+
+</html>

@@ -1,0 +1,672 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css">
+		<style>
+		#left {
+		  left:-8.33%;
+		  text-align: left;
+		  float: left;
+		  width:50%;
+		  z-index:-10;
+		}
+
+		#right {
+		  left:31.25%;
+		  top: 75px;
+		  float: right;
+		  text-align: left;
+		  z-index:-10;
+		  width:50%;
+		}
+
+    /* My customization: no uppercase, smaller font sizes */
+
+		.reveal h1 { font-size: 1.55em; text-transform: none;}
+		.reveal h2 { font-size: 1.00em; text-transform: none;}
+		.reveal h3 { font-size: 0.75em; text-transform: none;}
+		.reveal h4 { font-size: 0.50em; text-transform: none;}
+		.reveal h5 { font-size: 0.40em; text-transform: none;}
+		.reveal h6 { font-size: 0.30em; text-transform: none;}
+		
+		.reveal section img { background: none; border: 2px solid #00BCD4;} /* No background box on images*/
+		
+		.reveal ul {
+		  list-style-type: none; 
+			font-size: 24px;}
+			
+		.reveal ol {
+			font-size: 24px;}
+			
+		.reveal ol ul {
+		  list-style-type: circle; 
+			margin-top: 10px; 
+			margin-bottom: 20px;
+			font-size: 20px;	
+		}
+
+		.reveal ul ul {
+		  list-style-type: circle; 
+			margin-top: 20px; 
+			margin-bottom: 50px}
+			
+		/* Tooltip in d3.foodwebstatic */
+		
+		.d3-tip {
+		  line-height: 1;
+		  padding: 12px;
+		  background: rgba(0, 0, 0, 0.8);
+		  color: #fff;
+		  border-radius: 5px;
+		  pointer-events: none;
+			font-size: 8pt;
+			font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+		}
+	
+		.d3-tip:after {
+		  box-sizing: border-box;
+		  display: inline;
+		  font-size: 10px;
+		  width: 100%;
+		  line-height: 1;
+		  color: rgba(0, 0, 0, 0.8);
+		  position: absolute;
+		  pointer-events: none;
+		}
+	
+		.d3-tip.n:after {
+		  content: "\25BC";
+		  margin: -1px 0 0 0;
+		  top: 100%;
+		  left: 0;
+		  text-align: center;
+		}
+		
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<!--- =========== -->
+
+				<section>
+					<h1>Visualizing Ecosystem Energy Flow in Complex Food Web Networks</h1>
+					<br>
+
+					<h2>Kelly Kearney</h2>
+					<h3>University of Washington JISAO<br>NOAA Alaska Fisheries Science Center</h3>
+					<img class="plain" data-src="imagefiles/NOAA_logo_gstransparent.png" height=75px>
+					<img class="plain" data-src="imagefiles/jisao.png" height=75px>
+
+					<h3>National Ecosystem Modeling Workshop 4<br>Feb 28 - Mar 2, 2017</h3>
+
+				
+				</section>
+
+				<!--- =========== -->
+				
+				<section>
+					<h2>Marine food webs as network graphs</h2>
+					<div id="left">
+					  <ul>
+							<li><strong>Nodes:</strong> state variables
+								<ul>
+									<li>living critters</li>
+									<li>detrital pools</li>
+									<li>fishing fleets</li>
+								</ul>
+							</li>
+						  <li><strong>Edges:</strong> biomass/energy exchange
+								<ul style="font-size:24px">
+									<li>primary production</li>
+									<li>grazing</li>
+									<li>predation</li>
+									<li>egestion, excretion, respiration</li>
+									<li>fisheries landings and discards</li>
+									<li>non-predatory mortality</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<div id="right">
+						<img data-src="imagefiles/6548-050-4B858EB0.jpg" width="75%">
+					</div> 
+
+				</section>
+				
+				<!--- =========== -->
+				
+				<section>
+					
+					<section>
+						<h2>Are food web diagrams in the literature effective?</h2>
+					</section>
+					
+					<section>
+						<h2>Are food web diagrams in the literature effective?</h2>
+						<img class="stretch" data-src="imagefiles/flow_diagram_tampabay.png">
+						<br>
+						<p style="text-align: right; font-size: 18px">Tampa Bay via Ecopath with Ecosim v6.4</p>
+					</section>
+					
+					<section data-background-transition="none">
+						<h2>Are food web diagrams in the literature effective?</h2>
+						<img class="stretch" data-src="imagefiles/web_northwest_Atlantic_Link2002.png">
+						<br>
+						<p style="text-align: right; font-size: 18px">Link J (2002) Does food web theory work for marine ecosystems? Mar Ecol Prog Ser 230:1–9</p>
+						<aside class="notes">
+							<ul>
+								<li>caption: tangled 'bird's nest'</li>
+								<li>red = predaton on fish</li>
+							</ul>
+					</section>
+					
+					<section data-background-transition="none">
+						<h2>Are food web diagrams in the literature effective?</h2>
+						<img class="stretch" data-src="imagefiles/web_bering_sea_Aydin2007a.jpg">
+						<br>
+						<p style="text-align: right; font-size: 18px">Aydin K, Mueter F (2007) The Bering Sea-A dynamic food web perspective. Deep Res Part II Top Stud Oceanogr 54:2501–2525</p>
+					</section>
+					
+					
+					<section data-background-transition="none">
+						<h2>Are food web diagrams in the literature effective?</h2>
+						<p style="font-size: 20px">"Figure 6. The food web of the Albatross Bay Ecopath model. The figure illustrates the comprehensiveness of the model: it is not something to interpret!"</p>
+						<img class="stretch" data-src="imagefiles/web_Albatross_Bay.gif">
+						<br>
+						<p style="text-align: right; font-size: 18px">Rochester et al. (2007) The North Marine Region marine bioregional plan: Information and analysis for the regional profile. Final report to the Department of the Environment and Water Resources. CSIRO, Cleveland</p>
+					</section>
+					
+				</section>
+				
+				<!--- =========== -->
+				
+				<section>
+					<h2>Why are food web diagrams so illegible?</h2>
+					
+					<ul>
+						<li><strong>They’re complex!</strong>
+							<ul>
+								<li>50-250 nodes</li>
+								<li>500-2500 edges</li>
+							</ul>
+						</li>
+						<li><strong>Automated node placement algorithms are inappropriate</strong>
+							<ul>
+								<li>Vertical position = trophic level</li>
+								<li>Orthogonal edges not ideal</li>
+								<li>Modularity emphasis also not ideal</li>
+							</ul>
+						</li>
+						<li><strong>High (attempted) information content</strong>
+							<ul>
+								<li>Trying to encode names, biomass pool size, flux size and direction, trophic properties, etc.</li>
+								<li>Values span many orders of magnitude</li>
+							</ul>
+						</li>
+					</ul>
+					
+				</section>
+				
+				<!--- =========== -->
+				
+				<section>
+					<h2>Can we do better?</h2>
+					
+					<ul>
+						<li><strong>Desired characteristics</strong>
+							<ul>
+								<li>Node properties indicate size of biomass pools</li>
+								<li>Nodes do not overlap</li>
+								<li>Node labels are legible</li>
+								<li>Label word length doesn’t influence visual perception of node size</li>
+								<li>Edge direction is clear</li>
+								<li>Edge properties indicate magnitude of flow between groups</li>
+								<li>Major edge pathways can be seen</li>
+							</ul>
+						</li>
+						<li><strong>How?</strong></li>
+						<ul>
+							<li>A new node layout algorithm</li>
+							<li>Edge bundling</li>
+					</ul>
+				</section>
+				
+				<!--- =========== -->
+				
+				<section>
+					
+					<section>
+					
+						<h2>The food web layout algorithm</h2>
+						<div id="left">
+							<ul>
+								<li><strong>Trophic grouping</strong></li>
+								<ul>
+									<li style="margin: 50px 0;">Groups that play the same role should be close to each other</li>
+									<li style="margin: 50px 0;">Trophic similarity:<br><br>$T_{ij} = \frac{|P_i \cap P_j| + |p_i \cap p_j|}{|P_i \cup P_j| + |p_i \cup p_j|}$</li>
+								</ul>
+							</ul>
+						</div>
+						<div id="right">
+							<img class="stretch" data-src="imagefiles/gauzensFig1.png">
+							<p style="text-align: left; font-size: 18px">Gauzens et al. (2014) Trophic groups and modules: two levels of group detection in food webs. J R Soc Interface 12:1–29</p>
+						</div>
+					</section>
+					
+					<section>
+					
+						<h2>The food web layout algorithm</h2>
+						<div id="left">
+							<ul>
+								<li><strong>D3 force layout</strong></li>
+								<ul>
+									<li style="margin: 50px 0;">Velocity Verlet integrator</li>
+									<li style="margin: 50px 0;">More flexibility than most force-directed layouts</li>
+									<li style="margin: 50px 0;">Forces:
+										<ul>
+											<li>Collision avoidance</li>
+											<li>Trophic level</li>
+											<li>Trophic group</li>
+											<li>Flux links</li>
+											<li>Centering and charge</li>
+										</ul>
+									</li>
+								</ul>
+							</ul>
+						</div>
+						<div id="right">
+							<img data-src="imagefiles/d3.png">
+							<img class="stretch" data-src="imagefiles/force.png">
+							<p style="text-align: left; font-size: 18px">Data Driven Documents: https://d3js.org/</p>
+						</div>
+					</section>
+					
+					<section>
+						<h2>The food web layout algorithm</h2>
+						<div id="left">
+							<ul>
+								<li><strong>Divided Edge Bundling</strong></li>
+								<ul>
+									<li style="margin: 50px 0;">A variant on force-directed edge bundling</li>
+									<li style="margin: 50px 0;">Edges attract other edges that are nearby and traveling in the same direction</li>
+								</ul>
+							</ul>
+						</div>
+						<div id="right">
+							<img class="stretch plain" data-src="imagefiles/debexample.png">
+							<p style="text-align: left; font-size: 18px">Selassie D, Heller B, Heer J (2011) Divided edge bundling for directional network data. IEEE Trans Vis Comput Graph 17:2354–2363</p>
+						</div>
+							
+					</section>
+					
+				</section>
+				
+				
+				
+				<!--- =========== -->
+				
+				<section>
+					<section data-state="foodwebdemo1">
+
+						<h2>The food web layout algorithm</h2>
+						<h3>Tampa Bay</h3>
+						<div id="demodiv1"></div>
+
+					</section>
+				
+					<section data-state="foodwebdemo2">
+
+						<h2>The food web layout algorithm</h2>
+						<h3>Tampa Bay</h3>
+						<div id="demodiv2"></div>
+
+					</section>
+					
+					<section data-state="foodwebdemo4">
+
+						<h2>The food web layout algorithm</h2>
+						<h3>Tampa Bay</h3>
+						<div id="demodiv4"></div>
+
+					</section>
+					
+					<section data-state="foodwebdemo3">
+
+						<h2>The food web layout algorithm</h2>
+						<h3>Tampa Bay</h3>
+						<div id="demodiv3"></div>
+						
+						<aside class="notes">59 nodes, 462 edges</aside>
+
+					</section>
+				</section>
+				
+				<!--- =========== -->
+				
+				<section data-state="bering">
+
+					<h2>The food web layout algorithm</h2>
+					<h3>The Bering Sea</h3>
+					<div id="berdiv"></div>
+					
+					<aside class="notes">146 nodes, 2658 edges</aside>
+
+				</section>
+				
+				<section data-state="albatross">
+
+					<h2>The food web layout algorithm</h2>
+					<h3>Albatross Bay</h3>
+					<div id="albdiv"></div>
+					
+					<aside class="notes">107 nodes, 1387 edges</aside>
+
+				</section>
+				
+				<!--- =========== -->
+				
+				<section>
+					<h2>The software</h2>
+					<ol>
+						<li>Build an Ecopath model
+							<ul>
+								<li style="fontsize:">Ecopath with Ecosim, Rpath, ecopath_matlab, EwE-F</li>
+								<li>Matlab R2015b+ with <a href="https://github.com/kakearney/ecopath_matlab-pkg">ecopath_matlab toolbox </a>
+							</ul>
+						</li>
+						<li>Trophic groups calculation, save to JSON
+							<ul>
+								<li>Matlab R2015b+ with <a href="https://github.com/kakearney/foodwebgraph-pkg">foodwebgraph toolbox</a></li>
+							</ul>
+						</li>
+						<li>Run node layout tool
+							<ul>
+								<li>Web browser with <a href="https://github.com/kakearney/d3-foodweb">d3-foodweb</a>
+							</ul>
+						</li>
+						<li>Edge bundling (optional)
+							<ul>
+								<li>Matlab R2015b+ with foodwebgraph toolbox
+							</ul>
+						</li>
+						<li>Final plot
+							<ul>
+								<li>Web browser with d3-foodweb (SVG-based, interactive)</li>
+								<li>Matlab with foodwebgraph (static, for print)</li>
+							</ul>
+						</li>
+					</ol>
+				</section>
+				<section>
+					
+						<h2>The software</h2>
+						<h3>A peek at the javascript code</h3>
+						<pre><code data-trim>
+var cfun = d3.scaleLinear()
+	.domain([0, 1])
+	.range(["crimson", "steelblue"]);
+
+d3.json("jsonfiles/bering_bundled.json", function(data) {
+	d3.select("#berdiv")
+		.datum(data)
+	.call(d3.foodwebstatic()
+		.paddingLeft(50)
+		.paddingBottom(30)
+		.totwidth(800)
+		.totheight(550)
+		.tllim([1,5.75])
+		.rlim( [1,30])
+		.lwmax(30)
+		.colfun(cfun)
+	);
+	d3.selectAll(".y-axis").attr("font-size", 20);
+});
+					</pre></code>
+					<aside class="notes">
+						<ul>
+							<li>Build model: EwE, Rpath, ecopath_matlab</li>
+							<li>Trophic grouping, JSON-formatting, edge bundling: Matlab</li>
+							<li>Visualizations: any web browser</li>
+						</ul>
+					</aside>
+					</section>
+
+			</div>
+		</div>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script src="https://d3js.org/d3.v4.js"></script>
+		<script src="js/d3-foodweb.min.js"></script>
+		<script>
+			Reveal.initialize({
+            	center: false,
+							transition: 'none',
+							showNotes: false,
+							dependencies: [
+								{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+								{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+								{ src: 'plugin/zoom-js/zoom.js', async: true },
+								{ src: 'plugin/notes/notes.js', async: true },
+								{ src: 'plugin/math/math.js', async: true }
+							],
+							math: {
+								mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+								config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+							}
+            });
+						
+		  // Plot Tampa Bay web, initial position only
+						
+			Reveal.addEventListener('foodwebdemo1', function() {
+			
+				d3.select("svg").remove();
+				
+				cfun = d3.scaleOrdinal()
+					.domain([0,1,2,3])
+					.range(["#e41a1c", "#4daf4a", "#377eb8", "#984ea3"])
+					.unknown("#ffffff");
+		
+				d3.json("jsonfiles/tb_init.json", function(data) {
+					d3.select("#demodiv1")
+						.datum(data)
+					.call(d3.foodweblayout()
+						.paddingLeft(50)
+						.paddingTop(10)
+						.paddingRight(10)
+						.paddingBottom(60)
+						.totwidth(640)
+						.totheight(480)
+						.nodepad(10)
+						.strengthflxlink(0.0)
+						.strengthgrplink(0.1)
+						.strengthtrophic(1.5)
+						.strengthxcenter(0.03)
+						.tllim([1,5])
+						.rlim([2,50])
+						.blim([NaN,NaN])
+						.animating(false)
+						.colfun(cfun)
+					);
+					d3.selectAll(".flinks").attr("stroke","gray").attr("opacity",0.5).attr("stroke-width",2);
+					d3.selectAll(".y-axis").attr("font-size", 20);
+				});
+				// setTimeout(fixdetails,10);
+				//
+				// function fixdetails() {
+				// 	d3.selectAll(".flinks").attr("stroke","gray").attr("opacity",0.8).attr("stroke-width",2);
+				// 	d3.selectAll(".y-axis").attr("font-size", 20);
+				// 	d3.selectAll("rect").attr("fill", "none")
+				// }
+			});
+			
+			// Plot Tampa Bay web, animate
+			
+			Reveal.addEventListener('foodwebdemo2', function() {
+			
+				d3.select("svg").remove();
+				
+				h = 560;
+				w = 720;
+				var cfun = d3.scaleOrdinal()
+					.domain([0,1,2,3])
+					.range(["#e41a1c", "#4daf4a", "#377eb8", "#984ea3"])
+					.unknown("#ffffff");
+			
+					d3.json("jsonfiles/tb_init.json", function(data) {
+						d3.select("#demodiv2")
+							.datum(data)
+						.call(d3.foodweblayout()
+							.paddingLeft(50)
+							.paddingTop(10)
+							.paddingRight(10)
+							.paddingBottom(60)
+							.totwidth(640)
+							.totheight(480)
+							.nodepad(10)
+							.strengthflxlink(0.0)
+							.strengthgrplink(0.1)
+							.strengthtrophic(1.5)
+							.strengthxcenter(0.03)
+							.tllim([1,5])
+							.rlim( [2,50])
+							.blim( [NaN,NaN])
+							.animating(true)
+							.colfun(cfun)
+						);
+						d3.selectAll(".flinks").attr("stroke","gray").attr("opacity",0.5).attr("stroke-width",2);
+						d3.selectAll(".y-axis").attr("font-size", 20);
+					});
+			});
+			
+			// Plot Tampa Bay web, static with hover info
+			
+			Reveal.addEventListener('foodwebdemo3', function() {
+				d3.select("svg").remove();
+	
+				var cfun = d3.scaleOrdinal()
+					.domain([0,1,2,3])
+					.range(["#e41a1c", "#4daf4a", "#377eb8", "#984ea3"])
+					.unknown("#ffffff");
+
+				d3.json("jsonfiles/tb_bundled.json", function(data) {
+					d3.select("#demodiv3")
+						.datum(data)
+					.call(d3.foodwebstatic()
+						.paddingLeft(50)
+						.paddingTop(10)
+						.paddingRight(10)
+						.paddingBottom(60)
+						.totwidth(640)
+						.totheight(480)
+						.tllim([1,5])
+						.rlim( [2,50])
+						.blim( [NaN,NaN])
+						.lwmax(50)
+						.colfun(cfun)
+					);
+					d3.selectAll(".y-axis").attr("font-size", 20);
+				});
+			});
+			
+			// Plot Tampa Bay web, static with hover info
+			
+			Reveal.addEventListener('foodwebdemo4', function() {
+				d3.select("svg").remove();
+	
+				var cfun = d3.scaleOrdinal()
+					.domain([0,1,2,3])
+					.range(["#e41a1c", "#4daf4a", "#377eb8", "#984ea3"])
+					.unknown("#ffffff");
+
+				d3.json("jsonfiles/tb_positioned.json", function(data) {
+					d3.select("#demodiv4")
+						.datum(data)
+					.call(d3.foodwebstatic()
+						.paddingLeft(50)
+						.paddingTop(10)
+						.paddingRight(10)
+						.paddingBottom(60)
+						.totwidth(640)
+						.totheight(480)
+						.tllim([1,5])
+						.rlim( [2,50])
+						.blim( [NaN,NaN])
+						.lwmax(50)
+						.colfun(cfun)
+					);
+					d3.selectAll(".y-axis").attr("font-size", 20);
+				});
+			});
+			
+			// Plot Bering Sea web, static with hover info
+			
+			Reveal.addEventListener('bering', function() {
+				d3.select("svg").remove();
+	
+				var cfun = d3.scaleLinear()
+					.domain([0, 1])
+					.range(["crimson", "steelblue"]);
+
+				d3.json("jsonfiles/bering_bundled.json", function(data) {
+					d3.select("#berdiv")
+						.datum(data)
+					.call(d3.foodwebstatic()
+						.paddingLeft(50)
+						.paddingTop(10)
+						.paddingRight(10)
+						.paddingBottom(30)
+						.totwidth(800)
+						.totheight(550)
+						.tllim([1,5.75])
+						.rlim( [1,30])
+						.blim( [NaN,NaN])
+						.lwmax(30)
+						.colfun(cfun)
+					);
+					d3.selectAll(".y-axis").attr("font-size", 20);
+				});
+			});
+			
+			// Plot Albatross Bay web, static with hover info, funfetti version
+			
+			Reveal.addEventListener('albatross', function() {
+				d3.select("svg").remove();
+	
+				var cfun = d3.scaleOrdinal()
+					.domain([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100])
+					.range(["#191919","#ff3219","#51ff1f","#1c1f1f","#ff381c","#57ff25","#1f2525","#ff3e1f","#5dff2b","#222b2b","#ff4422","#63ff31","#253131","#ff4a25","#68fb36","#273636","#ff4f27","#6ef53c","#2b3c3c","#ff552b","#74ef42","#2d4242","#ff5b2d","#7ae948","#ff6131","#80e34e","#334e4e","#fe6733","#86dd54","#375454","#fa6d37","#8cd75a","#395a5a","#f87339","#92d160","#3d6060","#f4793d","#97cc65","#3f6565","#f27e3f","#9dc66b","#426b6b","#ef8442","#a3c071","#457171","#ec8a45","#a9ba77","#487777","#e99048","#afb47d","#4b7d7d","#e6964b","#b5ae83","#4e8383","#e39c4e","#bba889","#518989","#e0a251","#c1a28f","#548f8f","#dda854","#c79c95","#579595","#daae57","#cc979a","#599a9a","#d8b359","#d291a0","#5da0a0","#d4b95d","#d88ba6","#5fa6a6","#d2bf5f","#de85ac","#63acac","#cec563","#e47fb2","#65b2b2","#cccb65","#ea79b8","#69b8b8","#c8d169","#f073be","#6bbebe","#c6d76b","#f66dc4","#6fc4c4","#c2dd6f","#fb68c9","#71c9c9","#c0e271","#ff62cf","#74cfcf","#bde874","#ff5cd5","#77d5d5","#baee77","#ff56db","#7adbdb","#929591"])
+					.unknown("#ffffff");
+
+				d3.json("jsonfiles/albatross_bundled.json", function(data) {
+					d3.select("#albdiv")
+						.datum(data)
+					.call(d3.foodwebstatic()
+						.paddingLeft(50)
+						.paddingTop(10)
+						.paddingRight(10)
+						.paddingBottom(50)
+						.totwidth(640)
+						.totheight(480)
+						.tllim([0.5,5.5])
+						.rlim( [2,40])
+						.blim( [NaN,NaN])
+						.lwmax(20)
+						.colfun(cfun)
+					);
+					d3.selectAll(".y-axis").attr("font-size", 20);
+				});
+				// setTimeout(fixdetails,200);
+				//
+				// function fixdetails() {
+				// 	d3.selectAll(".y-axis").attr("font-size", 20);
+				// 	d3.selectAll("rect").attr("fill", "none")
+				// }
+			});
+			
+				
+
+		</script>
+	</body>
+</html>
